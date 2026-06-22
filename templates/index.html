@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyse ACP Premium</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Floating Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">ACP ANALYTICS</div>
+        <ul class="nav-links">
+            <li><a href="#data">Données</a></li>
+            <li><a href="#matrices">Matrices</a></li>
+            <li><a href="#analysis">Analyse</a></li>
+            <li><a href="#var-coords">Variables</a></li>
+            <li><a href="#visuals">Graphiques</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>Rapport d'Analyse</h1>
+            <p>Analyse en Composantes Principales (ACP Normée)</p>
+        </header>
+
+        <!-- 1. Données Initiales -->
+        <section id="data">
+            <div class="card">
+                <h2><i class="fas fa-database"></i> Données Initiales</h2>
+                <div style="overflow-x: auto;">
+                    {{ df|safe }}
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Matrices -->
+        <section id="matrices">
+            <div class="grid-2">
+                <div class="card">
+                    <h2><i class="fas fa-calculator"></i> Matrice Z-score</h2>
+                    <code class="formula">Zij = (Xij - X̄j) / σj</code>
+                    <div style="overflow-x: auto;">
+                        {{ Z|safe }}
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2><i class="fas fa-border-all"></i> Corrélation (R)</h2>
+                    <code class="formula">R = (1/n) × Zᵀ · Z</code>
+                    <div style="overflow-x: auto;">
+                        {{ R|safe }}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Analyse Factorielle -->
+        <section id="analysis">
+            <div class="grid-2">
+                <div class="card">
+                    <h2><i class="fas fa-wave-square"></i> Valeurs Propres (λ)</h2>
+                    <code class="formula">det(R - λI) = 0</code>
+                    <p><strong>Valeurs :</strong> {{ eig_vals }}</p>
+                </div>
+
+                <div class="card">
+                    <h2><i class="fas fa-vector-square"></i> Vecteurs Propres (V)</h2>
+                    <code class="formula">R · v = λ · v</code>
+                    <div style="overflow-x: auto;">
+                        {{ eig_vecs|safe }}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Qualité -->
+        <section id="quality">
+            <div class="card quality-box">
+                <h2>Qualité de Représentation (Plan 1-2)</h2>
+                <div class="quality-value">{{ Q2 }}%</div>
+                <p>Information conservée sur les premiers axes factoriels.</p>
+                <code class="formula"
+                    style="display:inline-block; margin-top:1rem; border:none; background:rgba(0,0,0,0.2);">(λ1 + λ2) / Σλ</code>
+            </div>
+        </section>
+
+        <!-- 5. Composantes -->
+        <section id="components">
+            <div class="card">
+                <h2><i class="fas fa-project-diagram"></i> Composantes Principales (F)</h2>
+                <code class="formula">F = Z · V</code>
+                <div style="overflow-x: auto;">
+                    {{ F|safe }}
+                </div>
+            </div>
+        </section>
+
+        <!-- 5b. Coordonnées des Variables -->
+        <section id="var-coords">
+            <div class="card">
+                <h2><i class="fas fa-superscript"></i> Coordonnées des Variables (F1, F2)</h2>
+                <code class="formula">Coord(j,k) = √λk * Ukj</code>
+                <p>Corrélations entre les variables initiales et les axes principaux (F1, F2).</p>
+                <div style="overflow-x: auto;">
+                    {{ coord_var|safe }}
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Visualisations -->
+        <section id="visuals">
+            <div class="grid-2">
+                <div class="card">
+                    <h2><i class="fas fa-chart-scatter"></i> Nuage des Individus</h2>
+                    <img src="{{ url_for('static', filename='nuage.png') }}" alt="Nuage des individus">
+                </div>
+                <div class="card">
+                    <h2><i class="fas fa-circle-notch"></i> Cercle de Corrélation</h2>
+                    <img src="{{ url_for('static', filename='cercle.png') }}" alt="Cercle de corrélation">
+                </div>
+            </div>
+        </section>
+
+        <div class="footer">
+            <p>&copy; 2026 ACP Analytics Platform. Built with Flask.</p>
+        </div>
+
+    </div>
+
+    <!-- Simple JS for Scroll Spy (Optional but nice) -->
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Basic Scroll Spy
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            const navLi = document.querySelectorAll('.nav-links li a');
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLi.forEach(a => {
+                a.classList.remove('active');
+                if (a.getAttribute('href').includes(current)) {
+                    a.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

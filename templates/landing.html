@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Hub - Premium Data Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="bg-animation">
+        <div class="bg-animation-blobs">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="blob blob-3"></div>
+        </div>
+    </div>
+    <div class="bg-tech-lines"></div>
+
+    <div class="container" style="max-width: 1200px;">
+        <header>
+            <h1>Analytics Hub</h1>
+            <p>Sélectionnez votre module d'analyse premium</p>
+        </header>
+
+        <div class="landing-grid">
+            <!-- 1. Scraping -->
+            <a href="/scrape_page" class="module-card card-scraping">
+                <div class="icon-box">
+                    <i class="fas fa-spider"></i>
+                </div>
+                <h2>Scraping FBref</h2>
+                <p>Collectez les statistiques et photos des joueurs depuis les 5 grandes ligues européennes.</p>
+                <div class="arrow-icon"><i class="fas fa-arrow-right"></i></div>
+            </a>
+
+            <!-- 2. ACP -->
+            <a href="/acp" class="module-card card-acp">
+                <div class="icon-box">
+                    <i class="fas fa-chart-pie"></i>
+                </div>
+                <h2>Analyse ACP</h2>
+                <p>Explorez les corrélations et réduisez la dimensionnalité de vos données complexes.</p>
+                <div class="arrow-icon"><i class="fas fa-arrow-right"></i></div>
+            </a>
+
+            <!-- 3. AFD -->
+            <a href="/afd" class="module-card card-afd">
+                <span class="badge-new">Nouveau</span>
+                <div class="icon-box">
+                    <i class="fas fa-project-diagram"></i>
+                </div>
+                <h2>Analyse AFD</h2>
+                <p>Classification supervisée par position (GK, DF, MF, FW) et analyse discriminante.</p>
+                <div class="arrow-icon"><i class="fas fa-arrow-right"></i></div>
+            </a>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2026 Analytics Hub Platform. Built with Flask & Advanced Analytics.</p>
+        </div>
+    </div>
+
+    <style>
+        /* Small local override for landing page specific header spacing */
+        .container {
+            padding-top: 4rem;
+        }
+        header {
+            margin-bottom: 4rem;
+        }
+    </style>
+</body>
+
+</html>

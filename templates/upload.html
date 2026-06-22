@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACP Analytics - Upload</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="bg-animation">
+        <div class="bg-animation-blobs">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="blob blob-3"></div>
+        </div>
+    </div>
+    <div class="bg-tech-lines"></div>
+
+    <nav class="navbar">
+        <div class="nav-brand">ACP ANALYTICS</div>
+        <ul class="nav-links"></ul>
+        <a href="/" class="nav-back"><i class="fas fa-arrow-left"></i> Hub Principal</a>
+    </nav>
+
+    <div class="floating-labels">
+
+        <div class="floating-label" style="top: 20%; left: -10%; animation-duration: 45s;">ACP</div>
+        <div class="floating-label" style="top: 60%; left: -20%; animation-duration: 60s; animation-delay: -10s;">PCA
+        </div>
+        <div class="floating-label"
+            style="top:10%; left: 30%; animation-duration: 50s; animation-delay: -25s; font-size: 4rem;">ANALYSE</div>
+        <div class="floating-label" style="top: 80%; left: -5%; animation-duration: 70s; font-size: 6rem;">VECTEURS
+        </div>
+    </div>
+    <div class="container upload-container">
+        <header>
+            <h1>Analyse en Composantes Principales</h1>
+            <p>Configurez et lancez votre analyse ACP</p>
+            <a href="/scrape_page" style="display:inline-flex; align-items:center; gap:0.5rem; margin-top:1rem;
+               background:rgba(99,102,241,0.15); border:1px solid rgba(99,102,241,0.4);
+               color:#a5b4fc; padding:0.5rem 1.2rem; border-radius:2rem; font-size:0.9rem;
+               text-decoration:none; transition:all 0.2s;"
+               onmouseover="this.style.background='rgba(99,102,241,0.3)'"
+               onmouseout="this.style.background='rgba(99,102,241,0.15)'">
+                <i class="fas fa-spider"></i> Scraper les données FBref (5 ligues)
+            </a>
+        </header>
+
+
+        <div class="card upload-card">
+            <form action="/analyze" method="POST" enctype="multipart/form-data" id="uploadForm">
+
+                <!-- File Upload Zone -->
+                <div class="upload-zone-wrapper">
+                    <h2><span><i class="fas fa-file-csv"></i> Configuration & Fichier</span></h2>
+
+                    <!-- Clé API automatique configurée -->
+
+                    <div class="upload-zone" id="uploadZone">
+                        <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                        <div class="form-group" style="pointer-events: none;">
+                            <label for="csvfile"><i class="fas fa-file-csv"></i> Sélectionner le fichier
+                                CSV</label>
+                            <input type="file" name="csvfile" id="csvfile" accept=".csv" required class="form-input">
+                            <p class="upload-text">Glissez-déposez votre fichier ici<br>ou cliquez pour
+                                parcourir</p>
+                        </div>
+                        <span class="file-name" id="fileName"></span>
+                    </div>
+
+
+                </div>
+
+                <!-- Options Grid -->
+                <div class="options-grid">
+
+                    <!-- ACP Type -->
+                    <div class="option-group">
+                        <h3><i class="fas fa-chart-line"></i> Type d'ACP</h3>
+                        <div class="radio-cards">
+                            <label class="radio-card">
+                                <input type="radio" name="acp_type" value="norme" checked>
+                                <div class="radio-card-content">
+                                    <div class="radio-card-title">ACP Normée</div>
+                                    <div class="radio-card-desc">Matrice de corrélation (R)</div>
+                                </div>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="acp_type" value="non_norme">
+                                <div class="radio-card-content">
+                                    <div class="radio-card-title">ACP Non Normée</div>
+                                    <div class="radio-card-desc">Matrice de covariance (S)</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Data Type -->
+                    <div class="option-group">
+                        <h3><i class="fas fa-database"></i> Type de Données</h3>
+                        <div class="radio-cards">
+                            <label class="radio-card">
+                                <input type="radio" name="data_type" value="homogene" checked>
+                                <div class="radio-card-content">
+                                    <div class="radio-card-title">Homogènes</div>
+                                    <div class="radio-card-desc">Variables de même nature</div>
+                                </div>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="data_type" value="heterogene">
+                                <div class="radio-card-content">
+                                    <div class="radio-card-title">Hétérogènes</div>
+                                    <div class="radio-card-desc">Variables de natures différentes</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Criterion -->
+                    <div class="option-group">
+                        <h3><i class="fas fa-filter"></i> Critère</h3>
+                        <div class="radio-cards">
+                            <label class="radio-card">
+                                <input type="radio" name="criterion" value="kaiser" checked>
+                                <div class="radio-card-content">
+                                    <div class="radio-card-title">Kaiser</div>
+                                    <div class="radio-card-desc">λ > moyenne(λ)</div>
+                                </div>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="criterion" value="quality">
+                                <div class="radio-card-content">
+                                    <div class="radio-card-title">Qualité</div>
+                                    <div class="radio-card-desc">Inertie cumulée ≥ 80%
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+                <!-- Column Selector Section (Hidden until upload) -->
+                <div id="columnSelectorSection" style="display: none; margin-bottom: 3rem;" class="option-group">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <h2><span><i class="fas fa-filter"></i> Sélectionner les Colonnes</span></h2>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button type="button" id="selectAllCols" class="btn-secondary btn-small">Tout</button>
+                            <button type="button" id="deselectAllCols" class="btn-secondary btn-small">Aucun</button>
+                        </div>
+                    </div>
+                    <div id="columnChips" class="column-chips-container">
+                        <!-- Chips will be generated here -->
+                    </div>
+                </div>
+
+                <!-- Row Filters Section (Hidden until upload) -->
+                <div id="rowFilterSection" style="display: none; margin-bottom: 3rem;" class="option-group">
+                    <h2><span><i class="fas fa-filter"></i> Filtres de Lignes (Sous-filtrage)</span></h2>
+                    <div class="filter-controls">
+                        <select id="filterCol" class="filter-input"></select>
+                        <select id="filterOp" class="filter-input">
+                            <option value="=">=</option>
+                            <option value=">">&gt;</option>
+                            <option value="<">&lt;</option>
+                            <option value="contains">Contient</option>
+                        </select>
+                        <input type="text" id="filterVal" class="filter-input" placeholder="Valeur...">
+                        <button type="button" id="addFilterBtn" class="submit-btn"
+                            style="padding: 0.6rem 1.2rem; width: auto; font-size: 0.9rem;">
+                            <i class="fas fa-plus"></i> Ajouter
+                        </button>
+                    </div>
+                    <div id="activeRules" class="rules-container"></div>
+                </div>
+
+                <!-- Data Preview & Edit Section -->
+                <div id="dataEditSection" style="display: none; margin-bottom: 3rem;" class="option-group">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <h2><span><i class="fas fa-table"></i> Préview & Edition des Données</span></h2>
+                        <div style="display: flex; gap: 0.5rem; align-items: center;">
+                            <div
+                                style="display: flex; align-items: center; gap: 0.25rem; background: rgba(255,255,255,0.05); padding: 0.25rem 0.5rem; border-radius: 0.5rem; border: 1px solid var(--card-border);">
+                                <input type="number" id="resizeRows" placeholder="Lig"
+                                    style="width: 50px; background: transparent; border: none; color: #fff; font-size: 0.8rem; text-align: center;">
+                                <span style="opacity: 0.3;">×</span>
+                                <input type="number" id="resizeCols" placeholder="Col"
+                                    style="width: 50px; background: transparent; border: none; color: #fff; font-size: 0.8rem; text-align: center;">
+                                <button type="button" id="resizeBtn" class="btn-secondary"
+                                    style="padding: 0.25rem 0.5rem; font-size: 0.75rem;"><i
+                                        class="fas fa-compress-arrows-alt"></i></button>
+                            </div>
+                            <button type="button" id="addRow" class="btn-secondary"><i class="fas fa-plus"></i>
+                                Ligne</button>
+                            <button type="button" id="addCol" class="btn-secondary"><i class="fas fa-plus"></i>
+                                Colonne</button>
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table id="dataTable">
+                            <thead id="tableHead"></thead>
+                            <tbody id="tableBody"></tbody>
+                        </table>
+                    </div>
+                    <p class="upload-text" style="font-size: 0.85rem; margin-top: 0.5rem; opacity: 0.7;">
+                        <i class="fas fa-info-circle"></i> Cliquez sur une cellule pour éditer les valeurs. Les colonnes vides
+                        seront ignorées.
+                    </p>
+                </div>
+
+                <input type="hidden" name="edited_data" id="editedData">
+
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <i class="fas fa-play-circle"></i> Lancer l'Analyse
+                </button>
+
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // File upload drag-and-drop
+        const uploadZone = document.getElementById('uploadZone');
+        const fileInput = document.getElementById('csvfile');
+        const fileName = document.getElementById('fileName');
+        const dataEditSection = document.getElementById('dataEditSection');
+        const dataTable = document.getElementById('dataTable');
+        const tableHead = document.getElementById('tableHead');
+        const tableBody = document.getElementById('tableBody');
+        const editedDataInput = document.getElementById('editedData');
+        const uploadForm = document.getElementById('uploadForm');
+
+
+        // Modified click listener for uploadZone to trigger hidden file input
+        uploadZone.addEventListener('click', (e) => {
+            // Only trigger file input if the click is not on a button within the zone
+            if (e.target === uploadZone || e.target.closest('.upload-zone') === uploadZone) {
+                fileInput.click();
+            }
+        });
+
+        // New browse button listener
+        // document.getElementById('browseBtn').addEventListener('click', () => fileInput.click());
+
+
+        uploadZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadZone.classList.add('dragover');
+        });
+
+        uploadZone.addEventListener('dragleave', () => {
+            uploadZone.classList.remove('dragover');
+        });
+
+        uploadZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadZone.classList.remove('dragover');
+            if (e.dataTransfer.files.length) {
+                fileInput.files = e.dataTransfer.files;
+                handleFiles(fileInput.files[0]);
+            }
+        });
+
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length) {
+                handleFiles(fileInput.files[0]);
+            }
+        });
+
+        let originalRows = []; // To store the full parsed data
+        let rowRules = []; // To store active row filter rules
+
+        function handleFiles(file) {
+            fileName.textContent = file.name;
+            fileName.style.display = 'block';
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const text = e.target.result;
+                parseCSV(text);
+            };
+            reader.readAsText(file);
+        }
+
+        function parseCSVLine(line, sep) {
+            const result = [];
+            let current = '';
+            let inQuotes = false;
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                if (char === '"') {
+                    inQuotes = !inQuotes;
+                } else if (char === sep && !inQuotes) {
+                    result.push(current.trim());
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+            result.push(current.trim());
+            return result;
+        }
+
+        function parseCSV(csv) {
+            try {
+                const lines = csv.split('\n');
+                if (lines.length === 0) return;
+
+                const sep = lines[0].includes(';') ? ';' : ',';
+                originalRows = lines.map(line => {
+                    const trimmed = line.trim();
+                    if (!trimmed) return [];
+                    return parseCSVLine(trimmed, sep);
+                }).filter(row => row.length > 0 && row.some(cell => cell !== ""));
+
+                if (originalRows.length > 0) {
+                    renderColumnSelector(originalRows[0]);
+                    populateFilterCols(originalRows[0]);
+                    rowRules = [];
+                    renderRowRules();
+                    updateDisplay();
+
+                    document.getElementById('columnSelectorSection').style.display = 'block';
+                    document.getElementById('rowFilterSection').style.display = 'block';
+                    dataEditSection.style.display = 'block';
+                }
+            } catch (err) {
+                console.error("Parse Error:", err);
+                alert("Erreur lors de la lecture du fichier CSV.");
+            }
+        }
+
+        function populateFilterCols(headers) {
+            const select = document.getElementById('filterCol');
+            select.innerHTML = '';
+            headers.forEach((h, i) => {
+                const opt = document.createElement('option');
+                opt.value = i;
+                opt.textContent = h || `Col ${i + 1}`;
+                select.appendChild(opt);
+            });
+        }
+
+        function renderColumnSelector(headers) {
+            const container = document.getElementById('columnChips');
+            container.innerHTML = '';
+
+            headers.forEach((header, i) => {
+                const chip = document.createElement('div');
+                chip.className = 'column-chip active';
+                chip.dataset.index = i;
+                chip.innerHTML = `<span>${header || 'Col ' + (i + 1)}</span><i class="fas fa-check"></i>`;
+                chip.onclick = () => toggleColumnFromChip(chip, i);
+                container.appendChild(chip);
+            });
+        }
+
+        function toggleColumnFromChip(chip, index) {
+            const isActive = chip.classList.toggle('active');
+            const icon = chip.querySelector('i');
+            icon.className = isActive ? 'fas fa-check' : 'fas fa-plus';
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            if (!originalRows || originalRows.length === 0) return;
+
+            const activeChips = Array.from(document.querySelectorAll('.column-chip.active'));
+            const activeColIndices = activeChips.map(chip => parseInt(chip.dataset.index));
+
+            // Sync the dropdown list
+            const select = document.getElementById('filterCol');
+            const currentVal = select.value;
+            select.innerHTML = '';
+            activeChips.forEach(chip => {
+                const opt = document.createElement('option');
+                opt.value = chip.dataset.index;
+                opt.textContent = chip.querySelector('span').textContent;
+                select.appendChild(opt);
+            });
+            // Try to restore previous selection if it's still there
+            if (activeColIndices.includes(parseInt(currentVal))) {
+                select.value = currentVal;
+            }
+
+            if (activeColIndices.length === 0) {
+                renderTable([], []);
+                return;
+            }
+
+            // 1. Filter Rows
+            const headers = originalRows[0];
+            const dataRows = originalRows.slice(1);
+
+            const filteredDataRows = dataRows.filter(row => {
+                return rowRules.every(rule => {
+                    const cellVal = row[rule.colIdx] || "";
+                    const filterVal = rule.value;
+
+                    const sCell = String(cellVal).trim().toLowerCase();
+                    const sFilter = String(filterVal).trim().toLowerCase();
+
+                    const nCell = parseFloat(cellVal.replace(',', '.'));
+                    const nFilter = parseFloat(filterVal.replace(',', '.'));
+                    const isNumeric = !isNaN(nCell) && !isNaN(nFilter);
+
+                    if (rule.op === '=') return isNumeric ? (nCell === nFilter) : (sCell === sFilter);
+                    if (rule.op === '>') return isNumeric ? (nCell > nFilter) : (sCell > sFilter);
+                    if (rule.op === '<') return isNumeric ? (nCell < nFilter) : (sCell < sFilter);
+                    if (rule.op === 'contains') return sCell.includes(sFilter);
+                    return true;
+                });
+            });
+
+            const finalRows = [headers, ...filteredDataRows];
+
+            // 2. Filter Columns
+            const finalData = finalRows.map(row =>
+                activeColIndices.map(i => row[i] !== undefined ? row[i] : "")
+            );
+
+            renderTable(finalData, activeColIndices);
+        }
+
+        // Row Rule Management
+        document.getElementById('addFilterBtn').onclick = () => {
+            const colIdx = parseInt(document.getElementById('filterCol').value);
+            const colName = document.getElementById('filterCol').options[document.getElementById('filterCol').selectedIndex].text;
+            const op = document.getElementById('filterOp').value;
+            const val = document.getElementById('filterVal').value.trim();
+
+            if (val === "") return;
+
+            rowRules.push({ colIdx, colName, op, value: val });
+            document.getElementById('filterVal').value = '';
+            renderRowRules();
+            updateDisplay();
+        };
+
+        function renderRowRules() {
+            const container = document.getElementById('activeRules');
+            container.innerHTML = '';
+            rowRules.forEach((rule, i) => {
+                const chip = document.createElement('div');
+                chip.className = 'rule-chip';
+                chip.innerHTML = `
+                    <span><b>${rule.colName}</b> ${rule.op} <b>${rule.value}</b></span>
+                    <i class="fas fa-times remove-rule" onclick="removeRule(${i})"></i>
+                `;
+                container.appendChild(chip);
+            });
+        }
+
+        window.removeRule = function (index) {
+            rowRules.splice(index, 1);
+            renderRowRules();
+            updateDisplay();
+        };
+
+        document.getElementById('selectAllCols').onclick = () => {
+            document.querySelectorAll('.column-chip').forEach(chip => {
+                chip.classList.add('active');
+                chip.querySelector('i').className = 'fas fa-check';
+            });
+            updateDisplay();
+        };
+
+        document.getElementById('deselectAllCols').onclick = () => {
+            document.querySelectorAll('.column-chip').forEach(chip => {
+                chip.classList.remove('active');
+                chip.querySelector('i').className = 'fas fa-plus';
+            });
+            updateDisplay();
+        };
+
+        function renderTable(rows, originalIndices = null) {
+            tableHead.innerHTML = '';
+            tableBody.innerHTML = '';
+
+            if (rows.length === 0) return;
+
+            // Update dimension inputs
+            document.getElementById('resizeRows').value = rows.length - 1;
+            document.getElementById('resizeCols').value = rows[0].length;
+
+            const headerRow = document.createElement('tr');
+            rows[0].forEach((header, i) => {
+                const th = document.createElement('th');
+                th.style.position = 'relative';
+                th.style.paddingTop = '1.8rem';
+
+                // Red × delete button at top
+                const delBtn = document.createElement('button');
+                delBtn.type = 'button';
+                delBtn.className = 'delete-btn';
+                delBtn.innerHTML = '&times;';
+                delBtn.title = 'Supprimer la colonne';
+                delBtn.style.cssText = 'position:absolute;top:4px;left:50%;transform:translateX(-50%);padding:1px 6px;font-size:0.8rem;';
+                delBtn.onclick = () => {
+                    if (originalIndices) {
+                        const origIdx = originalIndices[i];
+                        const chip = document.querySelector(`.column-chip[data-index="${origIdx}"]`);
+                        if (chip) toggleColumnFromChip(chip, origIdx);
+                    } else {
+                        const colIdx = Array.from(th.parentNode.cells).indexOf(th);
+                        deleteColumn(colIdx);
+                    }
+                };
+                th.appendChild(delBtn);
+
+                // Editable header name
+                const span = document.createElement('span');
+                span.textContent = header || `Col ${i + 1}`;
+                span.contentEditable = true;
+                th.appendChild(span);
+
+                headerRow.appendChild(th);
+            });
+
+            // Action column header
+            const actionTh = document.createElement('th');
+            actionTh.textContent = 'Action';
+            headerRow.appendChild(actionTh);
+            tableHead.appendChild(headerRow);
+
+            // Body rows
+            rows.slice(1).forEach(row => {
+                const tr = document.createElement('tr');
+                row.forEach(cell => {
+                    const td = document.createElement('td');
+                    td.textContent = cell;
+                    td.contentEditable = true;
+                    tr.appendChild(td);
+                });
+                const actionTd = document.createElement('td');
+                actionTd.innerHTML = '<button type="button" class="delete-btn"><i class="fas fa-trash"></i></button>';
+                actionTd.querySelector('button').onclick = () => tr.remove();
+                tr.appendChild(actionTd);
+                tableBody.appendChild(tr);
+            });
+        }
+
+        function deleteColumn(index) {
+            const headerRow = tableHead.rows[0];
+            headerRow.deleteCell(index);
+            Array.from(tableBody.rows).forEach(row => row.deleteCell(index));
+        }
+
+        function validateCell(td) {
+            const val = td.textContent.trim().replace(',', '.');
+            // If it's a number or empty, it's fine. 
+            // If it's text, we'll allow it (it will be treated as a label/index in the backend)
+            if (val !== "" && !isNaN(val)) {
+                td.classList.remove('invalid-cell');
+                return true;
+            } else {
+                // We don't mark as invalid anymore to allow names
+                td.classList.remove('invalid-cell');
+                return true;
+            }
+        }
+
+        // Add Row
+        document.getElementById('addRow').onclick = () => {
+            const numCols = tableHead.rows[0].cells.length - 1;
+            const tr = document.createElement('tr');
+            for (let i = 0; i < numCols; i++) {
+                const td = document.createElement('td');
+                td.contentEditable = true;
+                tr.appendChild(td);
+            }
+            const actionTd = document.createElement('td');
+            actionTd.innerHTML = '<button type="button" class="delete-btn"><i class="fas fa-trash"></i></button>';
+            actionTd.querySelector('button').onclick = () => tr.remove();
+            tr.appendChild(actionTd);
+            tableBody.appendChild(tr);
+        };
+
+        // Add Column
+        document.getElementById('addCol').onclick = () => {
+            const headerRow = tableHead.rows[0];
+            const actionColIdx = headerRow.cells.length - 1;
+
+            const th = document.createElement('th');
+            th.style.position = 'relative';
+            th.style.paddingTop = '1.8rem';
+
+            const delBtn = document.createElement('button');
+            delBtn.type = 'button';
+            delBtn.className = 'delete-btn';
+            delBtn.innerHTML = '&times;';
+            delBtn.style.cssText = 'position:absolute;top:4px;left:50%;transform:translateX(-50%);padding:1px 6px;font-size:0.8rem;';
+            delBtn.onclick = () => {
+                const idx = Array.from(th.parentNode.cells).indexOf(th);
+                deleteColumn(idx);
+            };
+            th.appendChild(delBtn);
+
+            const span = document.createElement('span');
+            span.textContent = `Col${actionColIdx + 1}`;
+            span.contentEditable = true;
+            th.appendChild(span);
+
+            headerRow.insertBefore(th, headerRow.cells[actionColIdx]);
+
+            Array.from(tableBody.rows).forEach(row => {
+                const td = document.createElement('td');
+                td.contentEditable = true;
+                row.insertBefore(td, row.cells[actionColIdx]);
+            });
+        };
+
+        function resizeTable(targetRows, targetCols) {
+            const currentRows = tableBody.rows.length;
+            const currentCols = tableHead.rows[0] ? (tableHead.rows[0].cells.length - 1) : 0;
+
+            if (currentCols === 0) return;
+
+            // Columns first
+            if (targetCols > currentCols) {
+                const toAdd = targetCols - currentCols;
+                for (let i = 0; i < toAdd; i++) document.getElementById('addCol').click();
+            } else if (targetCols < currentCols) {
+                const toDelete = currentCols - targetCols;
+                for (let i = 0; i < toDelete; i++) {
+                    deleteColumn(tableHead.rows[0].cells.length - 2);
+                }
+            }
+
+            // Rows
+            if (targetRows > currentRows) {
+                const toAdd = targetRows - currentRows;
+                for (let i = 0; i < toAdd; i++) document.getElementById('addRow').click();
+            } else if (targetRows < currentRows) {
+                const toDelete = currentRows - targetRows;
+                for (let i = 0; i < toDelete; i++) {
+                    tableBody.deleteRow(-1);
+                }
+            }
+        }
+
+        document.getElementById('resizeBtn').addEventListener('click', () => {
+            const rows = parseInt(document.getElementById('resizeRows').value);
+            const cols = parseInt(document.getElementById('resizeCols').value);
+            if (isNaN(rows) || isNaN(cols) || rows < 1 || cols < 1) {
+                alert("Entrez des nombres valides pour redimensionner.");
+                return;
+            }
+            resizeTable(rows, cols);
+        });
+
+        // Sync Table with Validation
+        uploadForm.addEventListener('submit', (e) => {
+            let hasError = false;
+            const data = [];
+
+            const headerRow = tableHead.rows[0];
+            const headers = Array.from(headerRow.cells)
+                .slice(0, -1) // Exclude action col
+                .map(th => {
+                    const span = th.querySelector('span');
+                    return span ? span.textContent.trim() : th.textContent.trim();
+                });
+            data.push(headers);
+
+            Array.from(tableBody.rows).forEach((row) => {
+                const rowData = Array.from(row.cells)
+                    .slice(0, -1) // Exclude action col
+                    .map((td) => {
+                        const isValid = validateCell(td);
+                        if (!isValid) hasError = true;
+                        return td.textContent.trim();
+                    });
+                data.push(rowData);
+            });
+
+            // We no longer block on non-numeric to allow name columns
+            /*
+            if (hasError) {
+                e.preventDefault();
+                alert("Erreur : Veuillez remplir toutes les cellules avec des valeurs numériques valides.");
+                return;
+            }
+            */
+
+            if (data[0].length === 0) {
+                e.preventDefault();
+                alert("Erreur : Le tableau est vide.");
+                return;
+            }
+
+            editedDataInput.value = JSON.stringify(data);
+        });
+    </script>
+</body>
+
+</html>

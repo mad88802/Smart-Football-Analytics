@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACP Analytics - Scraper les Données</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .league-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .league-card {
+            background: rgba(255,255,255,0.04);
+            border: 2px solid var(--card-border);
+            border-radius: 1rem;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            user-select: none;
+        }
+        .league-card:hover {
+            border-color: var(--accent-color);
+            background: rgba(99,102,241,0.12);
+            transform: translateY(-3px);
+        }
+        .league-card.selected {
+            border-color: var(--accent-color);
+            background: rgba(99,102,241,0.22);
+            box-shadow: 0 0 20px rgba(99,102,241,0.35);
+        }
+        .league-flag { font-size: 2.5rem; display: block; margin-bottom: 0.5rem; }
+        .league-name { font-weight: 600; font-size: 0.95rem; }
+
+        .step-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+            margin: 1.5rem 0;
+        }
+        .step-btn {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid var(--card-border);
+            border-radius: 0.75rem;
+            padding: 0.8rem 0.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: white;
+            font-family: inherit;
+            font-size: 0.85rem;
+        }
+        .step-btn:hover, .step-btn.selected {
+            border-color: #10B981;
+            background: rgba(16,185,129,0.15);
+            color: #10B981;
+        }
+        .step-btn i { display: block; font-size: 1.4rem; margin-bottom: 0.4rem; }
+
+        #log-box {
+            background: #0a0f1e;
+            border: 1px solid var(--card-border);
+            border-radius: 0.75rem;
+            padding: 1.2rem;
+            min-height: 200px;
+            max-height: 380px;
+            overflow-y: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.7;
+            color: #94a3b8;
+            margin-top: 1.5rem;
+        }
+        #log-box .log-line { margin: 0; animation: fadeInLine 0.3s ease; }
+        @keyframes fadeInLine { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: none; } }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: linear-gradient(135deg, #10B981, #059669);
+            border: none;
+            border-radius: 0.75rem;
+            padding: 0.9rem 2rem;
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .download-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(16,185,129,0.35); }
+
+        .spinner { animation: spin 1s linear infinite; display: inline-block; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+
+<body>
+    <div class="bg-animation">
+        <div class="bg-animation-blobs">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="blob blob-3"></div>
+        </div>
+    </div>
+    <div class="bg-tech-lines"></div>
+
+    <nav class="navbar">
+        <div class="nav-brand">⚽ DATA SCRAPER</div>
+        <ul class="nav-links"></ul>
+        <a href="/" class="nav-back"><i class="fas fa-arrow-left"></i> Hub Principal</a>
+    </nav>
+
+    <div class="container" style="max-width: 820px; padding-top: 100px;">
+        <header>
+            <h1>Scraper les Données</h1>
+            <p>Récupérez automatiquement les stats et photos des joueurs depuis <strong>FBref</strong></p>
+        </header>
+
+        <div class="card">
+            <!-- Step 1: League -->
+            <h2 style="margin-bottom: 1rem;"><i class="fas fa-globe"></i> 1. Choisir la Ligue</h2>
+            <div class="league-grid">
+                {% for key, league in leagues.items() %}
+                <div class="league-card" data-key="{{ key }}" onclick="selectLeague(this)">
+                    <span class="league-flag">{{ league.flag }}</span>
+                    <span class="league-name">{{ league.name }}</span>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Step 2: Season -->
+            <h2 style="margin-bottom: 1rem; margin-top: 2rem;"><i class="fas fa-calendar-alt"></i> 2. Choisir la Saison</h2>
+            <div style="margin: 1.5rem 0;">
+                <select id="seasonSelect" style="width: 100%; padding: 0.8rem 1rem; background: rgba(255,255,255,0.05); color: white; border: 2px solid var(--card-border); border-radius: 0.75rem; font-family: inherit; font-size: 1rem; cursor: pointer; outline: none;">
+                    <option value="" style="background: #0f172a;">Saison Actuelle (Défaut)</option>
+                    <option value="2024-2025" style="background: #0f172a;">2024-2025</option>
+                    <option value="2023-2024" style="background: #0f172a;">2023-2024</option>
+                    <option value="2022-2023" style="background: #0f172a;">2022-2023</option>
+                    <option value="2021-2022" style="background: #0f172a;">2021-2022</option>
+                    <option value="2020-2021" style="background: #0f172a;">2020-2021</option>
+                </select>
+            </div>
+
+            <!-- Step 3: What to scrape -->
+            <h2 style="margin-bottom: 1rem; margin-top: 2rem;"><i class="fas fa-cogs"></i> 3. Étapes à Exécuter</h2>
+            <div class="step-grid">
+                <button class="step-btn selected" data-step="all" onclick="selectStep(this)">
+                    <i class="fas fa-play-circle"></i> Tout Faire
+                </button>
+                <button class="step-btn" data-step="stats" onclick="selectStep(this)">
+                    <i class="fas fa-table"></i> Stats Seules
+                </button>
+                <button class="step-btn" data-step="photos" onclick="selectStep(this)">
+                    <i class="fas fa-camera"></i> Photos Seules
+                </button>
+                <button class="step-btn" data-step="clean" onclick="selectStep(this)">
+                    <i class="fas fa-broom"></i> Nettoyage Seul
+                </button>
+            </div>
+
+            <!-- Launch button -->
+            <button id="launchBtn" class="submit-btn" onclick="launchScrape()" style="margin-top: 2rem;">
+                <i class="fas fa-rocket"></i> Lancer le Scraping
+            </button>
+
+            <!-- Log output -->
+            <div id="log-box">
+                <p class="log-line" style="color: #475569;">En attente du lancement...</p>
+            </div>
+
+            <!-- Download button (hidden until done) -->
+            <div id="download-section" style="display:none; margin-top: 1rem;">
+                <a id="download-btn" class="download-btn" href="#">
+                    <i class="fas fa-download"></i> Télécharger le fichier nettoyé
+                </a>
+                <a class="download-btn" href="/acp" style="background: linear-gradient(135deg,#6366f1,#4f46e5); margin-left:1rem;">
+                    <i class="fas fa-chart-bar"></i> Lancer l'Analyse ACP
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedLeague = null;
+        let selectedStep = 'all';
+        let polling = null;
+
+        function selectLeague(el) {
+            document.querySelectorAll('.league-card').forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
+            selectedLeague = el.dataset.key;
+        }
+
+        function selectStep(el) {
+            document.querySelectorAll('.step-btn').forEach(b => b.classList.remove('selected'));
+            el.classList.add('selected');
+            selectedStep = el.dataset.step;
+        }
+
+        function log(msg, color = '#94a3b8') {
+            const box = document.getElementById('log-box');
+            const p = document.createElement('p');
+            p.className = 'log-line';
+            p.style.color = color;
+            p.textContent = msg;
+            box.appendChild(p);
+            box.scrollTop = box.scrollHeight;
+        }
+
+        async function launchScrape() {
+            if (!selectedLeague) {
+                alert('⚽ Veuillez sélectionner une ligue.');
+                return;
+            }
+
+            const btn = document.getElementById('launchBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-circle-notch spinner"></i> Scraping en cours...';
+            document.getElementById('log-box').innerHTML = '';
+            document.getElementById('download-section').style.display = 'none';
+
+            log('🚀 Démarrage du scraping...', '#6366f1');
+
+            const seasonVal = document.getElementById('seasonSelect').value;
+
+            const resp = await fetch('/start_scrape', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ league: selectedLeague, step: selectedStep, season: seasonVal })
+            });
+
+            const result = await resp.json();
+            if (result.error) {
+                log('❌ ' + result.error, '#EF4444');
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-rocket"></i> Lancer le Scraping';
+                return;
+            }
+
+            // Poll status
+            let lastLogCount = 0;
+            polling = setInterval(async () => {
+                const statusResp = await fetch('/scrape_status');
+                const status = await statusResp.json();
+
+                // Append new log lines
+                const newLines = status.log.slice(lastLogCount);
+                newLines.forEach(line => {
+                    const color = line.startsWith('✅') ? '#10B981'
+                                : line.startsWith('❌') ? '#EF4444'
+                                : line.startsWith('🎉') ? '#F59E0B'
+                                : '#94a3b8';
+                    log(line, color);
+                });
+                lastLogCount = status.log.length;
+
+                if (!status.running) {
+                    clearInterval(polling);
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fas fa-rocket"></i> Lancer le Scraping';
+
+                    if (status.output_file) {
+                        const dlBtn = document.getElementById('download-btn');
+                        dlBtn.href = '/download_scraped/' + status.output_file;
+                        dlBtn.download = status.output_file;
+                        document.getElementById('download-section').style.display = 'flex';
+                        document.getElementById('download-section').style.alignItems = 'center';
+                    }
+                    if (status.error) {
+                        log('❌ Erreur finale: ' + status.error, '#EF4444');
+                    }
+                }
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

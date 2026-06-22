@@ -1,0 +1,536 @@
+Player,Nation,Pos,Squad,Age,Born,Playing Time_MP,Playing Time_Starts,Playing Time_Min,Playing Time_90s,Performance_Gls,Performance_Ast,Performance_G+A,Performance_G-PK,Performance_PK,Performance_PKatt,Performance_CrdY,Performance_CrdR,Per 90 Minutes_Gls,Per 90 Minutes_Ast,Per 90 Minutes_G+A,Per 90 Minutes_G-PK,Per 90 Minutes_G+A-PK,Image_URL,Pos_Class
+Brenden Aaronson,USA,"MF,FW",Leeds United,25.44,2000,30,24,1975,21.9,4,3,7,4,0,0,1,0,0.18,0.14,0.32,0.18,0.32,,milieu
+Zach Abbott,ENG,DF,Nottingham Forest,19.88,2006,2,1,120,1.3,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/c103921a_2022.jpg,defence
+Tammy Abraham,ENG,FW,Aston Villa,28.49,1997,8,1,202,2.2,1,0,1,1,0,0,0,0,0.45,0.0,0.45,0.45,0.45,https://fbref.com/req/202302030/images/headshots/f586779e_2022.jpg,attaque
+Joshua Acheampong,ENG,DF,Chelsea,19.9,2006,12,7,573,6.4,1,0,1,1,0,0,1,0,0.16,0.0,0.16,0.16,0.16,https://fbref.com/req/202302030/images/headshots/b7e62e1d_2022.jpg,defence
+Tyler Adams,USA,MF,Bournemouth,27.12,1999,18,18,1411,15.7,2,1,3,2,0,0,7,0,0.13,0.06,0.19,0.13,0.19,https://fbref.com/req/202302030/images/headshots/2b09d998_2022.jpg,milieu
+Tosin Adarabioyo,ENG,DF,Chelsea,28.51,1997,15,7,750,8.3,0,0,0,0,0,0,2,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/c81d773d_2022.jpg,defence
+Simon Adingra,CIV,"MF,FW",Sunderland,24.24,2002,14,9,653,7.3,1,0,1,1,0,0,2,0,0.14,0.0,0.14,0.14,0.14,https://fbref.com/req/202302030/images/headshots/4dcec659_2022.jpg,milieu
+Amine Adli,MAR,MF,Bournemouth,25.89,2000,27,10,1040,11.6,3,1,4,3,0,0,2,0,0.26,0.09,0.35,0.26,0.35,https://fbref.com/req/202302030/images/headshots/dcfb17f4_2022.jpg,milieu
+Emmanuel Agbadou,CIV,DF,Wolves,28.78,1997,14,12,1101,12.2,0,0,0,0,0,0,1,1,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/75f1ed80_2022.jpg,defence
+Nayef Aguerd,MAR,DF,West Ham United,30.0,1996,2,2,180,2.0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/288e1e13_2022.jpg,defence
+Ola Aina,NGA,DF,Nottingham Forest,29.47,1996,15,15,1320,14.7,0,0,0,0,0,0,3,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/246d153b_2022.jpg,defence
+Rayan Aït-Nouri,ALG,DF,Manchester City,24.81,2001,13,10,779,8.7,0,2,2,0,0,0,2,0,0.0,0.23,0.23,0.0,0.23,https://fbref.com/req/202302030/images/headshots/9b398aea_2022.jpg,defence
+Kristoffer Ajer,NOR,DF,Brentford,27.95,1998,24,18,1628,18.1,0,1,1,0,0,0,3,0,0.0,0.06,0.06,0.0,0.06,https://fbref.com/req/202302030/images/headshots/a8c0acb7_2022.jpg,defence
+Nathan Aké,NED,DF,Manchester City,31.11,1995,14,4,495,5.5,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/eaeca114_2022.jpg,defence
+Carlos Alcaraz,ARG,MF,Everton,23.33,2002,16,6,675,7.5,0,1,1,0,0,0,3,0,0.0,0.13,0.13,0.0,0.13,https://fbref.com/req/202302030/images/headshots/4abac767_2022.jpg,milieu
+Omar Alderete,PAR,DF,Sunderland,29.26,1996,27,26,2354,26.2,1,1,2,1,0,0,6,0,0.04,0.04,0.08,0.04,0.08,https://fbref.com/req/202302030/images/headshots/bb08bce9_2022.jpg,defence
+Alisson,BRA,GK,Liverpool,33.49,1992,25,25,2250,25.0,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/7a2e46a8_2022.jpg,defence
+Max Alleyne,ENG,DF,Manchester City,20.69,2005,2,2,135,1.5,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,,defence
+Jaydon Amauri Banel,NED,"FW,MF",Burnley,21.44,2004,1,0,10,0.1,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,,attaque
+Ethan Ampadu,WAL,MF,Leeds United,25.54,2000,28,28,2489,27.7,1,1,2,1,0,0,7,0,0.04,0.04,0.07,0.04,0.07,https://fbref.com/req/202302030/images/headshots/10b9fa99_2022.jpg,milieu
+Joachim Andersen,DEN,DF,Fulham,29.83,1996,28,28,2471,27.5,0,1,1,0,0,0,7,0,0.0,0.04,0.04,0.0,0.04,https://fbref.com/req/202302030/images/headshots/e34fc66d_2022.jpg,defence
+Elliot Anderson,ENG,MF,Nottingham Forest,23.39,2002,31,31,2772,30.8,2,2,4,1,1,1,6,0,0.06,0.06,0.13,0.03,0.1,https://fbref.com/req/202302030/images/headshots/de31038e_2022.jpg,milieu
+André,BRA,MF,Wolves,24.7,2001,28,23,2132,23.7,1,0,1,1,0,0,9,0,0.04,0.0,0.04,0.04,0.04,https://fbref.com/req/202302030/images/headshots/ec604e2c_2022.jpg,milieu
+Nilson Angulo,ECU,MF,Sunderland,22.78,2003,5,3,256,2.8,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/a9b9d89c_2022.jpg,milieu
+Jaidon Anthony,ENG,MF,Burnley,26.33,1999,30,25,2114,23.5,7,1,8,7,0,0,4,0,0.3,0.04,0.34,0.3,0.34,https://fbref.com/req/202302030/images/headshots/e4238fb1_2022.jpg,milieu
+Alphonse Areola,FRA,GK,West Ham United,33.08,1993,20,20,1800,20.0,0,1,1,0,0,0,0,0,0.0,0.05,0.05,0.0,0.05,https://fbref.com/req/202302030/images/headshots/2f965a72_2022.jpg,defence
+Jhon Arias,COL,"FW,MF",Wolves,28.52,1997,23,14,1124,12.5,1,0,1,1,0,0,1,0,0.08,0.0,0.08,0.08,0.08,https://fbref.com/req/202302030/images/headshots/86d96066_2022.jpg,attaque
+Adam Armstrong,ENG,"FW,MF",Wolves,29.13,1997,7,7,566,6.3,1,2,3,1,0,0,3,0,0.16,0.32,0.48,0.16,0.48,https://fbref.com/req/202302030/images/headshots/68c720b5_2022.jpg,attaque
+Harrison Armstrong,ENG,MF,Everton,19.19,2007,11,6,499,5.5,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,,milieu
+Tolu Arokodare,NGA,FW,Wolves,25.35,2000,27,12,1244,13.8,3,1,4,3,0,1,1,0,0.22,0.07,0.29,0.22,0.29,https://fbref.com/req/202302030/images/headshots/a42760bc_2022.jpg,attaque
+Taiwo Awoniyi,NGA,FW,Nottingham Forest,28.63,1997,12,1,278,3.1,2,0,2,2,0,0,1,0,0.65,0.0,0.65,0.65,0.65,https://fbref.com/req/202302030/images/headshots/e5478b87_2022.jpg,attaque
+Yasin Ayari,SWE,MF,Brighton,22.48,2003,24,18,1726,19.2,3,2,5,3,0,0,1,0,0.16,0.1,0.26,0.16,0.26,https://fbref.com/req/202302030/images/headshots/f173303a_2022.jpg,milieu
+Benoît Badiashile,FRA,DF,Chelsea,25.01,2001,8,6,471,5.2,0,0,0,0,0,0,2,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/06df8256_2022.jpg,defence
+Leon Bailey,JAM,MF,Aston Villa,28.64,1997,9,2,340,3.8,0,1,1,0,0,0,1,0,0.0,0.26,0.26,0.0,0.26,https://fbref.com/req/202302030/images/headshots/3a233281_2022.jpg,milieu
+Dilane Bakwa,FRA,MF,Nottingham Forest,23.59,2002,10,3,345,3.8,0,1,1,0,0,0,1,0,0.0,0.26,0.26,0.0,0.26,https://fbref.com/req/202302030/images/headshots/2b5a35e5_2022.jpg,milieu
+Carlos Baleba,CMR,MF,Brighton,22.24,2004,25,19,1279,14.2,0,0,0,0,0,0,5,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/a1390d2f_2022.jpg,milieu
+Daniel Ballard,NIR,DF,Sunderland,26.52,1999,26,22,2008,22.3,2,0,2,2,0,0,3,0,0.09,0.0,0.09,0.09,0.09,https://fbref.com/req/202302030/images/headshots/38f300f3_2022.jpg,defence
+Ross Barkley,ENG,MF,Aston Villa,32.31,1993,14,2,402,4.5,2,0,2,2,0,0,0,0,0.45,0.0,0.45,0.45,0.45,https://fbref.com/req/202302030/images/headshots/3a24769f_2022.jpg,milieu
+Ashley Barnes,ENG,"FW,MF",Burnley,36.41,1989,6,0,40,0.4,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/2691c772_2022.jpg,attaque
+Harvey Barnes,ENG,"FW,MF",Newcastle United,28.3,1997,30,17,1659,18.4,5,0,5,5,0,0,1,0,0.27,0.0,0.27,0.27,0.27,https://fbref.com/req/202302030/images/headshots/3ea50f67_2022.jpg,attaque
+Thierno Barry,FRA,FW,Everton,23.44,2002,31,19,1640,18.2,6,0,6,6,0,0,3,0,0.33,0.0,0.33,0.33,0.33,https://fbref.com/req/202302030/images/headshots/52c3244b_2022.jpg,attaque
+Calvin Bassey,NGA,DF,Fulham,26.24,1999,23,21,1904,21.2,1,0,1,1,0,0,5,0,0.05,0.0,0.05,0.05,0.05,https://fbref.com/req/202302030/images/headshots/a36524bf_2022.jpg,defence
+Altay Bayındır,TUR,GK,Manchester Utd,27.96,1998,6,6,540,6.0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/072e68ed_2022.jpg,defence
+Jean-Ricner Bellegarde,HAI,"MF,FW",Wolves,27.76,1998,22,13,1086,12.1,1,1,2,1,0,0,4,0,0.08,0.08,0.17,0.08,0.17,https://fbref.com/req/202302030/images/headshots/10f0fdd3_2022.jpg,milieu
+Walter Benítez,ARG,GK,Crystal Palace,33.19,1993,1,1,90,1.0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/8a2248b4_2022.jpg,defence
+Rodrigo Bentancur,URU,MF,Tottenham Hotspur,28.76,1997,20,17,1410,15.7,1,1,2,1,0,0,5,0,0.06,0.06,0.13,0.06,0.13,https://fbref.com/req/202302030/images/headshots/3b8674e6_2022.jpg,milieu
+Sander Berge,NOR,MF,Fulham,28.12,1998,31,30,2590,28.8,0,1,1,0,0,0,5,0,0.0,0.03,0.03,0.0,0.03,https://fbref.com/req/202302030/images/headshots/d0b6129f_2022.jpg,milieu
+Lucas Bergvall,SWE,MF,Tottenham Hotspur,20.15,2006,18,10,850,9.4,1,2,3,1,0,0,2,0,0.11,0.21,0.32,0.11,0.32,,milieu
+Beto,GNB,FW,Everton,28.16,1998,31,12,1212,13.5,6,1,7,6,0,0,2,0,0.45,0.07,0.52,0.45,0.52,https://fbref.com/req/202302030/images/headshots/ed5c0319_2022.jpg,attaque
+Jaka Bijol,SVN,DF,Leeds United,27.15,1999,18,14,1308,14.5,1,1,2,1,0,0,3,0,0.07,0.07,0.14,0.07,0.14,https://fbref.com/req/202302030/images/headshots/6fdac234_2022.jpg,defence
+Yves Bissouma,MLI,MF,Tottenham Hotspur,29.58,1996,8,5,462,5.1,0,0,0,0,0,0,3,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/6c203af0_2022.jpg,milieu
+Marco Bizot,NED,GK,Aston Villa,35.05,1991,5,4,405,4.5,0,0,0,0,0,0,2,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/3d214e5f_2022.jpg,defence
+Oscar Bobb,NOR,"MF,FW",Manchester City,22.71,2003,9,5,468,5.2,0,1,1,0,0,0,1,0,0.0,0.19,0.19,0.0,0.19,https://fbref.com/req/202302030/images/headshots/eed2427e_2022.jpg,milieu
+Oscar Bobb,NOR,MF,Fulham,22.71,2003,7,3,296,3.3,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/eed2427e_2022.jpg,milieu
+Lamare Bogarde,NED,"MF,DF",Aston Villa,22.23,2004,24,8,807,9.0,0,0,0,0,0,0,5,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/bca5c4a7_2022.jpg,milieu
+Jayden Bogle,ENG,"DF,MF",Leeds United,25.67,2000,29,27,2402,26.7,1,1,2,1,0,0,6,0,0.04,0.04,0.07,0.04,0.07,https://fbref.com/req/202302030/images/headshots/ae5019e6_2022.jpg,defence
+Sebastiaan Bornauw,BEL,DF,Leeds United,27.02,1999,9,4,304,3.4,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/01834aa0_2022.jpg,defence
+Olivier Boscagli,FRA,DF,Brighton,28.36,1997,8,5,442,4.9,0,1,1,0,0,0,2,0,0.0,0.2,0.2,0.0,0.2,https://fbref.com/req/202302030/images/headshots/403f5d20_2022.jpg,defence
+Sven Botman,NED,DF,Newcastle United,26.21,2000,18,14,1205,13.4,1,1,2,1,0,0,1,0,0.07,0.07,0.15,0.07,0.15,https://fbref.com/req/202302030/images/headshots/ccce7025_2022.jpg,defence
+Jarrod Bowen,ENG,"MF,FW",West Ham United,29.27,1996,31,31,2777,30.9,8,6,14,7,1,1,4,0,0.26,0.19,0.45,0.23,0.42,https://fbref.com/req/202302030/images/headshots/79c84d1c_2022.jpg,milieu
+Conor Bradley,NIR,DF,Liverpool,22.72,2003,15,12,929,10.3,0,1,1,0,0,0,5,0,0.0,0.1,0.1,0.0,0.1,https://fbref.com/req/202302030/images/headshots/bbd67769_2022.jpg,defence
+Jarrad Branthwaite,ENG,DF,Everton,23.76,2002,8,5,504,5.6,1,0,1,1,0,0,1,0,0.18,0.0,0.18,0.18,0.18,https://fbref.com/req/202302030/images/headshots/c1949191_2022.jpg,defence
+Brian Brobbey,NED,FW,Sunderland,24.16,2002,24,15,1368,15.2,6,1,7,6,0,0,4,0,0.39,0.07,0.46,0.39,0.46,https://fbref.com/req/202302030/images/headshots/4c184730_2022.jpg,attaque
+Armando Broja,ALB,FW,Burnley,24.55,2001,20,8,819,9.1,1,1,2,1,0,0,0,0,0.11,0.11,0.22,0.11,0.22,https://fbref.com/req/202302030/images/headshots/97220da2_2022.jpg,attaque
+David Brooks,WAL,MF,Bournemouth,28.73,1997,25,12,1051,11.7,1,2,3,1,0,0,7,0,0.09,0.17,0.26,0.09,0.26,https://fbref.com/req/202302030/images/headshots/dc4cae05_2022.jpg,milieu
+Jacob Bruun Larsen,DEN,"MF,FW",Burnley,27.53,1998,23,10,972,10.8,0,1,1,0,0,0,0,0,0.0,0.09,0.09,0.0,0.09,https://fbref.com/req/202302030/images/headshots/4e204552_2022.jpg,milieu
+Emi Buendía,ARG,MF,Aston Villa,29.26,1996,29,18,1451,16.1,5,2,7,5,0,0,6,0,0.31,0.12,0.43,0.31,0.43,https://fbref.com/req/202302030/images/headshots/66b76d44_2022.jpg,milieu
+Hugo Bueno,ESP,"MF,DF",Wolves,23.53,2002,28,21,1952,21.7,1,1,2,1,0,0,1,0,0.05,0.05,0.09,0.05,0.09,https://fbref.com/req/202302030/images/headshots/bfc3b3a0_2022.jpg,milieu
+Santiago Bueno,URU,DF,Wolves,27.39,1998,22,21,1923,21.4,2,1,3,2,0,0,4,0,0.09,0.05,0.14,0.09,0.14,https://fbref.com/req/202302030/images/headshots/edc98fac_2022.jpg,defence
+Facundo Buonanotte,ARG,MF,Chelsea,21.27,2004,1,1,45,0.5,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/468a7a91_2022.jpg,milieu
+Facundo Buonanotte,ARG,MF,Leeds United,21.27,2004,2,0,26,0.3,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/468a7a91_2022.jpg,milieu
+Dan Burn,ENG,DF,Newcastle United,33.89,1992,23,21,1813,20.1,0,2,2,0,0,0,9,1,0.0,0.1,0.1,0.0,0.1,https://fbref.com/req/202302030/images/headshots/b2d31e83_2022.jpg,defence
+Bradley Burrowes,ENG,MF,Aston Villa,18.07,2008,1,0,17,0.2,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/802ee5ca_2022.jpg,milieu
+Jun'ai Byfield,ENG,DF,Tottenham Hotspur,17.31,2008,1,0,1,0.0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/0312881b_2022.jpg,defence
+Sam Byram,ENG,"DF,MF",Leeds United,32.53,1993,1,0,8,0.1,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/1bf811d4_2022.jpg,defence
+Moisés Caicedo,ECU,MF,Chelsea,24.41,2001,26,25,2181,24.2,3,1,4,3,0,0,9,1,0.12,0.04,0.17,0.12,0.17,https://fbref.com/req/202302030/images/headshots/16264a81_2022.jpg,milieu
+Tom Cairney,SCO,MF,Fulham,35.19,1991,20,4,562,6.2,1,0,1,1,0,0,3,0,0.16,0.0,0.16,0.16,0.16,https://fbref.com/req/202302030/images/headshots/a8748947_2022.jpg,milieu
+Riccardo Calafiori,ITA,DF,Arsenal,23.86,2002,22,18,1448,16.1,1,2,3,1,0,0,5,0,0.06,0.12,0.19,0.06,0.19,https://fbref.com/req/202302030/images/headshots/aded8e6f_2022.jpg,defence
+Dominic Calvert-Lewin,ENG,FW,Leeds United,29.04,1997,28,23,2115,23.5,10,1,11,8,2,3,1,0,0.43,0.04,0.47,0.34,0.38,https://fbref.com/req/202302030/images/headshots/59e6e5bf_2022.jpg,attaque
+Jaydee Canvot,FRA,DF,Crystal Palace,19.67,2006,13,7,706,7.8,0,0,0,0,0,0,2,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/3684108d_2022.jpg,defence
+Fabio Carvalho,POR,MF,Brentford,23.58,2002,6,1,102,1.1,1,0,1,1,0,0,0,0,0.88,0.0,0.88,0.88,0.88,https://fbref.com/req/202302030/images/headshots/966e28d0_2022.jpg,milieu
+Casemiro,BRA,MF,Manchester Utd,34.1,1992,29,28,2131,23.7,7,2,9,7,0,0,10,1,0.3,0.08,0.38,0.3,0.38,https://fbref.com/req/202302030/images/headshots/4d224fe8_2022.jpg,milieu
+Matty Cash,POL,DF,Aston Villa,28.64,1997,28,28,2441,27.1,3,2,5,3,0,0,7,0,0.11,0.07,0.18,0.11,0.18,https://fbref.com/req/202302030/images/headshots/2389cdc2_2022.jpg,defence
+Timothy Castagne,BEL,"DF,MF",Fulham,30.31,1995,23,13,1223,13.6,0,0,0,0,0,0,3,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/197640fd_2022.jpg,defence
+Valentín Castellanos,ARG,FW,West Ham United,27.49,1998,11,11,860,9.6,2,0,2,2,0,0,2,0,0.21,0.0,0.21,0.21,0.21,https://fbref.com/req/202302030/images/headshots/da76bab4_2022.jpg,attaque
+Trevoh Chalobah,ENG,DF,Chelsea,26.73,1999,29,29,2550,28.3,3,0,3,3,0,0,3,1,0.11,0.0,0.11,0.11,0.11,https://fbref.com/req/202302030/images/headshots/5515376c_2022.jpg,defence
+Rayan Cherki,FRA,MF,Manchester City,22.62,2003,25,14,1308,14.5,3,8,11,3,0,0,1,0,0.21,0.55,0.76,0.21,0.76,https://fbref.com/req/202302030/images/headshots/b34c63a5_2022.jpg,milieu
+Federico Chiesa,ITA,MF,Liverpool,28.43,1997,23,1,296,3.3,2,1,3,2,0,0,3,0,0.61,0.3,0.91,0.61,0.91,https://fbref.com/req/202302030/images/headshots/b0f7e36c_2022.jpg,milieu
+Tawanda Chirewa,ZIM,MF,Wolves,22.46,2003,2,0,27,0.3,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/34721c11_2022.jpg,milieu
+Ryan Christie,SCO,MF,Bournemouth,31.1,1995,21,5,727,8.1,2,0,2,2,0,0,2,0,0.25,0.0,0.25,0.25,0.25,https://fbref.com/req/202302030/images/headshots/26ce2263_2022.jpg,milieu
+Samuel Chukwueze,NGA,MF,Fulham,26.85,1999,17,7,809,9.0,3,4,7,3,0,0,0,0,0.33,0.44,0.78,0.33,0.78,https://fbref.com/req/202302030/images/headshots/b8a642fc_2022.jpg,milieu
+Dennis Cirkin,LVA,DF,Sunderland,23.98,2002,7,3,304,3.4,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/307ea3b6_2022.jpg,defence
+Nathaniel Clyne,ENG,MF,Crystal Palace,34.98,1991,8,6,495,5.5,0,1,1,0,0,0,1,0,0.0,0.18,0.18,0.0,0.18,https://fbref.com/req/202302030/images/headshots/0442183b_2022.jpg,milieu
+Séamus Coleman,IRL,DF,Everton,37.47,1988,3,1,11,0.1,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/0420d84f_2022.jpg,defence
+Nathan Collins,IRL,DF,Brentford,24.91,2001,28,25,2345,26.1,1,2,3,1,0,0,5,0,0.04,0.08,0.12,0.04,0.12,https://fbref.com/req/202302030/images/headshots/a8c19eb8_2022.jpg,defence
+Lewis Cook,ENG,"MF,DF",Bournemouth,29.15,1997,16,8,872,9.7,0,1,1,0,0,0,1,1,0.0,0.1,0.1,0.0,0.1,https://fbref.com/req/202302030/images/headshots/2afc7272_2022.jpg,milieu
+Diego Coppola,ITA,DF,Brighton,22.25,2003,5,2,194,2.2,0,0,0,0,0,0,2,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/22ae86f9_2022.jpg,defence
+Marc Cucurella,ESP,DF,Chelsea,27.69,1998,27,24,2077,23.1,1,3,4,1,0,0,5,1,0.04,0.13,0.17,0.04,0.17,https://fbref.com/req/202302030/images/headshots/1daec722_2022.jpg,defence
+Jorge Cuenca,ESP,DF,Fulham,26.36,1999,14,11,933,10.4,0,0,0,0,0,0,5,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/0abc51f2_2022.jpg,defence
+Josh Cullen,IRL,MF,Burnley,29.98,1996,18,18,1514,16.8,2,2,4,2,0,0,2,0,0.12,0.12,0.24,0.12,0.24,https://fbref.com/req/202302030/images/headshots/f6d7d690_2022.jpg,milieu
+Jair Cunha,BRA,DF,Nottingham Forest,21.06,2005,3,2,215,2.4,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/ac31d35e_2022.jpg,defence
+Matheus Cunha,BRA,"MF,FW",Manchester Utd,26.84,1999,28,24,2069,23.0,7,2,9,7,0,0,1,0,0.3,0.09,0.39,0.3,0.39,https://fbref.com/req/202302030/images/headshots/dc62b55d_2022.jpg,milieu
+Diogo Dalot,POR,"MF,DF",Manchester Utd,27.03,1999,29,25,2233,24.8,1,3,4,1,0,0,5,0,0.04,0.12,0.16,0.04,0.16,https://fbref.com/req/202302030/images/headshots/d9565625_2022.jpg,milieu
+Mikkel Damsgaard,DEN,MF,Brentford,25.74,2000,26,18,1575,17.5,3,4,7,3,0,0,0,0,0.17,0.23,0.4,0.17,0.4,https://fbref.com/req/202302030/images/headshots/215f3907_2022.jpg,milieu
+Kevin Danso,AUT,DF,Tottenham Hotspur,27.53,1998,17,11,933,10.4,0,0,0,0,0,0,4,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/6e33125f_2022.jpg,defence
+Karl Darlow,WAL,GK,Leeds United,35.47,1990,15,15,1350,15.0,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/cde3309f_2022.jpg,defence
+Ben Davies,WAL,DF,Tottenham Hotspur,32.93,1993,3,2,137,1.5,1,0,1,1,0,0,1,0,0.66,0.0,0.66,0.66,0.66,https://fbref.com/req/202302030/images/headshots/44781702_2022.jpg,defence
+Maxim De Cuyper,BEL,"DF,MF",Brighton,25.27,2000,24,14,1152,12.8,2,0,2,2,0,0,2,0,0.16,0.0,0.16,0.16,0.16,https://fbref.com/req/202302030/images/headshots/d494882e_2022.jpg,defence
+Liam Delap,ENG,FW,Chelsea,23.14,2003,22,9,796,8.8,1,0,1,1,0,0,2,0,0.11,0.0,0.11,0.11,0.11,https://fbref.com/req/202302030/images/headshots/dd897ee7_2022.jpg,attaque
+Sepp van den Berg,NED,DF,Brentford,24.27,2001,26,25,2304,25.6,0,1,1,0,0,0,1,0,0.0,0.04,0.04,0.0,0.04,https://fbref.com/req/202302030/images/headshots/7bf9400b_2022.jpg,defence
+Justin Devenny,NIR,"MF,FW",Crystal Palace,22.47,2003,18,5,603,6.7,1,0,1,0,1,1,0,0,0.15,0.0,0.15,0.0,0.0,https://fbref.com/req/202302030/images/headshots/6c2b66fc_2022.jpg,milieu
+Kiernan Dewsbury-Hall,ENG,MF,Everton,27.56,1998,24,23,2005,22.3,6,3,9,6,0,0,6,0,0.27,0.13,0.4,0.27,0.4,https://fbref.com/req/202302030/images/headshots/5c74c0f5_2022.jpg,milieu
+Bafodé Diakité,FRA,DF,Bournemouth,25.23,2001,18,15,1277,14.2,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/1bfb6fef_2022.jpg,defence
+Amad Diallo,CIV,MF,Manchester Utd,23.72,2002,25,22,1917,21.3,2,2,4,2,0,0,2,0,0.09,0.09,0.19,0.09,0.19,https://fbref.com/req/202302030/images/headshots/9dc96f10_2022.jpg,milieu
+Habib Diarra,SEN,MF,Sunderland,22.24,2004,14,12,1098,12.2,2,0,2,1,1,1,4,0,0.16,0.0,0.16,0.08,0.08,https://fbref.com/req/202302030/images/headshots/6d0fe035_2022.jpg,milieu
+Rúben Dias,POR,DF,Manchester City,28.88,1997,25,23,2051,22.8,2,0,2,2,0,0,3,0,0.09,0.0,0.09,0.09,0.09,https://fbref.com/req/202302030/images/headshots/31c69ef1_2022.jpg,defence
+Tyler Dibling,ENG,MF,Everton,20.05,2006,14,4,358,4.0,0,0,0,0,0,0,2,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/bdcc89ae_2022.jpg,milieu
+Lucas Digne,FRA,DF,Aston Villa,32.69,1993,26,18,1557,17.3,0,4,4,0,0,0,3,0,0.0,0.23,0.23,0.0,0.23,https://fbref.com/req/202302030/images/headshots/1b84dbe1_2022.jpg,defence
+Issa Diop,MAR,DF,Fulham,29.22,1997,10,6,596,6.6,0,0,0,0,0,0,2,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/a712ca2b_2022.jpg,defence
+El Hadji Malick Diouf,SEN,"DF,MF",West Ham United,21.25,2004,25,23,2094,23.3,0,5,5,0,0,0,4,0,0.0,0.21,0.21,0.0,0.21,https://fbref.com/req/202302030/images/headshots/bd5eb2e5_2022.jpg,defence
+Axel Disasi,FRA,DF,West Ham United,28.05,1998,7,7,630,7.0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/ad82197c_2022.jpg,defence
+Matt Doherty,IRL,"DF,MF",Wolves,34.2,1992,10,10,702,7.8,0,0,0,0,0,0,4,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/d557d734_2022.jpg,defence
+Jeremy Doku,BEL,"MF,FW",Manchester City,23.84,2002,22,13,1231,13.7,1,4,5,1,0,0,0,0,0.07,0.29,0.37,0.07,0.37,https://fbref.com/req/202302030/images/headshots/fffea3e5_2022.jpg,milieu
+Nicolás Domínguez,ARG,MF,Nottingham Forest,27.75,1998,20,14,935,10.4,1,0,1,1,0,0,2,0,0.1,0.0,0.1,0.1,0.1,https://fbref.com/req/202302030/images/headshots/20b3a502_2022.jpg,milieu
+Gianluigi Donnarumma,ITA,GK,Manchester City,27.09,1999,27,27,2430,27.0,0,0,0,0,0,0,6,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/08f5afaa_2022.jpg,defence
+Romelle Donovan,ENG,FW,Brentford,19.33,2006,4,0,41,0.5,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/519db366_2022.jpg,attaque
+Patrick Dorgu,DEN,MF,Manchester Utd,21.42,2004,22,14,1335,14.8,3,3,6,3,0,0,5,0,0.2,0.2,0.4,0.2,0.4,https://fbref.com/req/202302030/images/headshots/e6536124_2022.jpg,milieu
+Max Dowman,ENG,MF,Arsenal,16.24,2009,3,0,46,0.5,1,0,1,1,0,0,0,0,1.96,0.0,1.96,1.96,1.96,https://fbref.com/req/202302030/images/headshots/9008bb70_2022.jpg,milieu
+Radu Drăgușin,ROU,DF,Tottenham Hotspur,24.15,2002,8,5,515,5.7,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/620922ed_2022.jpg,defence
+Joél Drakes-Thomas,ENG,MF,Crystal Palace,16.8,2009,2,0,9,0.1,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,,milieu
+Martin Dúbravka,SVK,GK,Burnley,37.2,1989,31,31,2790,31.0,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/3a949a25_2022.jpg,defence
+Lewis Dunk,ENG,DF,Brighton,34.35,1991,29,28,2565,28.5,0,0,0,0,0,0,10,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/282f75f3_2022.jpg,defence
+George Earthy,ENG,MF,West Ham United,21.56,2004,1,0,9,0.1,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/123d2733_2022.jpg,milieu
+Odsonne Édouard,FRA,FW,Crystal Palace,28.2,1998,1,0,3,0.0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/0562b7f1_2022.jpg,attaque
+Tom Edozie,ENG,MF,Wolves,19.87,2006,1,0,7,0.1,1,0,1,1,0,0,0,0,12.86,0.0,12.86,12.86,12.86,,milieu
+Alysson Edward,BRA,MF,Aston Villa,19.9,2006,3,0,49,0.5,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,,milieu
+Marcus Edwards,ENG,"MF,FW",Burnley,27.32,1998,19,9,910,10.1,1,3,4,1,0,0,0,0,0.1,0.3,0.4,0.1,0.4,https://fbref.com/req/202302030/images/headshots/57760e66_2022.jpg,milieu
+Hjalmar Ekdal,SWE,DF,Burnley,27.44,1998,15,13,1179,13.1,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/3d554589_2022.jpg,defence
+Hugo Ekitike,FRA,FW,Liverpool,23.77,2002,28,21,1803,20.0,11,4,15,11,0,0,0,0,0.55,0.2,0.75,0.55,0.75,https://fbref.com/req/202302030/images/headshots/5b92d896_2022.jpg,attaque
+Anthony Elanga,SWE,"FW,MF",Newcastle United,23.92,2002,27,13,1221,13.6,0,1,1,0,0,0,0,0,0.0,0.07,0.07,0.0,0.07,https://fbref.com/req/202302030/images/headshots/2fba6108_2022.jpg,attaque
+Melker Ellborg,SWE,GK,Sunderland,22.85,2003,3,3,270,3.0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/013d348e_2022.jpg,defence
+Harvey Elliott,ENG,MF,Aston Villa,22.99,2003,4,1,112,1.2,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/b9e1436c_2022.jpg,milieu
+Harvey Elliott,ENG,"FW,MF",Liverpool,22.99,2003,1,0,1,0.0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/b9e1436c_2022.jpg,attaque
+Wataru Endo,JPN,DF,Liverpool,33.13,1993,8,1,175,1.9,0,1,1,0,0,0,1,0,0.0,0.51,0.51,0.0,0.51,https://fbref.com/req/202302030/images/headshots/c149016b_2022.jpg,defence
+Romain Esse,ENG,MF,Crystal Palace,20.88,2005,4,0,44,0.5,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/87189f25_2022.jpg,milieu
+Maxime Estève,FRA,DF,Burnley,23.84,2002,28,28,2401,26.7,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/1a066e69_2022.jpg,defence
+Evanilson,BRA,FW,Bournemouth,26.48,1999,29,25,2194,24.4,6,0,6,6,0,0,1,0,0.25,0.0,0.25,0.25,0.25,https://fbref.com/req/202302030/images/headshots/6f3cc2fe_2022.jpg,attaque
+Eberechi Eze,ENG,"MF,FW",Arsenal,27.75,1998,25,16,1419,15.8,6,2,8,6,0,0,1,0,0.38,0.13,0.51,0.38,0.51,https://fbref.com/req/202302030/images/headshots/ae4fc6a4_2022.jpg,milieu
+Eberechi Eze,ENG,MF,Crystal Palace,27.75,1998,1,1,83,0.9,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/ae4fc6a4_2022.jpg,milieu
+Bruno Fernandes,POR,MF,Manchester Utd,31.56,1994,28,28,2434,27.0,8,16,24,4,4,6,3,0,0.3,0.59,0.89,0.15,0.74,https://fbref.com/req/202302030/images/headshots/507c7bdf_2022.jpg,milieu
+Mateus Fernandes,POR,MF,West Ham United,21.72,2004,29,28,2392,26.6,3,3,6,3,0,0,6,0,0.11,0.11,0.23,0.11,0.23,https://fbref.com/req/202302030/images/headshots/ef491564_2022.jpg,milieu
+Enzo Fernández,ARG,MF,Chelsea,25.2,2001,30,29,2578,28.6,8,3,11,6,2,2,8,0,0.28,0.1,0.38,0.21,0.31,https://fbref.com/req/202302030/images/headshots/5ff4ab71_2022.jpg,milieu
+Zian Flemming,NED,FW,Burnley,27.66,1998,22,14,1189,13.2,8,0,8,6,2,2,3,0,0.61,0.0,0.61,0.45,0.45,https://fbref.com/req/202302030/images/headshots/b3f36e72_2022.jpg,attaque
+Jack Fletcher,ENG,MF,Manchester Utd,19.03,2007,3,0,108,1.2,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,,milieu
+Tyler Fletcher,SCO,MF,Manchester Utd,19.03,2007,1,0,1,0.0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,,milieu
+Phil Foden,ENG,MF,Manchester City,25.84,2000,26,21,1811,20.1,7,3,10,7,0,0,4,0,0.35,0.15,0.5,0.35,0.5,https://fbref.com/req/202302030/images/headshots/ed1e53f3_2022.jpg,milieu
+Wesley Fofana,FRA,DF,Chelsea,25.28,2000,19,14,1276,14.2,0,1,1,0,0,0,6,1,0.0,0.07,0.07,0.0,0.07,https://fbref.com/req/202302030/images/headshots/132a82f1_2022.jpg,defence
+Lyle Foster,RSA,"FW,MF",Burnley,25.57,2000,23,15,1303,14.5,3,2,5,3,0,0,4,0,0.21,0.14,0.35,0.21,0.35,https://fbref.com/req/202302030/images/headshots/f84a807c_2022.jpg,attaque
+Tyler Fredricson,ENG,DF,Manchester Utd,21.1,2005,1,0,3,0.0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/58630379_2022.jpg,defence
+Jeremie Frimpong,NED,"DF,MF",Liverpool,25.3,2000,15,9,752,8.4,0,1,1,0,0,0,1,0,0.0,0.12,0.12,0.0,0.12,https://fbref.com/req/202302030/images/headshots/74f2e748_2022.jpg,defence
+Niclas Füllkrug,GER,FW,West Ham United,33.13,1993,8,5,409,4.5,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/4f16405e_2022.jpg,attaque
+Cody Gakpo,NED,"MF,FW",Liverpool,26.9,1999,29,25,2145,23.8,6,3,9,6,0,0,2,0,0.25,0.13,0.38,0.25,0.38,https://fbref.com/req/202302030/images/headshots/1971591f_2022.jpg,milieu
+Conor Gallagher,ENG,MF,Tottenham Hotspur,26.14,2000,9,7,585,6.5,0,1,1,0,0,0,0,0,0.0,0.15,0.15,0.0,0.15,https://fbref.com/req/202302030/images/headshots/c2731c10_2022.jpg,milieu
+Idrissa Gana Gueye,SEN,MF,Everton,36.51,1989,22,22,1845,20.5,2,2,4,2,0,0,1,1,0.1,0.1,0.2,0.1,0.2,https://fbref.com/req/202302030/images/headshots/72c812f3_2022.jpg,milieu
+Ben Gannon-Doak,SCO,MF,Bournemouth,20.38,2005,5,0,61,0.7,0,1,1,0,0,0,0,0,0.0,1.48,1.48,0.0,1.48,https://fbref.com/req/202302030/images/headshots/733f1a7d_2022.jpg,milieu
+Andrés García,ESP,DF,Aston Villa,23.14,2003,4,0,40,0.4,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/40498af1_2022.jpg,defence
+Alejandro Garnacho,ARG,MF,Chelsea,21.74,2004,20,14,1122,12.5,1,4,5,1,0,0,2,0,0.08,0.32,0.4,0.08,0.4,https://fbref.com/req/202302030/images/headshots/7aa8adfe_2022.jpg,milieu
+James Garner,ENG,"MF,DF",Everton,25.05,2001,31,31,2783,30.9,2,6,8,2,0,0,7,0,0.06,0.19,0.26,0.06,0.26,https://fbref.com/req/202302030/images/headshots/4e015693_2022.jpg,milieu
+Lutsharel Geertruida,NED,"DF,MF",Sunderland,25.7,2000,25,14,1423,15.8,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/242e1043_2022.jpg,defence
+Tyrique George,ENG,FW,Chelsea,20.15,2006,4,0,145,1.6,0,0,0,0,0,0,2,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/e6f7797e_2022.jpg,attaque
+Tyrique George,ENG,MF,Everton,20.15,2006,5,1,106,1.2,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/e6f7797e_2022.jpg,milieu
+Morgan Gibbs-White,ENG,"MF,FW",Nottingham Forest,26.17,2000,31,30,2637,29.3,9,2,11,8,1,1,1,0,0.31,0.07,0.38,0.27,0.34,https://fbref.com/req/202302030/images/headshots/32f60ed8_2022.jpg,milieu
+Jamie Gittens,ENG,MF,Chelsea,21.64,2004,16,5,495,5.5,0,2,2,0,0,0,0,0,0.0,0.36,0.36,0.0,0.36,https://fbref.com/req/202302030/images/headshots/10745192_2022.jpg,milieu
+Wilfried Gnonto,ITA,FW,Leeds United,22.4,2003,16,4,387,4.3,0,1,1,0,0,0,3,0,0.0,0.23,0.23,0.0,0.23,https://fbref.com/req/202302030/images/headshots/75fdd638_2022.jpg,attaque
+Angel Gomes,ENG,"MF,FW",Wolves,25.58,2000,7,4,284,3.2,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/645a3363_2022.jpg,milieu
+João Gomes,BRA,MF,Wolves,25.13,2001,29,26,2297,25.5,1,1,2,1,0,0,9,0,0.04,0.04,0.08,0.04,0.08,https://fbref.com/req/202302030/images/headshots/8b57ad2c_2022.jpg,milieu
+Rodrigo Gomes,POR,"MF,FW",Wolves,22.73,2003,15,6,602,6.7,3,0,3,3,0,0,0,0,0.45,0.0,0.45,0.45,0.45,https://fbref.com/req/202302030/images/headshots/8dcf77c0_2022.jpg,milieu
+Toti Gomes,POR,DF,Wolves,27.2,1999,14,13,1039,11.5,0,0,0,0,0,0,2,1,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/f0caab96_2022.jpg,defence
+Diego Gómez,PAR,"MF,FW",Brighton,23.01,2003,28,23,1930,21.4,5,1,6,5,0,0,9,0,0.23,0.05,0.28,0.23,0.28,https://fbref.com/req/202302030/images/headshots/916728da_2022.jpg,milieu
+Joe Gomez,ENG,DF,Liverpool,28.85,1997,16,6,500,5.6,0,2,2,0,0,0,2,0,0.0,0.36,0.36,0.0,0.36,https://fbref.com/req/202302030/images/headshots/7a11550b_2022.jpg,defence
+Nicolás González,ESP,MF,Manchester City,24.24,2002,21,15,1376,15.3,1,0,1,1,0,0,6,0,0.07,0.0,0.07,0.07,0.07,https://fbref.com/req/202302030/images/headshots/2c56a792_2022.jpg,milieu
+Anthony Gordon,ENG,FW,Newcastle United,25.09,2001,25,23,1725,19.2,6,2,8,3,3,3,3,1,0.31,0.1,0.42,0.16,0.26,https://fbref.com/req/202302030/images/headshots/2bd83368_2022.jpg,attaque
+Ryan Gravenberch,NED,MF,Liverpool,23.87,2002,29,29,2518,28.0,4,3,7,4,0,0,5,0,0.14,0.11,0.25,0.14,0.25,https://fbref.com/req/202302030/images/headshots/b8e740fb_2022.jpg,milieu
+Archie Gray,ENG,"MF,DF",Tottenham Hotspur,20.05,2006,21,17,1374,15.3,2,2,4,2,0,0,5,0,0.13,0.13,0.26,0.13,0.26,https://fbref.com/req/202302030/images/headshots/f58515f5_2022.jpg,milieu
+Jack Grealish,ENG,MF,Everton,30.55,1995,20,18,1627,18.1,2,6,8,2,0,0,5,1,0.11,0.33,0.44,0.11,0.44,https://fbref.com/req/202302030/images/headshots/b0b4fd3e_2022.jpg,milieu
+Pascal Groß,GER,MF,Brighton,34.79,1991,12,11,1006,11.2,1,1,2,1,0,0,2,0,0.09,0.09,0.18,0.09,0.18,https://fbref.com/req/202302030/images/headshots/8aec0537_2022.jpg,milieu
+Brajan Gruda,GER,MF,Brighton,21.83,2004,18,8,719,8.0,1,1,2,1,0,0,2,0,0.13,0.13,0.25,0.13,0.25,https://fbref.com/req/202302030/images/headshots/ae9b998d_2022.jpg,milieu
+Ilia Gruev,BUL,MF,Leeds United,25.9,2000,21,15,1293,14.4,0,3,3,0,0,0,3,0,0.0,0.21,0.21,0.0,0.21,https://fbref.com/req/202302030/images/headshots/1fc4f3d1_2022.jpg,milieu
+Gabriel Gudmundsson,SWE,"DF,MF",Leeds United,26.92,1999,29,28,2362,26.2,0,0,0,0,0,0,6,1,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/d5d22a58_2022.jpg,defence
+Marc Guéhi,ENG,DF,Crystal Palace,25.71,2000,20,20,1800,20.0,2,2,4,2,0,0,4,0,0.1,0.1,0.2,0.1,0.2,https://fbref.com/req/202302030/images/headshots/d0706b27_2022.jpg,defence
+Marc Guéhi,ENG,DF,Manchester City,25.71,2000,8,8,720,8.0,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/d0706b27_2022.jpg,defence
+Evann Guessand,CIV,MF,Aston Villa,24.74,2001,13,6,588,6.5,0,1,1,0,0,0,0,0,0.0,0.15,0.15,0.0,0.15,https://fbref.com/req/202302030/images/headshots/b73f17f8_2022.jpg,milieu
+Evann Guessand,CIV,MF,Crystal Palace,24.74,2001,6,3,300,3.3,1,1,2,1,0,0,0,0,0.3,0.3,0.6,0.3,0.6,https://fbref.com/req/202302030/images/headshots/b73f17f8_2022.jpg,milieu
+Luis Guilherme,BRA,FW,West Ham United,20.13,2006,5,1,125,1.4,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/b7672d43_2022.jpg,attaque
+Bruno Guimarães,BRA,MF,Newcastle United,28.37,1997,23,22,2017,22.4,9,4,13,7,2,2,5,0,0.4,0.18,0.58,0.31,0.49,https://fbref.com/req/202302030/images/headshots/82518f62_2022.jpg,milieu
+Marc Guiu,ESP,FW,Sunderland,20.23,2006,2,0,15,0.2,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/d3d774cc_2022.jpg,attaque
+Marc Guiu,ESP,FW,Chelsea,20.23,2006,7,1,238,2.6,0,1,1,0,0,0,1,0,0.0,0.38,0.38,0.0,0.38,https://fbref.com/req/202302030/images/headshots/d3d774cc_2022.jpg,attaque
+Angus Gunn,SCO,GK,Nottingham Forest,30.18,1996,1,0,45,0.5,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/e082af5b_2022.jpg,defence
+Malo Gusto,FRA,"DF,MF",Chelsea,22.86,2003,28,20,1741,19.3,2,3,5,2,0,0,4,1,0.1,0.16,0.26,0.1,0.26,https://fbref.com/req/202302030/images/headshots/d56b9520_2022.jpg,defence
+Joško Gvardiol,CRO,DF,Manchester City,24.18,2002,16,15,1302,14.5,2,2,4,2,0,0,2,0,0.14,0.14,0.28,0.14,0.28,https://fbref.com/req/202302030/images/headshots/5ad50391_2022.jpg,defence
+Viktor Gyökeres,SWE,FW,Arsenal,27.82,1998,29,23,1892,21.0,11,0,11,9,2,2,4,0,0.52,0.0,0.52,0.43,0.43,https://fbref.com/req/202302030/images/headshots/4d5a9185_2022.jpg,attaque
+Erling Haaland,NOR,FW,Manchester City,25.69,2000,29,28,2413,26.8,22,7,29,19,3,4,1,0,0.82,0.26,1.08,0.71,0.97,https://fbref.com/req/202302030/images/headshots/1f44ac21_2022.jpg,attaque
+Lewis Hall,ENG,DF,Newcastle United,21.56,2004,24,19,1753,19.5,1,1,2,1,0,0,3,0,0.05,0.05,0.1,0.05,0.1,https://fbref.com/req/202302030/images/headshots/da011f18_2022.jpg,defence
+Jack Harrison,ENG,FW,Leeds United,29.36,1996,11,1,269,3.0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/aa849a12_2022.jpg,attaque
+Quilindschy Hartman,NED,DF,Burnley,24.37,2001,17,17,1500,16.7,0,4,4,0,0,0,1,0,0.0,0.24,0.24,0.0,0.24,https://fbref.com/req/202302030/images/headshots/39e1138f_2022.jpg,defence
+Jorrel Hato,NED,DF,Chelsea,20.06,2006,16,6,647,7.2,0,0,0,0,0,0,4,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/bde35051_2022.jpg,defence
+Kai Havertz,GER,"MF,FW",Arsenal,26.8,1999,6,3,264,2.9,0,1,1,0,0,0,0,0,0.0,0.34,0.34,0.0,0.34,https://fbref.com/req/202302030/images/headshots/fed7cb61_2022.jpg,milieu
+Ayden Heaven,ENG,DF,Manchester Utd,19.52,2006,14,8,654,7.3,0,1,1,0,0,0,2,0,0.0,0.14,0.14,0.0,0.14,https://fbref.com/req/202302030/images/headshots/64e17fab_2022.jpg,defence
+Jan Paul van Hecke,NED,DF,Brighton,25.81,2000,29,29,2580,28.7,3,2,5,3,0,0,7,0,0.1,0.07,0.17,0.1,0.17,https://fbref.com/req/202302030/images/headshots/4fd08daa_2022.jpg,defence
+Hwang Hee-chan,KOR,"FW,MF",Wolves,30.17,1996,20,15,1149,12.8,2,1,3,1,1,1,3,0,0.16,0.08,0.23,0.08,0.16,https://fbref.com/req/202302030/images/headshots/169fd162_2022.jpg,attaque
+George Hemmings,ENG,MF,Aston Villa,19.07,2007,2,0,27,0.3,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,,milieu
+Dean Henderson,ENG,GK,Crystal Palace,29.05,1997,29,29,2610,29.0,0,0,0,0,0,0,3,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/e5a76dfe_2022.jpg,defence
+Jordan Henderson,ENG,MF,Brentford,35.78,1990,29,21,1820,20.2,1,3,4,1,0,0,4,0,0.05,0.15,0.2,0.05,0.2,https://fbref.com/req/202302030/images/headshots/935e6b8f_2022.jpg,milieu
+Rico Henry,JAM,DF,Brentford,28.73,1997,25,14,1328,14.8,0,1,1,0,0,0,2,0,0.0,0.07,0.07,0.0,0.07,https://fbref.com/req/202302030/images/headshots/8a3c1dc7_2022.jpg,defence
+Mads Hermansen,DEN,GK,West Ham United,25.72,2000,11,11,990,11.0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/c924b17d_2022.jpg,defence
+Aaron Hickey,SCO,DF,Brentford,23.8,2002,18,7,599,6.7,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/1780bb4a_2022.jpg,defence
+James Hill,ENG,DF,Bournemouth,24.22,2002,22,15,1476,16.4,0,3,3,0,0,0,2,0,0.0,0.18,0.18,0.0,0.18,https://fbref.com/req/202302030/images/headshots/69942fb3_2022.jpg,defence
+Piero Hincapié,ECU,DF,Arsenal,24.22,2002,21,17,1503,16.7,1,2,3,1,0,0,2,0,0.06,0.12,0.18,0.06,0.18,https://fbref.com/req/202302030/images/headshots/0c7a48f8_2022.jpg,defence
+Jack Hinshelwood,ENG,MF,Brighton,20.97,2005,20,13,1176,13.1,1,3,4,1,0,0,0,0,0.08,0.23,0.31,0.08,0.31,https://fbref.com/req/202302030/images/headshots/e98211e7_2022.jpg,milieu
+Ki-Jana Hoever,NED,"MF,DF",Wolves,24.19,2002,8,6,425,4.7,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/9a71e978_2022.jpg,milieu
+Harry Howell,ENG,MF,Brighton,17.94,2008,3,1,94,1.0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,,milieu
+Callum Hudson-Odoi,ENG,MF,Nottingham Forest,25.39,2000,29,20,1751,19.5,3,3,6,3,0,0,0,0,0.15,0.15,0.31,0.15,0.31,https://fbref.com/req/202302030/images/headshots/15f3ec41_2022.jpg,milieu
+Will Hughes,ENG,MF,Crystal Palace,30.95,1995,27,15,1301,14.5,0,0,0,0,0,0,7,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/a0666d3e_2022.jpg,milieu
+Trai Hume,NIR,"DF,MF",Sunderland,24.03,2002,31,29,2581,28.7,0,1,1,0,0,0,8,0,0.0,0.03,0.03,0.0,0.03,https://fbref.com/req/202302030/images/headshots/4fa3a3a4_2022.jpg,defence
+Bashir Humphreys,ENG,"DF,MF",Burnley,23.04,2003,15,13,1242,13.8,0,0,0,0,0,0,5,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/d2b32e91_2022.jpg,defence
+Omari Hutchinson,ENG,MF,Nottingham Forest,22.41,2003,24,12,1287,14.3,1,3,4,1,0,0,0,0,0.07,0.21,0.28,0.07,0.28,https://fbref.com/req/202302030/images/headshots/bd9553e6_2022.jpg,milieu
+Igor,BRA,DF,West Ham United,28.14,1998,4,1,105,1.2,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/a4e85758_2022.jpg,defence
+Tim Iroegbunam,ENG,MF,Everton,22.75,2003,23,13,1110,12.3,0,2,2,0,0,0,8,0,0.0,0.16,0.16,0.0,0.16,https://fbref.com/req/202302030/images/headshots/84c5ceea_2022.jpg,milieu
+Andy Irving,SCO,MF,West Ham United,25.88,2000,7,2,158,1.8,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/b1be9fc0_2022.jpg,milieu
+Alexander Isak,SWE,FW,Liverpool,26.52,1999,10,6,504,5.6,2,1,3,2,0,0,0,0,0.36,0.18,0.54,0.36,0.54,https://fbref.com/req/202302030/images/headshots/8e92be30_2022.jpg,attaque
+Wilson Isidor,HAI,FW,Sunderland,25.59,2000,26,11,1068,11.9,4,0,4,4,0,0,1,0,0.34,0.0,0.34,0.34,0.34,https://fbref.com/req/202302030/images/headshots/a671316d_2022.jpg,attaque
+Alex Iwobi,NGA,MF,Fulham,29.91,1996,25,25,2131,23.7,4,3,7,4,0,0,3,0,0.17,0.13,0.3,0.17,0.3,https://fbref.com/req/202302030/images/headshots/6ca5ec4b_2022.jpg,milieu
+Daniel James,WAL,FW,Leeds United,28.38,1997,15,4,416,4.6,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/c931d9f9_2022.jpg,attaque
+Reece James,ENG,"DF,MF",Chelsea,26.31,1999,27,20,1896,21.1,2,4,6,2,0,0,4,0,0.09,0.19,0.28,0.09,0.28,https://fbref.com/req/202302030/images/headshots/1265a93a_2022.jpg,defence
+Vitaly Janelt,GER,MF,Brentford,27.89,1998,22,13,1261,14.0,1,4,5,1,0,0,7,0,0.07,0.29,0.36,0.07,0.36,https://fbref.com/req/202302030/images/headshots/8449d35e_2022.jpg,milieu
+Mathias Jensen,DEN,MF,Brentford,30.24,1996,29,19,1653,18.4,2,1,3,2,0,0,3,0,0.11,0.05,0.16,0.11,0.16,https://fbref.com/req/202302030/images/headshots/0f134faf_2022.jpg,milieu
+Gabriel Jesus,BRA,FW,Arsenal,28.99,1997,11,2,313,3.5,2,0,2,2,0,0,2,0,0.58,0.0,0.58,0.58,0.58,https://fbref.com/req/202302030/images/headshots/b66315ae_2022.jpg,attaque
+Igor Jesus,BRA,FW,Nottingham Forest,25.09,2001,30,22,1800,20.0,3,3,6,3,0,0,0,0,0.15,0.15,0.3,0.15,0.3,https://fbref.com/req/202302030/images/headshots/dbe24cce_2022.jpg,attaque
+Álex Jiménez,ESP,"DF,MF",Bournemouth,20.89,2005,27,22,1958,21.8,1,0,1,1,0,0,9,0,0.05,0.0,0.05,0.05,0.05,https://fbref.com/req/202302030/images/headshots/faa13947_2022.jpg,defence
+Raúl Jiménez,MEX,FW,Fulham,34.9,1991,30,25,1974,21.9,9,3,12,5,4,4,5,0,0.41,0.14,0.55,0.23,0.36,https://fbref.com/req/202302030/images/headshots/b561db50_2022.jpg,attaque
+Jamaldeen Jimoh,ENG,MF,Aston Villa,19.49,2006,1,0,9,0.1,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/1e711234_2022.jpg,milieu
+João Pedro,BRA,"FW,MF",Chelsea,24.51,2001,31,27,2311,25.7,14,5,19,14,0,0,4,0,0.55,0.19,0.74,0.55,0.74,https://fbref.com/req/202302030/images/headshots/e8832875_2022.jpg,attaque
+Joelinton,BRA,MF,Newcastle United,29.62,1996,24,20,1688,18.8,2,1,3,2,0,0,9,0,0.11,0.05,0.16,0.11,0.16,https://fbref.com/req/202302030/images/headshots/c17bfb65_2022.jpg,milieu
+John,BRA,GK,Nottingham Forest,30.12,1996,5,5,437,4.9,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/33a235af_2022.jpg,defence
+Brennan Johnson,WAL,"MF,FW",Tottenham Hotspur,24.85,2001,16,6,610,6.8,2,0,2,2,0,0,2,0,0.3,0.0,0.3,0.3,0.3,https://fbref.com/req/202302030/images/headshots/0cd31129_2022.jpg,milieu
+Brennan Johnson,WAL,MF,Crystal Palace,24.85,2001,11,7,626,7.0,0,1,1,0,0,0,3,0,0.0,0.14,0.14,0.0,0.14,https://fbref.com/req/202302030/images/headshots/0cd31129_2022.jpg,milieu
+Sam Johnstone,ENG,GK,Wolves,33.01,1993,12,12,1080,12.0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/9e5708be_2022.jpg,defence
+Curtis Jones,ENG,MF,Liverpool,25.16,2001,27,11,1356,15.1,0,1,1,0,0,0,1,0,0.0,0.07,0.07,0.0,0.07,https://fbref.com/req/202302030/images/headshots/4fb9c88f_2022.jpg,milieu
+Eli Junior Kroupi,FRA,"MF,FW",Bournemouth,19.77,2006,26,14,1158,12.9,9,0,9,8,1,1,3,0,0.7,0.0,0.7,0.62,0.62,https://fbref.com/req/202302030/images/headshots/b2fe86e5_2022.jpg,milieu
+Hamed Junior Traorè,CIV,MF,Bournemouth,26.11,2000,1,0,17,0.2,0,1,1,0,0,0,0,0,0.0,5.29,5.29,0.0,5.29,https://fbref.com/req/202302030/images/headshots/570bb4b9_2022.jpg,milieu
+James Justin,ENG,"DF,MF",Leeds United,28.1,1998,22,14,1271,14.1,1,1,2,1,0,0,2,0,0.07,0.07,0.14,0.07,0.14,https://fbref.com/req/202302030/images/headshots/fb614c44_2022.jpg,defence
+Filip Jørgensen,DEN,GK,Chelsea,23.95,2002,3,2,264,2.9,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/0107757e_2022.jpg,defence
+Ferdi Kadioglu,TUR,"DF,MF",Brighton,26.48,1999,30,27,2503,27.8,0,0,0,0,0,0,6,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/66c52a77_2022.jpg,defence
+Sasa Kalajdzic,AUT,"FW,MF",Wolves,28.73,1997,1,0,15,0.2,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/15f24fe7_2022.jpg,attaque
+Arnaud Kalimuendo,FRA,FW,Nottingham Forest,24.19,2002,9,0,96,1.1,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/bf4c41f9_2022.jpg,attaque
+Daichi Kamada,JPN,MF,Crystal Palace,29.65,1996,20,17,1479,16.4,0,0,0,0,0,0,2,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/15b287da_2022.jpg,milieu
+Boubacar Kamara,FRA,MF,Aston Villa,26.35,1999,18,17,1411,15.7,1,3,4,1,0,0,5,0,0.06,0.19,0.26,0.06,0.26,https://fbref.com/req/202302030/images/headshots/cc77354e_2022.jpg,milieu
+Mohamadou Kanté,FRA,MF,West Ham United,20.52,2005,8,0,37,0.4,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,,milieu
+Michael Kayode,ITA,DF,Brentford,21.72,2004,30,30,2628,29.2,1,0,1,1,0,0,6,0,0.03,0.0,0.03,0.03,0.03,https://fbref.com/req/202302030/images/headshots/e19660a8_2022.jpg,defence
+Michael Keane,ENG,DF,Everton,33.21,1993,27,24,2137,23.7,3,0,3,3,0,0,0,1,0.13,0.0,0.13,0.13,0.13,https://fbref.com/req/202302030/images/headshots/c5b7c315_2022.jpg,defence
+Caoimhín Kelleher,IRL,GK,Brentford,27.35,1998,30,30,2700,30.0,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/62d7ef38_2022.jpg,defence
+Milos Kerkez,HUN,DF,Liverpool,22.39,2003,28,25,2028,22.5,2,1,3,2,0,0,4,0,0.09,0.04,0.13,0.09,0.13,https://fbref.com/req/202302030/images/headshots/0ad53bdc_2022.jpg,defence
+Kevin,BRA,MF,Fulham,23.23,2003,23,8,908,10.1,1,1,2,1,0,0,1,0,0.1,0.1,0.2,0.1,0.2,https://fbref.com/req/202302030/images/headshots/93508980_2022.jpg,milieu
+Abdukodir Khusanov,UZB,DF,Manchester City,22.08,2004,15,9,892,9.9,0,0,0,0,0,0,2,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/d17ce930_2022.jpg,defence
+Max Kilman,ENG,DF,West Ham United,28.85,1997,21,17,1561,17.3,0,0,0,0,0,0,4,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/d0f72bf1_2022.jpg,defence
+Joshua King,ENG,MF,Fulham,19.24,2007,25,14,1139,12.7,1,2,3,1,0,0,3,0,0.08,0.16,0.24,0.08,0.24,https://fbref.com/req/202302030/images/headshots/86109b3b_2022.jpg,milieu
+Justin Kluivert,NED,MF,Bournemouth,26.9,1999,18,10,919,10.2,2,0,2,2,0,0,4,0,0.2,0.0,0.2,0.2,0.2,https://fbref.com/req/202302030/images/headshots/4c3a6744_2022.jpg,milieu
+Joe Knight,ENG,MF,Brighton,20.52,2005,1,0,1,0.0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,,milieu
+Randal Kolo Muani,FRA,"FW,MF",Tottenham Hotspur,27.31,1998,23,15,1231,13.7,1,1,2,1,0,0,2,0,0.07,0.07,0.15,0.07,0.15,https://fbref.com/req/202302030/images/headshots/c0b3669f_2022.jpg,attaque
+Ibrahima Konaté,FRA,DF,Liverpool,26.85,1999,29,29,2480,27.6,1,0,1,1,0,0,6,0,0.04,0.0,0.04,0.04,0.04,https://fbref.com/req/202302030/images/headshots/5ed9b537_2022.jpg,defence
+Ezri Konsa,ENG,DF,Aston Villa,28.43,1997,30,30,2675,29.7,0,0,0,0,0,0,0,1,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/0313a347_2022.jpg,defence
+Charalampos Kostoulas,GRE,FW,Brighton,18.83,2007,16,2,305,3.4,2,1,3,2,0,0,2,0,0.59,0.3,0.89,0.59,0.89,https://fbref.com/req/202302030/images/headshots/816010c4_2022.jpg,attaque
+Mateo Kovačić,CRO,MF,Manchester City,31.9,1994,1,0,5,0.1,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/79c0821a_2022.jpg,milieu
+Emil Krafth,SWE,DF,Newcastle United,31.66,1994,1,1,45,0.5,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/77cf6852_2022.jpg,defence
+Ladislav Krejčí,CZE,"DF,MF",Wolves,26.94,1999,24,23,2037,22.6,2,1,3,2,0,0,5,1,0.09,0.04,0.13,0.09,0.13,https://fbref.com/req/202302030/images/headshots/5b5c2228_2022.jpg,defence
+Mohammed Kudus,GHA,"MF,FW",Tottenham Hotspur,25.66,2000,19,19,1535,17.1,2,5,7,2,0,0,3,0,0.12,0.29,0.41,0.12,0.41,https://fbref.com/req/202302030/images/headshots/b62878a5_2022.jpg,milieu
+Jonah Kusi-Asare,SWE,FW,Fulham,18.74,2007,5,0,34,0.4,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/c7c26e61_2022.jpg,attaque
+Shea Lacey,ENG,FW,Manchester Utd,18.96,2007,2,0,14,0.2,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,,attaque
+Maxence Lacroix,FRA,DF,Crystal Palace,25.98,2000,28,28,2485,27.6,1,2,3,1,0,0,3,1,0.04,0.07,0.11,0.04,0.11,https://fbref.com/req/202302030/images/headshots/277c49ed_2022.jpg,defence
+Senne Lammens,BEL,GK,Manchester Utd,23.73,2002,25,25,2250,25.0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/8e6d2fcd_2022.jpg,defence
+Jamaal Lascelles,ENG,DF,Newcastle United,32.38,1993,2,0,21,0.2,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/450ab6fc_2022.jpg,defence
+Josh Laurent,ENG,"DF,MF",Burnley,30.9,1995,28,16,1585,17.6,1,0,1,1,0,0,7,1,0.06,0.0,0.06,0.06,0.06,https://fbref.com/req/202302030/images/headshots/f0068e0f_2022.jpg,defence
+Roméo Lavia,BEL,MF,Chelsea,22.23,2004,8,2,226,2.5,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/ecad9aa5_2022.jpg,milieu
+Enzo Le Fée,FRA,"MF,FW",Sunderland,26.15,2000,29,26,2301,25.6,4,4,8,1,3,4,5,0,0.16,0.16,0.31,0.04,0.2,https://fbref.com/req/202302030/images/headshots/6f806d99_2022.jpg,milieu
+Bernd Leno,GER,GK,Fulham,34.07,1992,31,31,2790,31.0,0,0,0,0,0,0,3,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/2628fd2b_2022.jpg,defence
+Jefferson Lerma,COL,"MF,DF",Crystal Palace,31.43,1994,24,13,1255,13.9,0,2,2,0,0,0,6,0,0.0,0.14,0.14,0.0,0.14,https://fbref.com/req/202302030/images/headshots/9b5ce51a_2022.jpg,milieu
+Rico Lewis,ENG,DF,Manchester City,21.35,2004,10,3,317,3.5,0,1,1,0,0,0,1,0,0.0,0.28,0.28,0.0,0.28,https://fbref.com/req/202302030/images/headshots/b57e066e_2022.jpg,defence
+Keane Lewis-Potter,ENG,"MF,DF",Brentford,25.1,2001,29,15,1345,14.9,3,2,5,3,0,0,1,0,0.2,0.13,0.33,0.2,0.33,https://fbref.com/req/202302030/images/headshots/41f08ac8_2022.jpg,milieu
+Myles Lewis-Skelly,ENG,DF,Arsenal,19.51,2006,14,1,321,3.6,0,0,0,0,0,0,3,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/5dff6c28_2022.jpg,defence
+Matthijs de Ligt,NED,DF,Manchester Utd,26.63,1999,13,13,1170,13.0,1,0,1,1,0,0,0,0,0.08,0.0,0.08,0.08,0.08,https://fbref.com/req/202302030/images/headshots/d6e53a3a_2022.jpg,defence
+Pedro Lima,BRA,DF,Wolves,19.74,2006,3,0,4,0.0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/b2f4cad5_2022.jpg,defence
+Victor Lindelöf,SWE,DF,Aston Villa,31.7,1994,12,6,578,6.4,0,1,1,0,0,0,0,0,0.0,0.16,0.16,0.0,0.16,https://fbref.com/req/202302030/images/headshots/f5deef4c_2022.jpg,defence
+Valentino Livramento,ENG,DF,Newcastle United,23.38,2002,15,12,1165,12.9,0,1,1,0,0,0,1,0,0.0,0.08,0.08,0.0,0.08,https://fbref.com/req/202302030/images/headshots/afed6722_2022.jpg,defence
+Sean Longstaff,ENG,MF,Leeds United,28.41,1997,17,10,947,10.5,1,2,3,1,0,0,2,0,0.1,0.19,0.29,0.1,0.29,https://fbref.com/req/202302030/images/headshots/a2b105e0_2022.jpg,milieu
+Fer López,ESP,MF,Wolves,21.85,2004,9,2,235,2.6,0,1,1,0,0,0,1,0,0.0,0.38,0.38,0.0,0.38,https://fbref.com/req/202302030/images/headshots/675cacff_2022.jpg,milieu
+Lucas,BRA,"MF,DF",Burnley,25.02,2001,15,12,1104,12.3,0,0,0,0,0,0,0,1,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/5d68f5b2_2022.jpg,milieu
+Lorenzo Lucca,ITA,FW,Nottingham Forest,25.55,2000,3,1,121,1.3,1,0,1,1,0,0,0,0,0.74,0.0,0.74,0.74,0.74,https://fbref.com/req/202302030/images/headshots/83c06f3a_2022.jpg,attaque
+Florentino Luís,POR,MF,Burnley,26.61,1999,24,20,1654,18.4,0,2,2,0,0,0,4,0,0.0,0.11,0.11,0.0,0.11,https://fbref.com/req/202302030/images/headshots/881cd6be_2022.jpg,milieu
+Douglas Luiz,BRA,MF,Aston Villa,27.89,1998,8,6,489,5.4,1,0,1,1,0,0,0,0,0.18,0.0,0.18,0.18,0.18,https://fbref.com/req/202302030/images/headshots/6f7d826d_2022.jpg,milieu
+Douglas Luiz,BRA,MF,Nottingham Forest,27.89,1998,8,5,315,3.5,0,0,0,0,0,0,2,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/6f7d826d_2022.jpg,milieu
+Saša Lukić,SRB,MF,Fulham,29.63,1996,20,15,1239,13.8,1,2,3,1,0,0,6,0,0.07,0.15,0.22,0.07,0.22,https://fbref.com/req/202302030/images/headshots/c6e8cf1f_2022.jpg,milieu
+Ian Maatsen,NED,DF,Aston Villa,24.05,2002,24,13,1264,14.0,0,0,0,0,0,0,2,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/cab9634e_2022.jpg,defence
+Alexis Mac Allister,ARG,MF,Liverpool,27.26,1998,30,26,2179,24.2,2,2,4,2,0,0,5,0,0.08,0.08,0.17,0.08,0.17,https://fbref.com/req/202302030/images/headshots/83d074ff_2022.jpg,milieu
+Noni Madueke,ENG,"FW,MF",Arsenal,24.05,2002,20,12,895,9.9,2,1,3,2,0,0,0,0,0.2,0.1,0.3,0.2,0.3,https://fbref.com/req/202302030/images/headshots/bf34eebd_2022.jpg,attaque
+Gabriel Magalhães,BRA,DF,Arsenal,28.28,1997,25,24,2166,24.1,3,4,7,3,0,0,3,0,0.12,0.17,0.29,0.12,0.29,https://fbref.com/req/202302030/images/headshots/67ac5bb8_2022.jpg,defence
+Soungoutou Magassa,FRA,MF,West Ham United,22.47,2003,20,11,972,10.8,1,0,1,1,0,0,4,0,0.09,0.0,0.09,0.09,0.09,https://fbref.com/req/202302030/images/headshots/dfc5d4fa_2022.jpg,milieu
+Harry Maguire,ENG,DF,Manchester Utd,33.07,1993,18,14,1203,13.4,1,1,2,1,0,0,3,1,0.07,0.07,0.15,0.07,0.15,https://fbref.com/req/202302030/images/headshots/d8931174_2022.jpg,defence
+Kobbie Mainoo,ENG,MF,Manchester Utd,20.94,2005,22,10,1122,12.5,0,2,2,0,0,0,0,0,0.0,0.16,0.16,0.0,0.16,https://fbref.com/req/202302030/images/headshots/c6220452_2022.jpg,milieu
+Tyrell Malacia,NED,DF,Manchester Utd,26.62,1999,2,0,9,0.1,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/6b6c793c_2022.jpg,defence
+Donyell Malen,NED,"FW,MF",Aston Villa,27.22,1999,21,5,656,7.3,4,1,5,4,0,0,0,0,0.55,0.14,0.69,0.55,0.69,https://fbref.com/req/202302030/images/headshots/116c35df_2022.jpg,attaque
+Giorgi Mamardashvili,GEO,GK,Liverpool,25.5,2000,6,6,540,6.0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/d4b73232_2022.jpg,defence
+Reinildo Mandava,MOZ,DF,Sunderland,32.19,1994,18,17,1428,15.9,0,1,1,0,0,0,7,1,0.0,0.06,0.06,0.0,0.06,https://fbref.com/req/202302030/images/headshots/c20bdcd7_2022.jpg,defence
+Mateus Mane,POR,MF,Wolves,18.53,2007,20,14,1286,14.3,2,1,3,2,0,0,0,0,0.14,0.07,0.21,0.14,0.21,,milieu
+Bendito Mantato,ENG,MF,Manchester Utd,18.18,2008,1,0,16,0.2,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,,milieu
+Solly March,ENG,MF,Brighton,31.69,1994,1,0,5,0.1,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/bb5fbd2b_2022.jpg,milieu
+Omar Marmoush,EGY,"FW,MF",Manchester City,27.14,1999,17,7,572,6.4,1,3,4,1,0,0,2,0,0.16,0.47,0.63,0.16,0.63,https://fbref.com/req/202302030/images/headshots/0e0102eb_2022.jpg,attaque
+Callum Marshall,NIR,FW,West Ham United,21.33,2004,2,0,60,0.7,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/3a27f1bf_2022.jpg,attaque
+Gabriel Martinelli,BRA,"FW,MF",Arsenal,24.78,2001,25,9,854,9.5,1,3,4,1,0,0,2,0,0.11,0.32,0.42,0.11,0.42,https://fbref.com/req/202302030/images/headshots/48a5a5d6_2022.jpg,attaque
+Emiliano Martínez,ARG,GK,Aston Villa,33.57,1992,27,27,2385,26.5,0,0,0,0,0,0,2,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/7956236f_2022.jpg,defence
+Lisandro Martínez,ARG,DF,Manchester Utd,28.19,1998,14,9,908,10.1,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/bac46a10_2022.jpg,defence
+Arthur Masuaku,COD,DF,Sunderland,32.39,1993,3,2,126,1.4,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/57df7a11_2022.jpg,defence
+Pape Matar Sarr,SEN,MF,Tottenham Hotspur,23.54,2002,22,13,1327,14.7,2,3,5,2,0,0,2,0,0.14,0.2,0.34,0.14,0.34,https://fbref.com/req/202302030/images/headshots/feb5d972_2022.jpg,milieu
+Jean-Philippe Mateta,FRA,FW,Crystal Palace,28.75,1997,24,23,1935,21.5,8,0,8,5,3,3,2,0,0.37,0.0,0.37,0.23,0.23,https://fbref.com/req/202302030/images/headshots/50e6dc35_2022.jpg,attaque
+Konstantinos Mavropanos,GRE,DF,West Ham United,28.3,1997,24,20,1904,21.2,1,0,1,1,0,0,2,0,0.05,0.0,0.05,0.05,0.05,https://fbref.com/req/202302030/images/headshots/00963611_2022.jpg,defence
+Eliezer Mayenda,ESP,"FW,MF",Sunderland,20.89,2005,19,8,758,8.4,2,0,2,2,0,0,0,0,0.24,0.0,0.24,0.24,0.24,https://fbref.com/req/202302030/images/headshots/6a021e43_2022.jpg,attaque
+Ezra Mayers,BRB,DF,West Ham United,19.2,2007,6,0,117,1.3,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,,defence
+Noussair Mazraoui,MAR,"MF,DF",Manchester Utd,28.37,1997,15,7,618,6.9,0,0,0,0,0,0,3,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/b74277a0_2022.jpg,milieu
+Bryan Mbeumo,CMR,"MF,FW",Manchester Utd,26.64,1999,26,26,2187,24.3,9,3,12,9,0,0,4,0,0.37,0.12,0.49,0.37,0.49,https://fbref.com/req/202302030/images/headshots/6afaebf2_2022.jpg,milieu
+James Mcatee,ENG,MF,Nottingham Forest,23.45,2002,10,1,180,2.0,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/96593e89_2022.jpg,milieu
+John McGinn,SCO,MF,Aston Villa,31.45,1994,24,23,1717,19.1,4,2,6,4,0,0,3,0,0.21,0.1,0.31,0.21,0.31,https://fbref.com/req/202302030/images/headshots/90f91999_2022.jpg,milieu
+Dwight McNeil,ENG,MF,Everton,26.35,1999,18,11,949,10.5,0,1,1,0,0,0,1,0,0.0,0.09,0.09,0.0,0.09,https://fbref.com/req/202302030/images/headshots/fc15fb84_2022.jpg,milieu
+Hannibal Mejbri,TUN,MF,Burnley,23.19,2003,23,12,990,11.0,1,3,4,1,0,0,7,0,0.09,0.27,0.36,0.09,0.36,https://fbref.com/req/202302030/images/headshots/ca22ccb0_2022.jpg,milieu
+Mikel Merino,ESP,"MF,FW",Arsenal,29.77,1996,21,10,1007,11.2,4,3,7,4,0,0,1,0,0.36,0.27,0.63,0.36,0.63,https://fbref.com/req/202302030/images/headshots/d080ed5e_2022.jpg,milieu
+Antoni Milambo,NED,MF,Brentford,20.99,2005,1,1,45,0.5,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/b05f4787_2022.jpg,milieu
+Nikola Milenković,SRB,DF,Nottingham Forest,28.46,1997,31,31,2790,31.0,0,0,0,0,0,0,6,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/bee704fc_2022.jpg,defence
+Lewis Miley,ENG,"MF,DF",Newcastle United,19.91,2006,19,11,1136,12.6,1,3,4,1,0,0,0,0,0.08,0.24,0.32,0.08,0.32,https://fbref.com/req/202302030/images/headshots/2c6835e5_2022.jpg,milieu
+James Milner,ENG,MF,Brighton,40.23,1986,19,6,726,8.1,1,1,2,0,1,1,2,0,0.12,0.12,0.25,0.0,0.12,https://fbref.com/req/202302030/images/headshots/2f90f6b8_2022.jpg,milieu
+Veljko Milosavljević,SRB,DF,Bournemouth,18.75,2007,7,4,368,4.1,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/c478319d_2022.jpg,defence
+Tyrone Mings,ENG,DF,Aston Villa,33.05,1993,13,11,964,10.7,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/8397a50c_2022.jpg,defence
+Yankuba Minteh,GAM,MF,Brighton,21.69,2004,27,20,1832,20.4,2,4,6,2,0,0,2,0,0.1,0.2,0.29,0.1,0.29,https://fbref.com/req/202302030/images/headshots/c3cf087d_2022.jpg,milieu
+Tyrick Mitchell,ENG,MF,Crystal Palace,26.57,1999,30,30,2667,29.6,1,1,2,1,0,0,5,0,0.03,0.03,0.07,0.03,0.07,https://fbref.com/req/202302030/images/headshots/5cbd1eb0_2022.jpg,milieu
+Kaoru Mitoma,JPN,"MF,FW",Brighton,28.86,1997,20,16,1426,15.8,2,1,3,2,0,0,3,0,0.13,0.06,0.19,0.13,0.19,https://fbref.com/req/202302030/images/headshots/74618572_2022.jpg,milieu
+Morato,BRA,DF,Nottingham Forest,24.75,2001,15,10,941,10.5,0,0,0,0,0,0,4,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/0f41e2ee_2022.jpg,defence
+Cristhian Mosquera,ESP,DF,Arsenal,21.76,2004,14,6,673,7.5,0,0,0,0,0,0,2,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/dc1ce4f5_2022.jpg,defence
+Yerson Mosquera,COL,DF,Wolves,24.91,2001,22,19,1706,19.0,0,0,0,0,0,0,10,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/1e159d70_2022.jpg,defence
+Mason Mount,ENG,MF,Manchester Utd,27.22,1999,18,10,817,9.1,3,0,3,3,0,0,0,0,0.33,0.0,0.33,0.33,0.33,https://fbref.com/req/202302030/images/headshots/9674002f_2022.jpg,milieu
+Divine Mukasa,ENG,MF,Manchester City,18.6,2007,2,0,27,0.3,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,,milieu
+Nordi Mukiele,FRA,DF,Sunderland,28.41,1997,25,25,2163,24.0,1,3,4,1,0,0,4,0,0.04,0.12,0.17,0.04,0.17,https://fbref.com/req/202302030/images/headshots/ac73ec79_2022.jpg,defence
+Romaine Mundle,ENG,MF,Sunderland,22.93,2003,14,2,411,4.6,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/597610cd_2022.jpg,milieu
+Marshall Munetsi,ZIM,"MF,FW",Wolves,29.77,1996,13,9,875,9.7,1,1,2,1,0,0,2,0,0.1,0.1,0.21,0.1,0.21,https://fbref.com/req/202302030/images/headshots/2acf0cd7_2022.jpg,milieu
+Rodrigo Muniz,BRA,FW,Fulham,24.9,2001,14,5,585,6.5,1,1,2,1,0,0,1,0,0.15,0.15,0.31,0.15,0.31,https://fbref.com/req/202302030/images/headshots/a755db8c_2022.jpg,attaque
+Daniel Muñoz,COL,MF,Crystal Palace,29.84,1996,21,21,1778,19.8,3,2,5,3,0,0,5,0,0.15,0.1,0.25,0.15,0.25,https://fbref.com/req/202302030/images/headshots/778ef829_2022.jpg,milieu
+Murillo,BRA,DF,Nottingham Forest,23.74,2002,23,23,1999,22.2,1,0,1,1,0,0,4,0,0.05,0.0,0.05,0.05,0.05,https://fbref.com/req/202302030/images/headshots/1704b0b8_2022.jpg,defence
+Alex Murphy,IRL,DF,Newcastle United,21.76,2004,1,0,2,0.0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/f1c42eb3_2022.jpg,defence
+Jacob Murphy,ENG,"FW,MF",Newcastle United,31.09,1995,26,14,1246,13.8,3,1,4,3,0,0,1,0,0.22,0.07,0.29,0.22,0.29,https://fbref.com/req/202302030/images/headshots/de112b84_2022.jpg,attaque
+Vitaliy Mykolenko,UKR,DF,Everton,26.84,1999,26,26,2328,25.9,0,1,1,0,0,0,5,0,0.0,0.04,0.04,0.0,0.04,https://fbref.com/req/202302030/images/headshots/30d4a2e5_2022.jpg,defence
+David Møller Wolfe,NOR,"MF,DF",Wolves,23.93,2002,18,9,846,9.4,0,2,2,0,0,0,1,0,0.0,0.21,0.21,0.0,0.21,https://fbref.com/req/202302030/images/headshots/9affc5f2_2022.jpg,milieu
+Iliman Ndiaye,SEN,MF,Everton,26.07,2000,25,25,2148,23.9,6,3,9,4,2,2,2,0,0.25,0.13,0.38,0.17,0.29,https://fbref.com/req/202302030/images/headshots/5ed97752_2022.jpg,milieu
+Dan Ndoye,SUI,MF,Nottingham Forest,25.43,2000,23,14,1171,13.0,1,1,2,1,0,0,1,0,0.08,0.08,0.15,0.08,0.15,https://fbref.com/req/202302030/images/headshots/8e697a8f_2022.jpg,milieu
+Dan Neil,ENG,MF,Sunderland,24.29,2001,3,0,14,0.2,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/a47ad0f5_2022.jpg,milieu
+Reiss Nelson,ENG,"FW,MF",Brentford,26.3,1999,7,0,61,0.7,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/c5bdb6e3_2022.jpg,attaque
+Pedro Neto,POR,MF,Chelsea,26.06,2000,29,25,2209,24.5,5,4,9,5,0,0,4,1,0.2,0.16,0.37,0.2,0.37,https://fbref.com/req/202302030/images/headshots/7ba2eaa9_2022.jpg,milieu
+Luca Netz,GER,"DF,MF",Nottingham Forest,22.87,2003,2,0,50,0.6,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/e79269bd_2022.jpg,defence
+Rio Ngumoha,ENG,MF,Liverpool,17.58,2008,13,1,229,2.5,1,0,1,1,0,0,0,0,0.39,0.0,0.39,0.39,0.39,https://fbref.com/req/202302030/images/headshots/022eca88_2022.jpg,milieu
+Eddie Nketiah,ENG,MF,Crystal Palace,26.83,1999,12,2,424,4.7,2,0,2,2,0,0,2,0,0.42,0.0,0.42,0.42,0.42,https://fbref.com/req/202302030/images/headshots/a53649b7_2022.jpg,milieu
+Lukas Nmecha,GER,FW,Leeds United,27.29,1998,25,9,880,9.8,6,1,7,4,2,3,0,0,0.61,0.1,0.72,0.41,0.51,https://fbref.com/req/202302030/images/headshots/0cc5f4a5_2022.jpg,attaque
+Matheus Nunes,POR,DF,Manchester City,27.59,1998,27,25,2265,25.2,1,4,5,1,0,0,4,0,0.04,0.16,0.2,0.04,0.2,https://fbref.com/req/202302030/images/headshots/e6af02e0_2022.jpg,defence
+Ethan Nwaneri,ENG,MF,Arsenal,19.02,2007,6,0,171,1.9,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/7f94982c_2022.jpg,milieu
+Trey Nyoni,ENG,MF,Liverpool,18.75,2007,4,0,15,0.2,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/1d3b3d77_2022.jpg,milieu
+Christian Nørgaard,DEN,MF,Arsenal,32.05,1994,6,0,61,0.7,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/df0a4c90_2022.jpg,milieu
+Jake O'Brien,IRL,DF,Everton,24.87,2001,30,28,2548,28.3,0,1,1,0,0,0,2,1,0.0,0.04,0.04,0.0,0.04,https://fbref.com/req/202302030/images/headshots/25f2ef01_2022.jpg,defence
+Luke O'Nien,ENG,DF,Sunderland,31.35,1994,8,2,231,2.6,0,0,0,0,0,0,1,1,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/8092d497_2022.jpg,defence
+Matt O'Riley,DEN,MF,Brighton,25.35,2000,4,2,187,2.1,1,0,1,0,1,1,0,0,0.48,0.0,0.48,0.0,0.0,https://fbref.com/req/202302030/images/headshots/fb495bb8_2022.jpg,milieu
+Wilson Odobert,FRA,"MF,FW",Tottenham Hotspur,21.33,2004,24,10,985,10.9,0,2,2,0,0,0,0,0,0.0,0.18,0.18,0.0,0.18,https://fbref.com/req/202302030/images/headshots/35516eac_2022.jpg,milieu
+Noah Okafor,SUI,"FW,MF",Leeds United,25.85,2000,24,15,1295,14.4,4,0,4,4,0,0,3,0,0.28,0.0,0.28,0.28,0.28,https://fbref.com/req/202302030/images/headshots/ca607d59_2022.jpg,attaque
+Callum Olusesi,ENG,MF,Tottenham Hotspur,19.2,2007,1,0,15,0.2,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,,milieu
+Amadou Onana,BEL,MF,Aston Villa,24.62,2001,22,19,1560,17.3,2,0,2,2,0,0,2,0,0.12,0.0,0.12,0.12,0.12,https://fbref.com/req/202302030/images/headshots/828657ff_2022.jpg,milieu
+Frank Onyeka,NGA,MF,Brentford,28.24,1998,6,0,92,1.0,0,1,1,0,0,0,0,0,0.0,0.98,0.98,0.0,0.98,https://fbref.com/req/202302030/images/headshots/2944f86f_2022.jpg,milieu
+Nehemiah Oriola,ENG,MF,Brighton,18.8,2007,1,0,1,0.0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,,milieu
+Stefan Ortega,GER,GK,Nottingham Forest,33.39,1992,3,3,270,3.0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/c1242d4e_2022.jpg,defence
+William Osula,DEN,FW,Newcastle United,22.65,2003,17,1,295,3.3,2,0,2,2,0,0,0,0,0.61,0.0,0.61,0.61,0.61,https://fbref.com/req/202302030/images/headshots/7b355808_2022.jpg,attaque
+Dango Ouattara,BFA,MF,Brentford,24.13,2002,25,19,1714,19.0,5,3,8,5,0,0,4,0,0.26,0.16,0.42,0.26,0.42,https://fbref.com/req/202302030/images/headshots/2f9e4435_2022.jpg,milieu
+Nico O’Reilly,ENG,"DF,MF",Manchester City,21.02,2005,28,23,2133,23.7,4,3,7,4,0,0,4,0,0.17,0.13,0.3,0.17,0.3,https://fbref.com/req/202302030/images/headshots/91ca4a16_2022.jpg,defence
+Pablo,BRA,"MF,FW",West Ham United,22.24,2004,7,5,405,4.5,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,,milieu
+João Palhinha,POR,"MF,DF",Tottenham Hotspur,30.72,1995,26,19,1779,19.8,3,2,5,3,0,0,6,0,0.15,0.1,0.25,0.15,0.25,https://fbref.com/req/202302030/images/headshots/a78ff07f_2022.jpg,milieu
+Cole Palmer,ENG,"MF,FW",Chelsea,23.9,2002,20,18,1417,15.7,9,1,10,4,5,5,4,0,0.57,0.06,0.64,0.25,0.32,https://fbref.com/req/202302030/images/headshots/dc7f8a28_2022.jpg,milieu
+Lucas Paquetá,BRA,"MF,FW",West Ham United,28.59,1997,18,18,1511,16.8,4,1,5,2,2,2,7,1,0.24,0.06,0.3,0.12,0.18,https://fbref.com/req/202302030/images/headshots/9b6f7fd5_2022.jpg,milieu
+Nathan Patterson,SCO,DF,Everton,24.45,2001,6,3,240,2.7,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/230f0471_2022.jpg,defence
+Myles Peart-Harris,ENG,MF,Brentford,23.53,2002,1,0,1,0.0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/ea1a5662_2022.jpg,milieu
+Lucas Perri,BRA,GK,Leeds United,28.3,1997,16,16,1440,16.0,0,0,0,0,0,0,2,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/5dbd461a_2022.jpg,defence
+Đorđe Petrović,SRB,GK,Bournemouth,26.47,1999,31,31,2790,31.0,0,0,0,0,0,0,2,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/0cf321c8_2022.jpg,defence
+Jordan Pickford,ENG,GK,Everton,32.06,1994,31,31,2790,31.0,0,0,0,0,0,0,2,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/4806ec67_2022.jpg,defence
+Ethan Pinnock,JAM,DF,Brentford,32.84,1993,4,4,318,3.5,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/e541326e_2022.jpg,defence
+Yeremi Pino,ESP,MF,Crystal Palace,23.44,2002,27,21,1721,19.1,2,1,3,2,0,0,4,0,0.1,0.05,0.16,0.1,0.16,https://fbref.com/req/202302030/images/headshots/540ec57b_2022.jpg,milieu
+Joël Piroe,SUR,FW,Leeds United,26.66,1999,13,2,226,2.5,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/1f0072a6_2022.jpg,attaque
+Nick Pope,ENG,GK,Newcastle United,33.94,1992,22,22,1966,21.8,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/4b40d9ca_2022.jpg,defence
+Pedro Porro,ESP,DF,Tottenham Hotspur,26.54,1999,27,25,2166,24.1,0,2,2,0,0,0,6,0,0.0,0.08,0.08,0.0,0.08,https://fbref.com/req/202302030/images/headshots/27d0a506_2022.jpg,defence
+Freddie Potts,ENG,MF,West Ham United,22.54,2003,20,12,1146,12.7,0,1,1,0,0,0,1,0,0.0,0.08,0.08,0.0,0.08,https://fbref.com/req/202302030/images/headshots/86bf27f0_2022.jpg,milieu
+Aaron Ramsdale,ENG,GK,Newcastle United,27.88,1998,10,9,824,9.2,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/466fb2c5_2022.jpg,defence
+Jacob Ramsey,ENG,MF,Newcastle United,24.84,2001,21,11,1081,12.0,2,1,3,2,0,0,5,1,0.17,0.08,0.25,0.17,0.25,https://fbref.com/req/202302030/images/headshots/1544f145_2022.jpg,milieu
+David Raya,ESP,GK,Arsenal,30.54,1995,31,31,2790,31.0,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/98ea5115_2022.jpg,defence
+Rayan,BRA,MF,Bournemouth,19.65,2006,8,7,623,6.9,2,1,3,2,0,0,1,0,0.29,0.14,0.43,0.29,0.43,https://fbref.com/req/202302030/images/headshots/288647fc_2022.jpg,milieu
+Harrison Reed,ENG,MF,Fulham,31.17,1995,6,0,31,0.3,1,0,1,1,0,0,0,0,2.9,0.0,2.9,2.9,2.9,https://fbref.com/req/202302030/images/headshots/803ae100_2022.jpg,milieu
+Tijjani Reijnders,NED,MF,Manchester City,27.67,1998,26,17,1496,16.6,5,2,7,5,0,0,2,0,0.3,0.12,0.42,0.3,0.42,https://fbref.com/req/202302030/images/headshots/afb61630_2022.jpg,milieu
+Chadi Riad,MAR,DF,Crystal Palace,22.78,2003,6,3,314,3.5,0,1,1,0,0,0,2,0,0.0,0.29,0.29,0.0,0.29,https://fbref.com/req/202302030/images/headshots/b3b9b8b8_2022.jpg,defence
+Declan Rice,ENG,MF,Arsenal,27.21,1999,30,29,2581,28.7,4,5,9,4,0,0,2,0,0.14,0.17,0.31,0.14,0.31,https://fbref.com/req/202302030/images/headshots/1c7012b8_2022.jpg,milieu
+Chris Richards,USA,DF,Crystal Palace,26.01,2000,26,26,2332,25.9,1,0,1,1,0,0,3,0,0.04,0.0,0.04,0.04,0.04,https://fbref.com/req/202302030/images/headshots/0a3d6d2b_2022.jpg,defence
+Richarlison,BRA,FW,Tottenham Hotspur,28.89,1997,26,15,1511,16.8,9,3,12,9,0,0,5,0,0.54,0.18,0.71,0.54,0.71,https://fbref.com/req/202302030/images/headshots/fa031b34_2022.jpg,attaque
+Chris Rigg,ENG,MF,Sunderland,18.78,2007,13,8,558,6.2,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/35741fe2_2022.jpg,milieu
+Patrick Roberts,ENG,"FW,MF",Sunderland,29.15,1997,1,0,28,0.3,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/59d93937_2022.jpg,attaque
+Andrew Robertson,SCO,DF,Liverpool,32.05,1994,19,6,775,8.6,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/2e4f5f03_2022.jpg,defence
+Antonee Robinson,USA,"DF,MF",Fulham,28.64,1997,15,12,1044,11.6,0,0,0,0,0,0,3,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/289601e6_2022.jpg,defence
+Kaden Rodney,ENG,"DF,MF",Crystal Palace,21.48,2004,1,0,4,0.0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/49375cdd_2022.jpg,defence
+Joe Rodon,WAL,DF,Leeds United,28.44,1997,29,29,2545,28.3,2,0,2,2,0,0,1,0,0.07,0.0,0.07,0.07,0.07,https://fbref.com/req/202302030/images/headshots/8d62d31a_2022.jpg,defence
+Rodri,ESP,MF,Manchester City,29.77,1996,18,14,1244,13.8,1,0,1,1,0,0,2,0,0.07,0.0,0.07,0.07,0.07,https://fbref.com/req/202302030/images/headshots/6434f10d_2022.jpg,milieu
+Guido Rodríguez,ARG,MF,West Ham United,31.96,1994,6,2,180,2.0,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/34e393f2_2022.jpg,milieu
+Robin Roefs,NED,GK,Sunderland,23.2,2003,28,28,2520,28.0,0,0,0,0,0,0,3,0,0.0,0.0,0.0,0.0,0.0,,defence
+Morgan Rogers,ENG,MF,Aston Villa,23.68,2002,31,31,2753,30.6,8,5,13,8,0,0,6,0,0.26,0.16,0.42,0.26,0.42,https://fbref.com/req/202302030/images/headshots/2e5915f1_2022.jpg,milieu
+Merlin Röhl,GER,MF,Everton,23.73,2002,12,2,366,4.1,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/1f2c7b55_2022.jpg,milieu
+Cristian Romero,ARG,DF,Tottenham Hotspur,27.92,1998,22,21,1799,20.0,4,1,5,4,0,0,10,2,0.2,0.05,0.25,0.2,0.25,https://fbref.com/req/202302030/images/headshots/a3d94a58_2022.jpg,defence
+James Rowswell,ENG,DF,Tottenham Hotspur,19.71,2006,1,0,1,0.0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,,defence
+Georginio Rutter,FRA,"MF,FW",Brighton,23.94,2002,25,19,1603,17.8,2,2,4,2,0,0,2,0,0.11,0.11,0.22,0.11,0.22,https://fbref.com/req/202302030/images/headshots/c64c01fc_2022.jpg,milieu
+José Sá,POR,GK,Wolves,33.2,1993,19,19,1710,19.0,0,0,0,0,0,0,2,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/903b6e8b_2022.jpg,defence
+Noah Sadiki,COD,MF,Sunderland,21.28,2004,26,26,2292,25.5,0,0,0,0,0,0,7,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/645481cc_2022.jpg,milieu
+Bukayo Saka,ENG,"FW,MF",Arsenal,24.56,2001,27,22,1998,22.2,6,3,9,5,1,1,1,0,0.27,0.14,0.41,0.23,0.36,https://fbref.com/req/202302030/images/headshots/bc7dc64d_2022.jpg,attaque
+Mohamed Salah,EGY,"MF,FW",Liverpool,33.79,1992,22,19,1819,20.2,5,6,11,4,1,1,1,0,0.25,0.3,0.54,0.2,0.49,https://fbref.com/req/202302030/images/headshots/e342ad68_2022.jpg,milieu
+William Saliba,FRA,DF,Arsenal,25.02,2001,25,24,2074,23.0,1,0,1,1,0,0,1,0,0.04,0.0,0.04,0.04,0.04,https://fbref.com/req/202302030/images/headshots/972aeb2a_2022.jpg,defence
+Robert Sánchez,ESP,GK,Chelsea,28.36,1997,29,29,2524,28.0,0,1,1,0,0,0,3,1,0.0,0.04,0.04,0.0,0.04,https://fbref.com/req/202302030/images/headshots/6a713852_2022.jpg,defence
+Jadon Sancho,ENG,MF,Aston Villa,26.01,2000,19,8,763,8.5,0,2,2,0,0,0,0,0,0.0,0.24,0.24,0.0,0.24,https://fbref.com/req/202302030/images/headshots/dbf053da_2022.jpg,milieu
+Ibrahim Sangaré,CIV,MF,Nottingham Forest,28.32,1997,23,21,1765,19.6,2,2,4,2,0,0,5,0,0.1,0.1,0.2,0.1,0.2,https://fbref.com/req/202302030/images/headshots/bced0375_2022.jpg,milieu
+Andrey Santos,BRA,MF,Chelsea,21.91,2004,23,10,1009,11.2,0,0,0,0,0,0,4,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/dd745366_2022.jpg,milieu
+Ismaila Sarr,SEN,"MF,FW",Crystal Palace,28.09,1998,20,20,1725,19.2,7,1,8,5,2,2,2,0,0.37,0.05,0.42,0.26,0.31,https://fbref.com/req/202302030/images/headshots/bfdb33aa_2022.jpg,milieu
+Mamadou Sarr,SEN,DF,Chelsea,20.58,2005,2,1,92,1.0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/61f80c89_2022.jpg,defence
+Sávio,BRA,MF,Manchester City,21.97,2004,17,5,573,6.4,0,1,1,0,0,0,2,0,0.0,0.16,0.16,0.0,0.16,https://fbref.com/req/202302030/images/headshots/fe6e7156_2022.jpg,milieu
+Nicolò Savona,ITA,DF,Nottingham Forest,23.03,2003,14,11,1028,11.4,2,0,2,2,0,0,2,0,0.18,0.0,0.18,0.18,0.18,https://fbref.com/req/202302030/images/headshots/e041497d_2022.jpg,defence
+Oliver Scarles,ENG,"DF,MF",West Ham United,20.3,2005,12,9,656,7.3,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/242e5e6d_2022.jpg,defence
+Dane Scarlett,ENG,FW,Tottenham Hotspur,22.02,2004,2,0,9,0.1,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/21945a9e_2022.jpg,attaque
+Kevin Schade,GER,"MF,FW",Brentford,24.34,2001,28,26,2206,24.5,7,3,10,7,0,1,6,1,0.29,0.12,0.41,0.29,0.41,https://fbref.com/req/202302030/images/headshots/52afb588_2022.jpg,milieu
+Fabian Schär,SUI,DF,Newcastle United,34.27,1991,16,11,1091,12.1,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/c8aa95da_2022.jpg,defence
+Alex Scott,ENG,MF,Bournemouth,22.61,2003,31,28,2310,25.7,2,1,3,2,0,0,3,0,0.08,0.04,0.12,0.08,0.12,https://fbref.com/req/202302030/images/headshots/104d0bb8_2022.jpg,milieu
+Jenson Seelt,NED,DF,Sunderland,22.85,2003,2,1,134,1.5,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/ec75ee25_2022.jpg,defence
+Matz Sels,BEL,GK,Nottingham Forest,34.09,1992,24,23,2038,22.6,0,0,0,0,0,0,2,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/834b5c4c_2022.jpg,defence
+Antoine Semenyo,GHA,"MF,FW",Manchester City,26.22,2000,9,9,789,8.8,5,1,6,5,0,0,0,0,0.57,0.11,0.68,0.57,0.68,https://fbref.com/req/202302030/images/headshots/efd2ec23_2022.jpg,milieu
+Antoine Semenyo,GHA,MF,Bournemouth,26.22,2000,20,20,1798,20.0,10,3,13,9,1,2,6,0,0.5,0.15,0.65,0.45,0.6,https://fbref.com/req/202302030/images/headshots/efd2ec23_2022.jpg,milieu
+Marcos Senesi,ARG,DF,Bournemouth,28.89,1997,30,30,2658,29.5,0,4,4,0,0,0,8,0,0.0,0.14,0.14,0.0,0.14,https://fbref.com/req/202302030/images/headshots/35141f4c_2022.jpg,defence
+Benjamin Šeško,SVN,FW,Manchester Utd,22.83,2003,26,13,1342,14.9,9,1,10,9,0,0,2,0,0.6,0.07,0.67,0.6,0.67,https://fbref.com/req/202302030/images/headshots/3260690c_2022.jpg,attaque
+Ryan Sessegnon,ENG,"DF,MF",Fulham,25.87,2000,24,18,1641,18.2,2,1,3,2,0,0,0,0,0.11,0.05,0.16,0.11,0.16,https://fbref.com/req/202302030/images/headshots/6aa3e78b_2022.jpg,defence
+Luke Shaw,ENG,DF,Manchester Utd,30.71,1995,31,31,2615,29.1,0,1,1,0,0,0,5,0,0.0,0.03,0.03,0.0,0.03,https://fbref.com/req/202302030/images/headshots/9c94165b_2022.jpg,defence
+Bernardo Silva,POR,MF,Manchester City,31.64,1994,30,26,2245,24.9,2,4,6,2,0,0,9,0,0.08,0.16,0.24,0.08,0.24,https://fbref.com/req/202302030/images/headshots/3eb22ec9_2022.jpg,milieu
+Jota Silva,POR,FW,Nottingham Forest,26.66,1999,1,0,12,0.1,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,,attaque
+Xavi Simons,NED,"MF,FW",Tottenham Hotspur,22.94,2003,25,17,1597,17.7,1,4,5,1,0,0,4,1,0.06,0.23,0.28,0.06,0.28,https://fbref.com/req/202302030/images/headshots/da4d670f_2022.jpg,milieu
+Adam Smith,ENG,DF,Bournemouth,34.92,1991,18,11,808,9.0,0,1,1,0,0,0,3,0,0.0,0.11,0.11,0.0,0.11,https://fbref.com/req/202302030/images/headshots/20b104bc_2022.jpg,defence
+Emile Smith Rowe,ENG,MF,Fulham,25.67,2000,30,16,1466,16.3,3,0,3,3,0,0,1,0,0.18,0.0,0.18,0.18,0.18,https://fbref.com/req/202302030/images/headshots/17695062_2022.jpg,milieu
+Dominic Solanke,ENG,FW,Tottenham Hotspur,28.54,1997,12,8,782,8.7,3,0,3,3,0,0,1,0,0.35,0.0,0.35,0.35,0.35,,attaque
+Julio Soler,ARG,DF,Bournemouth,21.11,2005,3,0,35,0.4,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,,defence
+Oliver Sonne,PER,DF,Burnley,25.38,2000,7,1,169,1.9,1,0,1,1,0,0,0,0,0.53,0.0,0.53,0.53,0.53,,defence
+Borna Sosa,CRO,"DF,MF",Crystal Palace,28.19,1998,5,0,55,0.6,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,,defence
+Tomáš Souček,CZE,MF,West Ham United,31.08,1995,28,17,1598,17.8,4,0,4,4,0,0,2,1,0.23,0.0,0.23,0.23,0.23,,milieu
+Souza,BRA,MF,Tottenham Hotspur,19.79,2006,4,2,144,1.6,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,,milieu
+Djed Spence,ENG,"DF,MF",Tottenham Hotspur,25.64,2000,24,21,1808,20.1,0,0,0,0,0,0,4,0,0.0,0.0,0.0,0.0,0.0,,defence
+Anton Stach,GER,MF,Leeds United,27.37,1998,26,25,2136,23.7,4,3,7,4,0,0,3,0,0.17,0.13,0.29,0.17,0.29,,milieu
+John Stones,ENG,DF,Manchester City,31.84,1994,7,4,353,3.9,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,,defence
+Jørgen Strand Larsen,NOR,FW,Wolves,26.14,2000,22,14,1404,15.6,1,1,2,0,1,2,2,0,0.06,0.06,0.13,0.0,0.06,https://fbref.com/req/202302030/images/headshots/f553b2b3_2022.jpg,attaque
+Jørgen Strand Larsen,NOR,FW,Crystal Palace,26.14,2000,6,6,466,5.2,3,0,3,3,0,0,2,0,0.58,0.0,0.58,0.58,0.58,https://fbref.com/req/202302030/images/headshots/f553b2b3_2022.jpg,attaque
+Pascal Struijk,NED,DF,Leeds United,26.63,1999,28,27,2431,27.0,0,1,1,0,0,0,4,0,0.0,0.04,0.04,0.0,0.04,https://fbref.com/req/202302030/images/headshots/f4d296e4_2022.jpg,defence
+Crysencio Summerville,NED,"MF,FW",West Ham United,24.41,2001,24,22,1856,20.6,5,1,6,5,0,0,4,0,0.24,0.05,0.29,0.24,0.29,https://fbref.com/req/202302030/images/headshots/df04eb4b_2022.jpg,milieu
+Dominik Szoboszlai,HUN,"MF,DF",Liverpool,25.43,2000,29,29,2601,28.9,5,3,8,5,0,1,7,1,0.17,0.1,0.28,0.17,0.28,https://fbref.com/req/202302030/images/headshots/934e1968_2022.jpg,milieu
+Jocelin Ta Bi,CIV,MF,Sunderland,21.13,2005,1,1,38,0.4,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,,milieu
+Chemsdine Talbi,MAR,"MF,FW",Sunderland,20.89,2005,23,14,1325,14.7,4,1,5,4,0,0,0,0,0.27,0.07,0.34,0.27,0.34,https://fbref.com/req/202302030/images/headshots/47ce793b_2022.jpg,milieu
+Ao Tanaka,JPN,MF,Leeds United,27.55,1998,21,7,769,8.5,2,0,2,2,0,0,1,0,0.23,0.0,0.23,0.23,0.23,https://fbref.com/req/202302030/images/headshots/1d36d6b6_2022.jpg,milieu
+James Tarkowski,ENG,DF,Everton,33.36,1992,30,30,2700,30.0,1,1,2,1,0,0,5,0,0.03,0.03,0.07,0.03,0.07,https://fbref.com/req/202302030/images/headshots/15ea812b_2022.jpg,defence
+Marcus Tavernier,ENG,MF,Bournemouth,27.02,1999,27,24,2122,23.6,5,4,9,3,2,2,4,0,0.21,0.17,0.38,0.13,0.3,https://fbref.com/req/202302030/images/headshots/5c0da4a4_2022.jpg,milieu
+Loum Tchaouna,FRA,"MF,FW",Burnley,22.56,2003,23,9,858,9.5,1,0,1,1,0,0,1,0,0.1,0.0,0.1,0.1,0.1,https://fbref.com/req/202302030/images/headshots/a3c8b4d3_2022.jpg,milieu
+Jackson Tchatchoua,CMR,"MF,DF",Wolves,24.54,2001,28,17,1705,18.9,0,1,1,0,0,0,3,0,0.0,0.05,0.05,0.0,0.05,https://fbref.com/req/202302030/images/headshots/aeca7743_2022.jpg,milieu
+Mathys Tel,FRA,"MF,FW",Tottenham Hotspur,20.92,2005,24,9,906,10.1,3,0,3,3,0,0,0,0,0.3,0.0,0.3,0.3,0.3,https://fbref.com/req/202302030/images/headshots/829aa60c_2022.jpg,milieu
+Kenny Tete,NED,DF,Fulham,30.47,1995,22,21,1791,19.9,1,0,1,1,0,0,2,0,0.05,0.0,0.05,0.05,0.05,https://fbref.com/req/202302030/images/headshots/77d7c96f_2022.jpg,defence
+Igor Thiago,BRA,FW,Brentford,24.76,2001,31,30,2652,29.5,19,1,20,13,6,7,6,0,0.64,0.03,0.68,0.44,0.48,https://fbref.com/req/202302030/images/headshots/dc45ac24_2022.jpg,attaque
+Malick Thiaw,GER,DF,Newcastle United,24.64,2001,28,26,2335,25.9,4,0,4,4,0,0,3,0,0.15,0.0,0.15,0.15,0.15,https://fbref.com/req/202302030/images/headshots/ff5ea0bf_2022.jpg,defence
+Youri Tielemans,BEL,MF,Aston Villa,28.9,1997,18,15,1322,14.7,0,4,4,0,0,0,0,0,0.0,0.27,0.27,0.0,0.27,https://fbref.com/req/202302030/images/headshots/56f7a928_2022.jpg,milieu
+Jurriën Timber,NED,DF,Arsenal,24.78,2001,30,28,2454,27.3,3,5,8,3,0,0,5,0,0.11,0.18,0.29,0.11,0.29,https://fbref.com/req/202302030/images/headshots/41034650_2022.jpg,defence
+Jean-Clair Todibo,FRA,DF,West Ham United,26.25,1999,20,20,1698,18.9,0,1,1,0,0,0,4,1,0.0,0.05,0.05,0.0,0.05,https://fbref.com/req/202302030/images/headshots/88f130ed_2022.jpg,defence
+Sandro Tonali,ITA,MF,Newcastle United,25.89,2000,29,25,2038,22.6,0,2,2,0,0,0,3,0,0.0,0.09,0.09,0.0,0.09,https://fbref.com/req/202302030/images/headshots/0db169ae_2022.jpg,milieu
+Pau Torres,ESP,DF,Aston Villa,29.2,1997,17,15,1388,15.4,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/532e1e4f_2022.jpg,defence
+Alex Tóth,HUN,MF,Bournemouth,20.43,2005,4,1,74,0.8,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,,milieu
+James Trafford,ENG,GK,Manchester City,23.47,2002,3,3,270,3.0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/259fea27_2022.jpg,defence
+Adama Traoré,ESP,MF,Fulham,30.18,1996,15,1,274,3.0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/9a28eba4_2022.jpg,milieu
+Adama Traoré,ESP,"FW,MF",West Ham United,30.18,1996,7,0,91,1.0,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/9a28eba4_2022.jpg,attaque
+Bertrand Traoré,BFA,"MF,FW",Sunderland,30.56,1995,12,9,632,7.0,1,0,1,1,0,0,1,0,0.14,0.0,0.14,0.14,0.14,https://fbref.com/req/202302030/images/headshots/c47541e0_2022.jpg,milieu
+Mike Trésor,BEL,"FW,MF",Burnley,26.84,1999,4,0,23,0.3,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/b2a81fc6_2022.jpg,attaque
+Kieran Trippier,ENG,DF,Newcastle United,35.53,1990,18,17,1456,16.2,0,1,1,0,0,0,3,0,0.0,0.06,0.06,0.0,0.06,https://fbref.com/req/202302030/images/headshots/21512407_2022.jpg,defence
+Leandro Trossard,BEL,"FW,MF",Arsenal,31.32,1994,26,18,1677,18.6,5,5,10,5,0,0,1,0,0.27,0.27,0.54,0.27,0.54,https://fbref.com/req/202302030/images/headshots/38ceb24a_2022.jpg,attaque
+Adrien Truffert,FRA,DF,Bournemouth,24.36,2001,31,31,2749,30.5,0,3,3,0,0,0,3,0,0.0,0.1,0.1,0.0,0.1,https://fbref.com/req/202302030/images/headshots/5d0e0a1f_2022.jpg,defence
+Axel Tuanzebe,COD,DF,Burnley,28.37,1997,11,11,931,10.3,1,0,1,1,0,0,1,0,0.1,0.0,0.1,0.1,0.1,https://fbref.com/req/202302030/images/headshots/2baec6ce_2022.jpg,defence
+Stefanos Tzimas,GRE,FW,Brighton,20.23,2006,9,1,139,1.5,1,1,2,1,0,0,0,0,0.65,0.65,1.29,0.65,1.29,https://fbref.com/req/202302030/images/headshots/a497130f_2022.jpg,attaque
+Christantus Uche,NGA,FW,Crystal Palace,22.86,2003,14,0,173,1.9,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/87941696_2022.jpg,attaque
+Destiny Udogie,ITA,"DF,MF",Tottenham Hotspur,23.33,2002,14,8,843,9.4,0,1,1,0,0,0,3,0,0.0,0.11,0.11,0.0,0.11,https://fbref.com/req/202302030/images/headshots/7cd520e8_2022.jpg,defence
+Manuel Ugarte,URU,MF,Manchester Utd,24.97,2001,21,7,797,8.9,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/c9817014_2022.jpg,milieu
+Lesley Ugochukwu,FRA,MF,Burnley,22.01,2004,30,22,1973,21.9,3,1,4,3,0,0,3,1,0.14,0.05,0.18,0.14,0.18,https://fbref.com/req/202302030/images/headshots/1df4a109_2022.jpg,milieu
+Enes Ünal,TUR,FW,Bournemouth,28.89,1997,17,0,186,2.1,1,0,1,1,0,0,1,0,0.48,0.0,0.48,0.48,0.48,https://fbref.com/req/202302030/images/headshots/f8eca1b6_2022.jpg,attaque
+Hákon Valdimarsson,ISL,GK,Brentford,24.46,2001,1,1,90,1.0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/57a34cf4_2022.jpg,defence
+Virgil van Dijk,NED,DF,Liverpool,34.73,1991,31,31,2790,31.0,3,0,3,3,0,0,4,0,0.1,0.0,0.1,0.1,0.1,https://fbref.com/req/202302030/images/headshots/e06683ca_2022.jpg,defence
+Joël Veltman,NED,DF,Brighton,34.2,1992,19,8,850,9.4,1,0,1,1,0,0,4,0,0.11,0.0,0.11,0.11,0.11,https://fbref.com/req/202302030/images/headshots/dad4b285_2022.jpg,defence
+Micky van de Ven,NED,DF,Tottenham Hotspur,24.94,2001,28,28,2411,26.8,4,1,5,4,0,0,7,1,0.15,0.04,0.19,0.15,0.19,https://fbref.com/req/202302030/images/headshots/8fe2a392_2022.jpg,defence
+Bart Verbruggen,NED,GK,Brighton,23.61,2002,31,31,2790,31.0,0,0,0,0,0,0,3,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/cf134113_2022.jpg,defence
+Guglielmo Vicario,ITA,GK,Tottenham Hotspur,29.48,1996,31,31,2790,31.0,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/77d6fd4d_2022.jpg,defence
+Kyle Walker,ENG,"DF,MF",Burnley,35.84,1990,29,29,2547,28.3,0,2,2,0,0,0,8,0,0.0,0.07,0.07,0.0,0.07,https://fbref.com/req/202302030/images/headshots/86dd77d1_2022.jpg,defence
+Kyle Walker-Peters,ENG,DF,West Ham United,28.96,1997,18,10,959,10.7,1,0,1,1,0,0,2,0,0.09,0.0,0.09,0.09,0.09,https://fbref.com/req/202302030/images/headshots/984a5a64_2022.jpg,defence
+Aaron Wan-Bissaka,COD,"DF,MF",West Ham United,28.34,1997,22,21,1903,21.1,0,2,2,0,0,0,4,0,0.0,0.09,0.09,0.0,0.09,https://fbref.com/req/202302030/images/headshots/9e525177_2022.jpg,defence
+James Ward-Prowse,ENG,MF,West Ham United,31.41,1994,5,5,413,4.6,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/3515d404_2022.jpg,milieu
+James Ward-Prowse,ENG,MF,Burnley,31.41,1994,6,3,317,3.5,0,1,1,0,0,0,1,0,0.0,0.28,0.28,0.0,0.28,https://fbref.com/req/202302030/images/headshots/3515d404_2022.jpg,milieu
+Ollie Watkins,ENG,FW,Aston Villa,30.25,1995,30,27,2293,25.5,9,1,10,9,0,0,3,0,0.35,0.04,0.39,0.35,0.39,https://fbref.com/req/202302030/images/headshots/aed3a70f_2022.jpg,attaque
+Tom Watson,ENG,MF,Brighton,19.97,2006,6,0,62,0.7,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/9886c32e_2022.jpg,milieu
+Danny Welbeck,ENG,FW,Brighton,35.34,1990,30,20,1826,20.3,12,0,12,11,1,3,5,0,0.59,0.0,0.59,0.54,0.54,https://fbref.com/req/202302030/images/headshots/ce5143da_2022.jpg,attaque
+Adam Wharton,ENG,MF,Crystal Palace,22.14,2004,27,26,2163,24.0,0,5,5,0,0,0,6,1,0.0,0.21,0.21,0.0,0.21,https://fbref.com/req/202302030/images/headshots/4b542852_2022.jpg,milieu
+Ben White,ENG,DF,Arsenal,28.47,1997,7,5,411,4.6,0,1,1,0,0,0,0,0,0.0,0.22,0.22,0.0,0.22,https://fbref.com/req/202302030/images/headshots/35e413f1_2022.jpg,defence
+Mats Wieffer,NED,DF,Brighton,26.37,1999,21,18,1571,17.5,0,3,3,0,0,0,7,0,0.0,0.17,0.17,0.0,0.17,https://fbref.com/req/202302030/images/headshots/4876c9ab_2022.jpg,defence
+Neco Williams,WAL,DF,Nottingham Forest,24.96,2001,30,30,2618,29.1,1,3,4,1,0,0,5,1,0.03,0.1,0.14,0.03,0.14,https://fbref.com/req/202302030/images/headshots/dd323728_2022.jpg,defence
+Estêvão Willian,BRA,"MF,FW",Chelsea,18.93,2007,20,10,767,8.5,2,2,4,2,0,0,3,0,0.23,0.23,0.47,0.23,0.47,https://fbref.com/req/202302030/images/headshots/2eda11b1_2022.jpg,milieu
+Joe Willock,ENG,MF,Newcastle United,26.61,1999,20,7,703,7.8,0,1,1,0,0,0,3,0,0.0,0.13,0.13,0.0,0.13,https://fbref.com/req/202302030/images/headshots/a3b03921_2022.jpg,milieu
+Callum Wilson,ENG,"FW,MF",West Ham United,34.08,1992,25,10,1049,11.7,5,1,6,5,0,0,0,0,0.43,0.09,0.51,0.43,0.51,https://fbref.com/req/202302030/images/headshots/c596fcb0_2022.jpg,attaque
+Harry Wilson,WAL,MF,Fulham,29.02,1997,29,27,2259,25.1,10,6,16,10,0,0,6,0,0.4,0.24,0.64,0.4,0.64,https://fbref.com/req/202302030/images/headshots/c6dc9ecd_2022.jpg,milieu
+Ben Winterburn,ENG,MF,Bournemouth,21.57,2004,1,0,7,0.1,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,,milieu
+Florian Wirtz,GER,MF,Liverpool,22.91,2003,27,23,2004,22.3,4,2,6,4,0,0,1,0,0.18,0.09,0.27,0.18,0.27,https://fbref.com/req/202302030/images/headshots/e7fcf289_2022.jpg,milieu
+Yoane Wissa,COD,FW,Newcastle United,29.57,1996,13,4,431,4.8,1,0,1,1,0,0,1,0,0.21,0.0,0.21,0.21,0.21,https://fbref.com/req/202302030/images/headshots/2500cef9_2022.jpg,attaque
+Nick Woltemade,GER,"FW,MF",Newcastle United,24.12,2002,27,21,1664,18.5,7,3,10,6,1,1,0,0,0.38,0.16,0.54,0.32,0.49,https://fbref.com/req/202302030/images/headshots/7ca196eb_2022.jpg,attaque
+Chris Wood,NZL,FW,Nottingham Forest,34.31,1991,8,7,540,6.0,2,0,2,2,0,0,0,0,0.33,0.0,0.33,0.33,0.33,https://fbref.com/req/202302030/images/headshots/4e9a0555_2022.jpg,attaque
+Joe Worrall,ENG,DF,Burnley,29.22,1997,11,5,500,5.6,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/a5212312_2022.jpg,defence
+Granit Xhaka,SUI,MF,Sunderland,33.5,1992,27,25,2274,25.3,1,5,6,1,0,0,5,0,0.04,0.2,0.24,0.04,0.24,https://fbref.com/req/202302030/images/headshots/e61b8aee_2022.jpg,milieu
+Yehor Yarmoliuk,UKR,MF,Brentford,22.08,2004,31,24,2133,23.7,1,2,3,1,0,0,7,0,0.04,0.08,0.13,0.04,0.13,https://fbref.com/req/202302030/images/headshots/907a5d7c_2022.jpg,milieu
+Ryan Yates,ENG,MF,Nottingham Forest,28.35,1997,16,1,415,4.6,0,1,1,0,0,0,1,0,0.0,0.22,0.22,0.0,0.22,https://fbref.com/req/202302030/images/headshots/c1fe2a48_2022.jpg,milieu
+Leny Yoro,FRA,DF,Manchester Utd,20.38,2005,28,17,1615,17.9,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/6763f716_2022.jpg,defence
+Oleksandr Zinchenko,UKR,DF,Nottingham Forest,29.29,1996,5,4,353,3.9,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,https://fbref.com/req/202302030/images/headshots/51cf8561_2022.jpg,defence
+Joshua Zirkzee,NED,"FW,MF",Manchester Utd,24.85,2001,18,4,523,5.8,2,1,3,2,0,0,1,0,0.34,0.17,0.52,0.34,0.52,https://fbref.com/req/202302030/images/headshots/028e70b9_2022.jpg,attaque
+Martín Zubimendi,ESP,MF,Arsenal,27.15,1999,31,30,2596,28.8,5,1,6,5,0,0,4,0,0.17,0.03,0.21,0.17,0.21,https://fbref.com/req/202302030/images/headshots/3ee0dd59_2022.jpg,milieu
+Martin Ødegaard,NOR,MF,Arsenal,27.28,1998,20,13,1076,12.0,1,5,6,1,0,0,0,0,0.08,0.42,0.5,0.08,0.5,https://fbref.com/req/202302030/images/headshots/79300479_2022.jpg,milieu

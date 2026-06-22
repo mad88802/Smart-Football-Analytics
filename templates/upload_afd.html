@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFD Analytics - Configuration</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="bg-animation">
+        <div class="bg-animation-blobs">
+            <div class="blob blob-1" style="background: var(--neon-purple);"></div>
+            <div class="blob blob-2" style="background: var(--accent-bright);"></div>
+            <div class="blob blob-3" style="background: var(--neon-purple);"></div>
+        </div>
+    </div>
+    <div class="bg-tech-lines"></div>
+
+    <nav class="navbar">
+        <div class="nav-brand">AFD ANALYTICS</div>
+        <ul class="nav-links"></ul>
+        <a href="/" class="nav-back"><i class="fas fa-arrow-left"></i> Hub Principal</a>
+    </nav>
+
+    <div class="container upload-container">
+        <header>
+            <h1>Analyse Factorielle Discriminante</h1>
+            <p>Configurez et lancez votre analyse AFD</p>
+        </header>
+
+        <div class="card upload-card">
+            <form action="/analyze_afd" method="POST" enctype="multipart/form-data" id="afdForm">
+                
+                <!-- File Upload Zone -->
+                <div class="upload-zone-wrapper">
+                    <h2><span><i class="fas fa-file-csv"></i> 1. Fichier de données</span></h2>
+                    <div class="upload-zone" id="uploadZone">
+                        <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                        <div class="form-group" style="pointer-events: none;">
+                            <label for="csvfile"><i class="fas fa-file-csv"></i> Sélectionner le fichier CSV</label>
+                            <input type="file" name="csvfile" id="csvfile" accept=".csv" required class="form-input">
+                            <p id="fileNameDisplay" class="upload-text">Glissez-déposez votre fichier ici<br>ou cliquez pour parcourir</p>
+                        </div>
+                        <span class="file-name" id="fileName" style="display:none; color: var(--neon-purple); font-weight:600; margin-top:1rem;"></span>
+                    </div>
+                </div>
+
+                <!-- AFD Configuration (Hidden until file loaded) -->
+                <div id="afdConfig" style="display: none; margin-top: 2rem; animation: fadeIn 0.5s ease-out;">
+                    
+                    <div class="grid-2">
+                        <!-- Target Selection -->
+                        <div class="card" style="padding: 1.5rem; background: rgba(192, 132, 252, 0.05); border: 1px solid rgba(192, 132, 252, 0.3);">
+                            <h3><i class="fas fa-bullseye"></i> 2. Variable Cible (Classe)</h3>
+                            <select name="target_col" id="target_col" class="filter-input" style="width: 100%; margin-bottom: 0.5rem; background: rgba(15, 23, 42, 0.6); color: #fff; border: 1px solid rgba(192, 132, 252, 0.3); padding: 0.5rem; border-radius: 0.5rem;">
+                                <!-- Will be populated dynamically -->
+                            </select>
+                            <p class="text-secondary" style="font-size: 0.85rem;">La classification sera effectuée selon cette variable cible.</p>
+                        </div>
+
+                        <!-- Test Size -->
+                        <div class="card" style="padding: 1.5rem; background: rgba(255,255,255,0.03);">
+                            <h3><i class="fas fa-vial"></i> 3. Split Test/Train</h3>
+                            <p class="text-secondary" style="font-size: 0.85rem; margin-bottom: 1rem;">Proportion des données pour l'évaluation</p>
+                            <input type="range" name="test_size" min="0.1" max="0.5" step="0.05" value="0.2" id="testSizeRange" style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; margin-top: 0.5rem; font-size: 0.9rem;">
+                                <span>Train: <b id="trainVal">80%</b></span>
+                                <span>Test: <b id="testVal">20%</b></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row Filters Section -->
+                    <div id="rowFilterSection" style="margin-top: 2rem;" class="option-group">
+                        <h2><span><i class="fas fa-filter"></i> 4. Filtres de Lignes (Sous-filtrage)</span></h2>
+                        <div class="filter-controls">
+                            <select id="filterCol" class="filter-input"></select>
+                            <select id="filterOp" class="filter-input">
+                                <option value="=">=</option>
+                                <option value=">">&gt;</option>
+                                <option value="<">&lt;</option>
+                                <option value="contains">Contient</option>
+                            </select>
+                            <input type="text" id="filterVal" class="filter-input" placeholder="Valeur...">
+                            <button type="button" id="addFilterBtn" class="submit-btn" style="padding: 0.6rem 1.2rem; width: auto; font-size: 0.9rem;">
+                                <i class="fas fa-plus"></i> Ajouter
+                            </button>
+                        </div>
+                        <div id="activeRules" class="rules-container"></div>
+                    </div>
+
+                    <!-- Features Selection -->
+                    <div class="card" style="margin-top: 1.5rem; padding: 1.5rem; background: rgba(255,255,255,0.03);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <h3><i class="fas fa-list-check"></i> 5. Variables d'Analyse (Features)</h3>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <button type="button" id="selectAllCols" class="btn-secondary btn-small">Tout</button>
+                                <button type="button" id="deselectAllCols" class="btn-secondary btn-small">Aucun</button>
+                            </div>
+                        </div>
+                        <p class="text-secondary" style="font-size: 0.85rem; margin-bottom: 1rem;">Sélectionnez les variables numériques pour la discrimination</p>
+                        <div id="columnChips" class="column-chips-container">
+                            <!-- Chips will be generated here -->
+                        </div>
+                    </div>
+
+                    <!-- Data Preview Section -->
+                    <div id="dataEditSection" style="margin-top: 2rem;" class="option-group">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                            <h2><span><i class="fas fa-table"></i> 6. Préview & Edition des Données</span></h2>
+                            <div style="display: flex; gap: 0.5rem; align-items: center;">
+                                <div style="display: flex; align-items: center; gap: 0.25rem; background: rgba(255,255,255,0.05); padding: 0.25rem 0.5rem; border-radius: 0.5rem; border: 1px solid var(--card-border);">
+                                    <input type="number" id="resizeRows" placeholder="Lig" style="width: 50px; background: transparent; border: none; color: #fff; font-size: 0.8rem; text-align: center;">
+                                    <span style="opacity: 0.3;">×</span>
+                                    <input type="number" id="resizeCols" placeholder="Col" style="width: 50px; background: transparent; border: none; color: #fff; font-size: 0.8rem; text-align: center;">
+                                    <button type="button" id="resizeBtn" class="btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;"><i class="fas fa-compress-arrows-alt"></i></button>
+                                </div>
+                                <button type="button" id="addRow" class="btn-secondary"><i class="fas fa-plus"></i> Ligne</button>
+                                <button type="button" id="addCol" class="btn-secondary"><i class="fas fa-plus"></i> Col</button>
+                            </div>
+                        </div>
+                        <div class="table-container">
+                            <table id="dataTable">
+                                <thead id="tableHead"></thead>
+                                <tbody id="tableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="edited_data" id="editedData">
+
+                    <button type="submit" class="submit-btn" style="margin-top: 2rem; background: var(--neon-purple);">
+                        <i class="fas fa-rocket"></i> Lancer l'Analyse AFD
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const uploadZone = document.getElementById('uploadZone');
+        const fileInput = document.getElementById('csvfile');
+        const fileName = document.getElementById('fileName');
+        const fileNameDisplay = document.getElementById('fileNameDisplay');
+        const afdConfig = document.getElementById('afdConfig');
+        const columnChips = document.getElementById('columnChips');
+        const tableHead = document.getElementById('tableHead');
+        const tableBody = document.getElementById('tableBody');
+        const editedDataInput = document.getElementById('editedData');
+        const afdForm = document.getElementById('afdForm');
+        
+        let originalRows = [];
+        let rowRules = [];
+
+        // Upload zone events
+        uploadZone.onclick = () => fileInput.click();
+        
+        fileInput.onchange = () => {
+            if (fileInput.files.length) handleFile(fileInput.files[0]);
+        };
+
+        function isColumnNumeric(rows, colIdx) {
+            let numericCount = 0;
+            let totalCount = 0;
+            for (let i = 1; i < Math.min(rows.length, 20); i++) {
+                const val = rows[i][colIdx];
+                if (val !== undefined && val !== null && val !== "") {
+                    totalCount++;
+                    const cleanVal = val.replace(',', '.');
+                    if (!isNaN(parseFloat(cleanVal)) && isFinite(cleanVal)) {
+                        numericCount++;
+                    }
+                }
+            }
+            return totalCount > 0 && (numericCount / totalCount) > 0.5;
+        }
+
+        function populateTargetColDropdown(headers) {
+            const select = document.getElementById('target_col');
+            select.innerHTML = '';
+            headers.forEach((h, i) => {
+                const opt = document.createElement('option');
+                opt.value = h;
+                opt.textContent = h || `Col ${i+1}`;
+                select.appendChild(opt);
+            });
+            // Prioritize 'position' before 'pos' to handle the transformed CSV
+            const defaultTargets = ['position', 'pos', 'poste', 'target', 'class', 'role'];
+            for (const target of defaultTargets) {
+                const match = headers.find(h => h && h.toLowerCase() === target);
+                if (match) {
+                    select.value = match; // Set by value, not by index
+                    break;
+                }
+            }
+        }
+
+        // Target change handler
+        document.getElementById('target_col').onchange = () => {
+            renderColumnChips(originalRows[0]);
+            updateDisplay();
+        };
+
+        function parseCSVLine(line, sep) {
+            const result = [];
+            let current = '';
+            let inQuotes = false;
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                if (char === '"') {
+                    inQuotes = !inQuotes;
+                } else if (char === sep && !inQuotes) {
+                    result.push(current.trim());
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+            result.push(current.trim());
+            return result;
+        }
+
+        function handleFile(file) {
+            fileName.textContent = file.name;
+            fileName.style.display = 'block';
+            fileNameDisplay.style.display = 'none';
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const text = e.target.result;
+                const lines = text.split('\n');
+                const sep = lines[0].includes(';') ? ';' : ',';
+                originalRows = lines.map(line => {
+                    const trimmed = line.trim();
+                    if (!trimmed) return [];
+                    return parseCSVLine(trimmed, sep);
+                }).filter(row => row.length > 0 && row.some(c => c !== ""));
+                
+                if (originalRows.length > 0) {
+                    populateTargetColDropdown(originalRows[0]);
+                    renderColumnChips(originalRows[0]);
+                    populateFilterCols(originalRows[0]);
+                    updateDisplay();
+                    afdConfig.style.display = 'block';
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function populateFilterCols(headers) {
+            const select = document.getElementById('filterCol');
+            select.innerHTML = '';
+            headers.forEach((h, i) => {
+                const opt = document.createElement('option');
+                opt.value = i;
+                opt.textContent = h || `Col ${i+1}`;
+                select.appendChild(opt);
+            });
+        }
+
+        function renderColumnChips(headers) {
+            columnChips.innerHTML = '';
+            const selectedTarget = document.getElementById('target_col').value;
+            headers.forEach((h, i) => {
+                const isNum = isColumnNumeric(originalRows, i);
+                const isTargetOrMeta = h && (
+                    h.toLowerCase() === selectedTarget.toLowerCase() ||
+                    ['player', 'image_url', 'nation', 'squad'].includes(h.toLowerCase())
+                );
+                const isActive = isNum && !isTargetOrMeta;
+
+                const chip = document.createElement('div');
+                chip.className = `column-chip ${isActive ? 'active' : ''}`;
+                chip.dataset.index = i;
+                chip.innerHTML = `<span>${h || 'Col '+(i+1)}</span><i class="fas ${isActive ? 'fa-check' : 'fa-plus'}"></i>`;
+                chip.onclick = () => {
+                    chip.classList.toggle('active');
+                    chip.querySelector('i').className = chip.classList.contains('active') ? 'fas fa-check' : 'fas fa-plus';
+                    updateDisplay();
+                };
+                columnChips.appendChild(chip);
+            });
+        }
+
+        function toggleColumnFromChip(chip, index) {
+            const isActive = chip.classList.toggle('active');
+            chip.querySelector('i').className = isActive ? 'fas fa-check' : 'fas fa-plus';
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            if (!originalRows || originalRows.length === 0) return;
+
+            const activeChips = Array.from(document.querySelectorAll('.column-chip.active'));
+            const activeColIndices = activeChips.map(c => parseInt(c.dataset.index));
+
+            // Sync the filter dropdown
+            const select = document.getElementById('filterCol');
+            const currentVal = select.value;
+            select.innerHTML = '';
+            activeChips.forEach(chip => {
+                const opt = document.createElement('option');
+                opt.value = chip.dataset.index;
+                opt.textContent = chip.querySelector('span').textContent;
+                select.appendChild(opt);
+            });
+            if (activeColIndices.includes(parseInt(currentVal))) select.value = currentVal;
+
+            if (activeColIndices.length === 0) {
+                renderTable([]);
+                return;
+            }
+
+            // Filter rows
+            const dataRows = originalRows.slice(1).filter(row => {
+                return rowRules.every(rule => {
+                    const cellVal = row[rule.colIdx] || "";
+                    const sCell = String(cellVal).trim().toLowerCase();
+                    const sFilter = String(rule.value).trim().toLowerCase();
+                    const nCell = parseFloat(cellVal.replace(',','.'));
+                    const nFilter = parseFloat(rule.value.replace(',','.'));
+                    const isNum = !isNaN(nCell) && !isNaN(nFilter);
+
+                    if (rule.op === '=') return isNum ? (nCell === nFilter) : (sCell === sFilter);
+                    if (rule.op === '>') return isNum ? (nCell > nFilter) : (sCell > sFilter);
+                    if (rule.op === '<') return isNum ? (nCell < nFilter) : (sCell < sFilter);
+                    if (rule.op === 'contains') return sCell.includes(sFilter);
+                    return true;
+                });
+            });
+
+            const finalRows = [originalRows[0], ...dataRows];
+
+            // Filter columns by active chips
+            const finalData = finalRows.map(row =>
+                activeColIndices.map(i => row[i] !== undefined ? row[i] : "")
+            );
+
+            renderTable(finalData, activeColIndices);
+        }
+
+        function renderTable(rows, originalIndices = null) {
+            tableHead.innerHTML = '';
+            tableBody.innerHTML = '';
+            if (!rows || rows.length === 0) return;
+
+            // Update dimension inputs
+            document.getElementById('resizeRows').value = rows.length - 1;
+            document.getElementById('resizeCols').value = rows[0].length;
+
+            const headerRow = document.createElement('tr');
+            rows[0].forEach((h, i) => {
+                const th = document.createElement('th');
+                th.style.position = 'relative';
+                th.style.paddingTop = '1.8rem';
+
+                const delBtn = document.createElement('button');
+                delBtn.type = 'button';
+                delBtn.className = 'delete-btn';
+                delBtn.innerHTML = '&times;';
+                delBtn.title = 'Supprimer la colonne';
+                delBtn.style.cssText = 'position:absolute;top:4px;left:50%;transform:translateX(-50%);padding:1px 6px;font-size:0.8rem;';
+                delBtn.onclick = () => {
+                    if (originalIndices) {
+                        const origIdx = originalIndices[i];
+                        const chip = document.querySelector(`.column-chip[data-index="${origIdx}"]`);
+                        if (chip) toggleColumnFromChip(chip, origIdx);
+                    } else {
+                        const colIdx = Array.from(th.parentNode.cells).indexOf(th);
+                        deleteColumn(colIdx);
+                    }
+                };
+                th.appendChild(delBtn);
+
+                const span = document.createElement('span');
+                span.textContent = h || `Col ${i + 1}`;
+                span.contentEditable = true;
+                th.appendChild(span);
+
+                headerRow.appendChild(th);
+            });
+            headerRow.appendChild(document.createElement('th')).textContent = 'Action';
+            tableHead.appendChild(headerRow);
+
+            rows.slice(1).forEach(row => {
+                const tr = document.createElement('tr');
+                row.forEach(cell => {
+                    const td = document.createElement('td');
+                    td.textContent = cell;
+                    td.contentEditable = true;
+                    tr.appendChild(td);
+                });
+                const actionTd = document.createElement('td');
+                actionTd.innerHTML = '<button type="button" class="delete-btn"><i class="fas fa-trash"></i></button>';
+                actionTd.querySelector('button').onclick = () => tr.remove();
+                tr.appendChild(actionTd);
+                tableBody.appendChild(tr);
+            });
+        }
+
+        function deleteColumn(index) {
+            const headerRow = tableHead.rows[0];
+            headerRow.deleteCell(index);
+            Array.from(tableBody.rows).forEach(row => row.deleteCell(index));
+        }
+
+        // Filters
+        document.getElementById('addFilterBtn').onclick = () => {
+            const colIdx = parseInt(document.getElementById('filterCol').value);
+            const colName = document.getElementById('filterCol').options[document.getElementById('filterCol').selectedIndex].text;
+            const op = document.getElementById('filterOp').value;
+            const val = document.getElementById('filterVal').value.trim();
+            if (val) {
+                rowRules.push({ colIdx, colName, op, value: val });
+                renderRowRules();
+                updateDisplay();
+            }
+        };
+
+        function renderRowRules() {
+            const container = document.getElementById('activeRules');
+            container.innerHTML = '';
+            rowRules.forEach((r, i) => {
+                const chip = document.createElement('div');
+                chip.className = 'rule-chip';
+                chip.innerHTML = `<span><b>${r.colName}</b> ${r.op} <b>${r.value}</b></span><i class="fas fa-times" onclick="removeRule(${i})"></i>`;
+                container.appendChild(chip);
+            });
+        }
+
+        window.removeRule = (i) => {
+            rowRules.splice(i, 1);
+            renderRowRules();
+            updateDisplay();
+        };
+
+        // Select All / None
+        document.getElementById('selectAllCols').onclick = () => {
+            document.querySelectorAll('.column-chip').forEach(c => {
+                c.classList.add('active');
+                c.querySelector('i').className = 'fas fa-check';
+            });
+            updateDisplay();
+        };
+        document.getElementById('deselectAllCols').onclick = () => {
+            document.querySelectorAll('.column-chip').forEach(c => {
+                c.classList.remove('active');
+                c.querySelector('i').className = 'fas fa-plus';
+            });
+            updateDisplay();
+        };
+
+        // Resize Logic
+        document.getElementById('resizeBtn').onclick = () => {
+            const targetRows = parseInt(document.getElementById('resizeRows').value);
+            const targetCols = parseInt(document.getElementById('resizeCols').value);
+            
+            if (isNaN(targetRows) || isNaN(targetCols) || targetRows < 1 || targetCols < 1) {
+                alert("Entrez des dimensions valides.");
+                return;
+            }
+
+            const currentRows = tableBody.rows.length;
+            const currentCols = tableHead.rows[0].cells.length - 1;
+
+            // Adjust Rows
+            if (targetRows > currentRows) {
+                for (let i = 0; i < targetRows - currentRows; i++) document.getElementById('addRow').click();
+            } else if (targetRows < currentRows) {
+                for (let i = 0; i < currentRows - targetRows; i++) tableBody.deleteRow(-1);
+            }
+
+            // Adjust Cols
+            if (targetCols > currentCols) {
+                for (let i = 0; i < targetCols - currentCols; i++) document.getElementById('addCol').click();
+            } else if (targetCols < currentCols) {
+                for (let i = 0; i < currentCols - targetCols; i++) {
+                    const headerRow = tableHead.rows[0];
+                    headerRow.deleteCell(headerRow.cells.length - 2);
+                    Array.from(tableBody.rows).forEach(row => row.deleteCell(row.cells.length - 2));
+                }
+            }
+        };
+
+        // Add Row/Col Logic
+        document.getElementById('addRow').onclick = () => {
+            const numCols = tableHead.rows[0].cells.length - 1;
+            const tr = document.createElement('tr');
+            for (let i = 0; i < numCols; i++) {
+                const td = document.createElement('td');
+                td.contentEditable = true;
+                tr.appendChild(td);
+            }
+            const actionTd = document.createElement('td');
+            actionTd.innerHTML = '<button type="button" class="delete-btn"><i class="fas fa-trash"></i></button>';
+            actionTd.querySelector('button').onclick = () => tr.remove();
+            tr.appendChild(actionTd);
+            tableBody.appendChild(tr);
+        };
+
+        document.getElementById('addCol').onclick = () => {
+            const headerRow = tableHead.rows[0];
+            const actionColIdx = headerRow.cells.length - 1;
+
+            const th = document.createElement('th');
+            th.style.position = 'relative';
+            th.style.paddingTop = '1.8rem';
+
+            const delBtn = document.createElement('button');
+            delBtn.type = 'button';
+            delBtn.className = 'delete-btn';
+            delBtn.innerHTML = '&times;';
+            delBtn.style.cssText = 'position:absolute;top:4px;left:50%;transform:translateX(-50%);padding:1px 6px;font-size:0.8rem;';
+            delBtn.onclick = () => {
+                const idx = Array.from(th.parentNode.cells).indexOf(th);
+                deleteColumn(idx);
+            };
+            th.appendChild(delBtn);
+
+            const span = document.createElement('span');
+            span.textContent = `Col${actionColIdx + 1}`;
+            span.contentEditable = true;
+            th.appendChild(span);
+
+            headerRow.insertBefore(th, headerRow.cells[actionColIdx]);
+
+            Array.from(tableBody.rows).forEach(row => {
+                const td = document.createElement('td');
+                td.contentEditable = true;
+                row.insertBefore(td, row.cells[actionColIdx]);
+            });
+        };
+
+        // Submit — always send ALL columns (from originalRows with row filters),
+        // so the target column 'Pos' is never missing.
+        afdForm.onsubmit = (e) => {
+            // Rebuild full data from originalRows, applying row filters only
+            const allHeaders = originalRows[0];
+            const dataRows = originalRows.slice(1).filter(row => {
+                return rowRules.every(rule => {
+                    const cellVal = row[rule.colIdx] || "";
+                    const sCell = String(cellVal).trim().toLowerCase();
+                    const sFilter = String(rule.value).trim().toLowerCase();
+                    const nCell = parseFloat(cellVal.replace(',','.'));
+                    const nFilter = parseFloat(rule.value.replace(',','.'));
+                    const isNum = !isNaN(nCell) && !isNaN(nFilter);
+                    if (rule.op === '=') return isNum ? (nCell === nFilter) : (sCell === sFilter);
+                    if (rule.op === '>') return isNum ? (nCell > nFilter) : (sCell > sFilter);
+                    if (rule.op === '<') return isNum ? (nCell < nFilter) : (sCell < sFilter);
+                    if (rule.op === 'contains') return sCell.includes(sFilter);
+                    return true;
+                });
+            });
+
+            const fullData = [allHeaders.map(h => h.trim()), ...dataRows];
+            console.log('AFD Submit - Headers:', fullData[0], 'Rows:', fullData.length - 1);
+            editedDataInput.value = JSON.stringify(fullData);
+            
+            // Collect feature cols from active chips
+            const features = Array.from(document.querySelectorAll('.column-chip.active'))
+                                 .map(c => c.querySelector('span').textContent);
+            
+            if (features.length === 0) {
+                alert("Veuillez sélectionner au moins une variable d'analyse (feature) dans la section 5.");
+                e.preventDefault();
+                return false;
+            }
+
+            // Add hidden inputs for features to the form
+            document.querySelectorAll('input[name="feature_cols"]').forEach(el => el.remove());
+            features.forEach(f => {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'feature_cols';
+                input.value = f;
+                afdForm.appendChild(input);
+            });
+        };
+    </script>
+</body>
+
+</html>

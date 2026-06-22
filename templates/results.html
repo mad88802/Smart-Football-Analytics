@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Résultats ACP</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>
+
+    <!-- KaTeX for Beautiful Formulas -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+
+<body>
+    <div class="bg-animation">
+        <div class="bg-animation-blobs">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="blob blob-3"></div>
+        </div>
+    </div>
+    <div class="bg-tech-lines"></div>
+    <div class="floating-labels">
+        <div class="floating-label" style="top: 15%; left: -5%; animation-duration: 40s;">C1 & C2</div>
+        <div class="floating-label" style="top: 50%; left: -15%; animation-duration: 55s; animation-delay: -5s;">ACP
+        </div>
+        <div class="floating-label"
+            style="top: 75%; left: 10%; animation-duration: 48s; animation-delay: -20s; font-size: 5rem;">CORRÉLATION
+        </div>
+    </div>
+
+    <!-- Floating Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            {% if acp_type == 'norme' %}ACP NORMÉE{% else %}ACP NON NORMÉE{% endif %}
+        </div>
+        <ul class="nav-links">
+            <li><a href="#data">Données</a></li>
+            <li><a href="#matrices">Matrices</a></li>
+            <li><a href="#analysis">Analyse</a></li>
+            <li><a href="#var-coords">Variables</a></li>
+            {% if acp_type == 'non_norme' %}<li><a href="#contributions">Contributions</a></li>{% endif %}
+            <li><a href="#visuals">Graphiques</a></li>
+        </ul>
+        <a href="/" class="nav-back"><i class="fas fa-home"></i> Retour au Hub</a>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>Rapport d'Analyse</h1>
+            <p>
+                {% if acp_type == 'norme' %}
+                Analyse en Composantes Principales Normée (ACP Normée)
+                {% else %}
+                Analyse en Composantes Principales Non Normée (ACP Non Normée)
+                {% endif %}
+                <br>
+                <span class="badge">{{ data_type|title }}</span>
+                <span class="badge">{{ criterion_text }}</span>
+                <span class="badge">{{ nb_axes }} axes retenus</span>
+            </p>
+        </header>
+
+        <!-- 1. Données Initiales -->
+        <section id="data">
+            <div class="card collapsed">
+                <h2 onclick="toggleCard(this)">
+                    <span><i class="fas fa-database"></i> Données Initiales</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <div class="table-container">
+                        {{ df|safe }}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Matrices -->
+        <section id="matrices">
+            <div class="card collapsed">
+                <h2 onclick="toggleCard(this)">
+                    <span><i class="fas fa-calculator"></i> {{ standardization_label }}</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <div class="formula">{{ standardization_formula|safe }}</div>
+                    <div class="table-container">
+                        {{ standardization|safe }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="card collapsed">
+                <h2 onclick="toggleCard(this)">
+                    <span><i class="fas fa-border-all"></i> {{ matrix_label }}</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <div class="formula">{{ matrix_formula|safe }}</div>
+                    <div class="table-container">
+                        {{ matrix|safe }}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Analyse Factorielle -->
+        <section id="analysis">
+            <div class="card collapsed">
+                <h2 onclick="toggleCard(this)">
+                    <span><i class="fas fa-wave-square"></i> Valeurs Propres ($\lambda$)</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <div class="formula">$det({{ eig_matrix_symbol }} - \lambda I) = 0$</div>
+                    <div class="table-container">
+                        {{ eig_vals_df|safe }}
+                    </div>
+                    <p style="margin-top: 1rem;"><strong>Critère appliqué :</strong> {{ criterion_text }}</p>
+                </div>
+            </div>
+
+            <div class="card collapsed">
+                <h2 onclick="toggleCard(this)">
+                    <span><i class="fas fa-vector-square"></i> Vecteurs Propres ($V$)</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <div class="formula">${{ eig_matrix_symbol }} \cdot v = \lambda \cdot v$</div>
+                    <div class="table-container">
+                        {{ eig_vecs|safe }}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Qualité -->
+        <section id="quality">
+            <div class="card quality-box collapsed">
+                <h2 onclick="toggleCard(this)">
+                    <span>Qualité de Représentation</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <div class="quality-value">{{ "%.2f"|format(quality_value) }}%</div>
+                    <p>Information conservée sur les {{ nb_axes }} premiers axes factoriels.</p>
+                    <div class="formula"
+                        style="display:inline-block; margin-top:1rem; border:none; background:rgba(0,0,0,0.2);">
+                        $\text{Inertie cumulée} = {{ Q_cumulative[:nb_axes] }}$
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Composantes -->
+        <section id="components">
+            <div class="card collapsed">
+                <h2 onclick="toggleCard(this)">
+                    <span><i class="fas fa-project-diagram"></i> Composantes Principales ($C$)</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <div class="formula">{{ component_formula|safe }}</div>
+                    <div style="overflow-x: auto;">
+                        {{ C|safe }}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5b. Coordonnées des Variables -->
+        <section id="var-coords">
+            <div class="card collapsed">
+                <h2 onclick="toggleCard(this)">
+                    <span><i class="fas fa-superscript"></i> Coordonnées des Variables</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <div class="formula">
+                        {% if acp_type == 'norme' %}
+                        $Coord(j,k) = \sqrt{\lambda_k} \times U_{kj}$
+                        {% else %}
+                        $Coord(j,k) = \frac{\sqrt{\lambda_k} \times U_{kj}}{\sigma_j}$
+                        {% endif %}
+                    </div>
+                    <p>Corrélations entre les variables initiales et les axes principaux.</p>
+                    <div style="overflow-x: auto;">
+                        {{ coord_var|safe }}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5c. Contributions et Qualité (Individus) — ACP Non Normée uniquement -->
+        {% if acp_type == 'non_norme' %}
+        <section id="contributions">
+            <div class="card collapsed" style="margin-bottom: 2rem;">
+                <h2 onclick="toggleCard(this)">
+                    <span><i class="fas fa-chart-pie"></i> Contributions des Individus ($\rho_{ik}$)</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <p>Contribution relative de l'individu à l'inertie expliquée de l'axe.</p>
+                    <div class="formula">
+                        $\rho_{ik} = \frac{p_i (C_k^i)^2}{\lambda_k}$
+                    </div>
+                    <div style="margin-top: 1.5rem;">
+                        {{ ctr|safe }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="card collapsed" style="margin-bottom: 3.5rem;">
+                <h2 onclick="toggleCard(this)">
+                    <span><i class="fas fa-bullseye"></i> Qualité de Représentation ($cos^2$)</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <p>Rapport entre l'information apportée par l'individu sur l'axe par rapport à son information initiale.</p>
+                    <div class="formula">
+                        $cos^2(\theta_{ik}) = \frac{(C_k^i)^2}{||X_i||_M^2}$
+                    </div>
+                    <div style="margin-top: 1.5rem;">
+                        {{ cos2|safe }}
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+
+        <!-- 6. Visualisations -->
+        <section id="visuals">
+            <h2><i class="fas fa-images"></i> Plans Factoriels</h2>
+            {% for plot in plots %}
+            <div class="grid-2" style="margin-bottom: 2rem;">
+                <div class="card collapsed">
+                    <h2 onclick="toggleCard(this)" style="border:none; margin-bottom: 0;">
+                        <span>Nuage des Individus {% if plot.is_1d %}(C{{ plot.ax1 }}){% else %}(C{{ plot.ax1 }} & C{{ plot.ax2 }}){% endif %}</span>
+                        <i class="fas fa-chevron-down chevron"></i>
+                    </h2>
+                    <div class="card-body">
+                        <div id="plotly-nuage-{{ loop.index }}" class="plotly-graph"
+                            data-graph='{{ plot.nuage_json | safe }}'></div>
+                    </div>
+                </div>
+                
+                <div class="card collapsed">
+                    <h2 onclick="toggleCard(this)" style="border:none; margin-bottom: 0;">
+                        <span>Cercle de Corrélation {% if plot.is_1d %}(C{{ plot.ax1 }}){% else %}(C{{ plot.ax1 }} & C{{ plot.ax2 }}){% endif %}</span>
+                        <i class="fas fa-chevron-down chevron"></i>
+                    </h2>
+                    <div class="card-body">
+                        <div id="plotly-cercle-{{ loop.index }}" class="plotly-graph"
+                            data-graph='{{ plot.cercle_json | safe }}'></div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            <!-- AI Interpretation Section -->
+            <div id="ai-section" class="card collapsed" data-interpretation='{{ interpretation_data | tojson | safe }}'
+                style="margin-top: 2rem; border-left: 5px solid #6366f1;">
+                <h2 style="color: #6366f1;" onclick="toggleCard(this)">
+                    <span><i class="fas fa-robot"></i> Interprétation Automatique (AI)</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+
+                <div class="card-body">
+
+                <div id="interpretation-container" style="font-size: 1.1rem; line-height: 1.6;">
+                    <button id="generate-ai" class="submit-btn"
+                        style="width: auto; padding: 0.8rem 2rem; margin-top: 1rem;">
+                        <i class="fas fa-magic"></i> Générer l'Analyse IA
+                    </button>
+                </div>
+
+                <div id="ai-loader" style="display: none; padding: 2rem; text-align: center;">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: #6366f1;"></i>
+                    <p style="margin-top: 1rem;">L'IA analyse vos résultats...</p>
+                </div>
+                </div>
+            </div>
+
+            <!-- Tableau Export Section -->
+            <div id="tableau-section" class="card collapsed" style="margin-top: 2rem; border-left: 5px solid #6366f1;">
+                <h2 style="color: #6366f1;" onclick="toggleCard(this)">
+                    <span><i class="fas fa-file-export"></i> Exportation des Données (CSV)</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <p>Téléchargez vos données unifiées pour une utilisation dans vos outils d'analyse (Tableau, Excel,
+                        etc.).</p>
+
+
+                    <div class="grid-2" style="gap: 1rem; margin-top: 1rem;">
+                        <button onclick="launchTableauDirect()" class="submit-btn" 
+                            style="width: auto; padding: 0.8rem 2rem; background: #6366f1; grid-column: span 2;">
+                            <i class="fas fa-rocket"></i> 🚀 OUVRIR DANS TABLEAU (MÉTHODE DIRECTE)
+                        </button>
+                        <button onclick="exportToTableau('individuals')" class="submit-btn"
+                            style="width: auto; padding: 0.8rem 2rem;">
+                            <i class="fas fa-download"></i> Export Individus Seul
+                        </button>
+                        <button onclick="exportToTableau('variables')" class="submit-btn"
+                            style="width: auto; padding: 0.8rem 2rem;">
+                            <i class="fas fa-download"></i> Export Cercle Seul
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+    <!-- Simple JS for Scroll Spy and AI Generation -->
+    <script>
+
+        function toggleCard(header) {
+            const card = header.closest('.card');
+            card.classList.toggle('collapsed');
+            
+            // Re-render plotly if needed (sometimes helps with sizing)
+            const graphs = card.querySelectorAll('.plotly-graph');
+            graphs.forEach(g => Plotly.Plots.resize(g));
+        }
+
+        // Data passed from Flask via data-attribute
+        const aiSection = document.getElementById('ai-section');
+        const interpretationData = JSON.parse(aiSection.dataset.interpretation);
+
+        document.getElementById('generate-ai').addEventListener('click', async function () {
+            const container = document.getElementById('interpretation-container');
+            const loader = document.getElementById('ai-loader');
+
+            // Show loader
+            container.style.display = 'none';
+            loader.style.display = 'block';
+
+            try {
+                const response = await fetch('/get_interpretation', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(interpretationData)
+                });
+
+                const result = await response.json();
+
+                if (result.interpretation) {
+                    loader.style.display = 'none';
+                    const resultsContainer = document.createElement('div');
+                    resultsContainer.innerHTML = result.interpretation;
+                    aiSection.appendChild(resultsContainer);
+                } else if (result.error) {
+                    throw new Error(result.error);
+                }
+            } catch (error) {
+                loader.style.display = 'none';
+                container.style.display = 'block';
+                alert("Erreur lors de la génération : " + error.message);
+            }
+        });
+
+        // Function to launch Tableau via .twbx
+        async function launchTableauDirect() {
+            try {
+                const response = await fetch('/launch_tableau', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({})
+                });
+                const result = await response.json();
+                if (result.success) {
+                    alert("Génération du workbook terminée ! Tableau va s'ouvrir...");
+                } else {
+                    throw new Error(result.error);
+                }
+            } catch (error) {
+                alert("Erreur lors du lancement : " + error.message);
+            }
+        }
+
+        // Function to Export CSV for Tableau
+        function exportToTableau(type) {
+            const data = interpretationData;
+            let csvContent = "";
+            let filename = "";
+
+            if (type === 'individuals') {
+                filename = "acp_individus_tableau.csv";
+                const columns = Object.keys(data.C);
+                csvContent += "Individu," + columns.join(",") + ",Cluster\n";
+
+                const rows = Object.keys(data.C[columns[0]]);
+                rows.forEach((rowKey, index) => {
+                    let c1 = data.C[columns[0]][rowKey];
+                    let c2 = data.C[columns[1]][rowKey];
+                    let cluster = data.clusters[index];
+                    csvContent += `${rowKey},${c1},${c2},${cluster}\n`;
+                });
+            }
+
+            if (type === 'variables') {
+                filename = "acp_cercle_complet_tableau.csv";
+                csvContent += "Type,Name,C1,C2,Path\n";
+
+                // 1. Ajouter le Cercle Unité (Fond)
+                for (let i = 0; i <= 100; i++) {
+                    const angle = (i / 100) * 2 * Math.PI;
+                    const x = Math.cos(angle).toFixed(4);
+                    const y = Math.sin(angle).toFixed(4);
+                    csvContent += `Cercle,Cercle,${x},${y},${i}\n`;
+                }
+
+                // 2. Ajouter les Vecteurs (Variables de l'Analyse)
+                const columns = Object.keys(data.coord_var);
+                const variables = Object.keys(data.coord_var[columns[0]]);
+                variables.forEach(varName => {
+                    const f1 = data.coord_var[columns[0]][varName];
+                    const f2 = data.coord_var[columns[1]][varName];
+                    csvContent += `Vecteur,${varName},0,0,0\n`;
+                    csvContent += `Vecteur,${varName},${f1.toFixed(4)},${f2.toFixed(4)},1\n`;
+                });
+            }
+
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.setAttribute("href", url);
+            link.setAttribute("download", filename);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+        }
+
+        // Basic Scroll Spy for sidebar links
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section, #ai-section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.scrollY >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(a => {
+                a.classList.remove('active');
+                if (a.getAttribute('href').includes(current)) {
+                    a.classList.add('active');
+                }
+            });
+        });
+
+        // Animated Plotly Rendering
+        document.addEventListener('DOMContentLoaded', function () {
+            const graphs = document.querySelectorAll('.plotly-graph');
+
+            graphs.forEach(container => {
+                try {
+                    const graphData = JSON.parse(container.dataset.graph);
+                    const isNuage = container.id.includes('nuage');
+
+                    // 1. Render immediately
+                    Plotly.newPlot(container, graphData.data, graphData.layout, {
+                        responsive: true,
+                        displayModeBar: true,
+                        modeBarButtonsToRemove: ['lasso2d', 'select2d']
+                    });
+
+                    // 2. Animation after load
+                    if (isNuage) {
+                        setTimeout(() => {
+                            Plotly.animate(container, {
+                                data: [{ marker: { size: 14, opacity: 0.85 } }]
+                            }, {
+                                transition: { duration: 1000, easing: 'elastic-in-out' },
+                                frame: { duration: 1000 }
+                            });
+                        }, 500);
+                    }
+                } catch (e) {
+                    console.error("Plotly error for:", container.id, e);
+                }
+            });
+        });
+
+        // Initialize KaTeX rendering
+        document.addEventListener('DOMContentLoaded', function () {
+            // Wait a tiny bit to ensure deferred scripts are parsed
+            setTimeout(() => {
+                if (typeof renderMathInElement === 'function') {
+                    renderMathInElement(document.body, {
+                        delimiters: [
+                            { left: '$$', right: '$$', display: true },
+                            { left: '$', right: '$', display: false }
+                        ],
+                        throwOnError: false
+                    });
+                } else {
+                    console.error("KaTeX auto-render script not loaded.");
+                }
+            }, 100);
+
+            // Trigger formula animations on scroll
+            const formulaObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.formula').forEach(formula => {
+                formulaObserver.observe(formula);
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('.nav-links a, .nav-back').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+    <!-- Chatbot UI -->
+    <div id="chat-widget">
+        <button id="chat-toggle-btn">
+            <i class="fas fa-comment-dots"></i>
+        </button>
+        <div id="chat-window" class="collapsed">
+            <div class="chat-header">
+                <h3><i class="fas fa-robot"></i> Assistant ACP</h3>
+                <button id="chat-close-btn"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="chat-body" id="chat-messages">
+                <div class="message assistant">
+                    Bonjour ! Je suis l'assistant IA de cette analyse. Posez-moi vos questions sur les résultats de l'ACP !
+                </div>
+            </div>
+            <div class="chat-footer">
+                <input type="text" id="chat-input" placeholder="Posez une question..." autocomplete="off">
+                <button id="chat-send-btn"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Chatbot CSS */
+        #chat-widget {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            font-family: 'Inter', sans-serif;
+        }
+        #chat-toggle-btn {
+            background: var(--primary-color, #6366f1);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #chat-toggle-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+        }
+        #chat-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 500px;
+            background: var(--card-bg, rgba(30, 41, 59, 0.95));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        #chat-window.collapsed {
+            opacity: 0;
+            transform: translateY(20px) scale(0.9);
+            pointer-events: none;
+        }
+        .chat-header {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .chat-header h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: var(--primary-color, #6366f1);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        #chat-close-btn {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        #chat-close-btn:hover {
+            color: white;
+        }
+        .chat-body {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .message {
+            max-width: 85%;
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+        .message.assistant {
+            background: rgba(99, 102, 241, 0.15);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: #f8fafc;
+            align-self: flex-start;
+            border-bottom-left-radius: 2px;
+        }
+        .message.user {
+            background: var(--primary-color, #6366f1);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 2px;
+        }
+        .message.loading {
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            font-style: italic;
+        }
+        .chat-footer {
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            gap: 0.5rem;
+        }
+        #chat-input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 20px;
+            padding: 0.8rem 1rem;
+            outline: none;
+            font-size: 0.95rem;
+        }
+        #chat-input:focus {
+            border-color: var(--primary-color, #6366f1);
+        }
+        #chat-send-btn {
+            background: var(--primary-color, #6366f1);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+        #chat-send-btn:hover {
+            background: #4f46e5;
+        }
+        
+        /* Markdown styles in chat */
+        .message.assistant p { margin: 0 0 0.5rem 0; }
+        .message.assistant p:last-child { margin-bottom: 0; }
+        .message.assistant strong { color: #818cf8; }
+        .message.assistant ul { padding-left: 1.5rem; margin: 0.5rem 0; }
+        .message.assistant code { background: rgba(0,0,0,0.3); padding: 0.2rem 0.4rem; border-radius: 4px; font-family: monospace; }
+        
+        @media (max-width: 768px) {
+            #chat-window {
+                position: fixed;
+                bottom: 85px; right: 10px; left: 10px; width: auto; height: 400px;
+            }
+        }
+    </style>
+
+    <script>
+        // Chatbot Logic
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggleBtn = document.getElementById('chat-toggle-btn');
+            const closeBtn = document.getElementById('chat-close-btn');
+            const chatWindow = document.getElementById('chat-window');
+            const chatMessages = document.getElementById('chat-messages');
+            const chatInput = document.getElementById('chat-input');
+            const chatSendBtn = document.getElementById('chat-send-btn');
+            
+            let chatHistory = [];
+
+            // Markdown parser simple
+            function parseMarkdown(text) {
+                return text
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                    .replace(/`([^`]+)`/g, '<code>$1</code>')
+                    .replace(/\n\n/g, '</p><p>')
+                    .replace(/\n- (.*?)(?=\n|$)/g, '<ul><li>$1</li></ul>')
+                    .replace(/<\/ul>\n<ul>/g, '') // fusionner les listes
+                    .replace(/\n/g, '<br>');
+            }
+
+            function toggleChat() {
+                chatWindow.classList.toggle('collapsed');
+                if (!chatWindow.classList.contains('collapsed')) {
+                    chatInput.focus();
+                }
+            }
+
+            toggleBtn.addEventListener('click', toggleChat);
+            closeBtn.addEventListener('click', toggleChat);
+
+            function addMessage(content, role) {
+                const msgDiv = document.createElement('div');
+                msgDiv.className = `message ${role}`;
+                
+                if (role === 'assistant' && content !== "...") {
+                    msgDiv.innerHTML = `<p>${parseMarkdown(content)}</p>`;
+                } else {
+                    msgDiv.textContent = content;
+                }
+                
+                chatMessages.appendChild(msgDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                return msgDiv;
+            }
+
+            async function sendMessage() {
+                const message = chatInput.value.trim();
+                if (!message) return;
+
+                // Add user message to UI
+                addMessage(message, 'user');
+                chatInput.value = '';
+
+                // Show loading
+                const loadingMsg = addMessage("...", 'loading');
+
+                try {
+                    // Send to backend
+                    const response = await fetch('/chat', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            message: message,
+                            history: chatHistory,
+                            interpretationData: interpretationData
+                        })
+                    });
+
+                    const data = await response.json();
+                    
+                    // Remove loading msg
+                    loadingMsg.remove();
+
+                    if (data.response) {
+                        addMessage(data.response, 'assistant');
+                        // Update history
+                        chatHistory.push({ role: "user", content: message });
+                        chatHistory.push({ role: "assistant", content: data.response });
+                    } else if (data.error) {
+                        addMessage(`Erreur: ${data.error}`, 'assistant');
+                    }
+                    
+                } catch (e) {
+                    loadingMsg.remove();
+                    addMessage(`Erreur de connexion: ${e.message}`, 'assistant');
+                }
+            }
+
+            chatSendBtn.addEventListener('click', sendMessage);
+            chatInput.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') sendMessage();
+            });
+        });
+    </script>
+</body>
+</html>

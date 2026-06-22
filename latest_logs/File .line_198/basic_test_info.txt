@@ -1,0 +1,22 @@
+  File .py:198:SB
+--------------------------------------------------------------------
+Last Page: [WARNING! Browser Not Open!]
+ Duration: 112.39s
+  Browser: Chrome 146.0.7680.165
+   Driver: chromedriver 146.0.7680.72
+Timestamp: 1774912530  (Unix Timestamp)
+     Date: Tuesday, 31 March 2026
+     Time: 12:15:30 AM  (Afr. centrale Ouest, UTC+01:00)
+--------------------------------------------------------------------
+Traceback:
+  Traceback (most recent call last):
+  File "C:\Users\DZ Laptops\AppData\Local\Temp\ipykernel_24216\1514967822.py", line 68, in main
+    sb.uc_open_with_reconnect(url, reconnect_time=2)
+  File "c:\Users\DZ Laptops\AppData\Local\Programs\Python\Python311\Lib\site-packages\seleniumbase\core\browser_launcher.py", line 5464, in <lambda>
+    lambda *args, **kwargs: uc_open_with_reconnect(
+                            ^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\DZ Laptops\AppData\Local\Programs\Python\Python311\Lib\site-packages\seleniumbase\core\browser_launcher.py", line 508, in uc_open_with_reconnect
+    driver.reconnect(reconnect_time)
+  File "c:\Users\DZ Laptops\AppData\Local\Programs\Python\Python311\Lib\site-packages\seleniumbase\undetected\__init__.py", line 466, in reconnect
+    time.sleep(timeout)
+KeyboardInterrupt

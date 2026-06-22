@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFD Analytics - Résultats Détaillés</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>
+</head>
+
+<body>
+    <div class="bg-animation">
+        <div class="bg-animation-blobs">
+            <div class="blob blob-1" style="background: var(--neon-purple);"></div>
+            <div class="blob blob-2" style="background: var(--accent-bright);"></div>
+            <div class="blob blob-3" style="background: var(--neon-purple);"></div>
+        </div>
+    </div>
+    <div class="bg-tech-lines"></div>
+
+    <nav class="navbar">
+        <div class="nav-brand">AFD RESULTS</div>
+        <ul class="nav-links">
+            <li><a href="#data">Données</a></li>
+            <li><a href="#metrics">Métriques</a></li>
+            <li><a href="#visuals">Projection</a></li>
+            <li><a href="#maths">Matrices</a></li>
+        </ul>
+        <a href="/afd" class="nav-back"><i class="fas fa-arrow-left"></i> Nouvelle Analyse</a>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>Analyse Factorielle Discriminante</h1>
+            <p>Rapport détaillé de classification par <strong>Position</strong></p>
+        </header>
+
+        <!-- 1. Données Initiales -->
+        <section id="data" style="margin-bottom: 3rem;">
+            <div class="card">
+                <h2><i class="fas fa-table"></i> 1. Données Initiales (Aperçu)</h2>
+                <div class="table-container" style="max-height: 400px; overflow-y: auto;">
+                    {{ initial_df|safe }}
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Metrics Grid -->
+        <section id="metrics" style="margin-bottom: 3rem;">
+            <div class="grid-4">
+                <div class="card metric-card">
+                    <div class="metric-value">{{ (metrics.accuracy * 100)|round(2) }}%</div>
+                    <div class="metric-label">Précision Globale (Accuracy)</div>
+                </div>
+                <div class="card metric-card">
+                    <div class="metric-value">{{ (metrics.f1_score * 100)|round(2) }}%</div>
+                    <div class="metric-label">F1-Score (Weighted)</div>
+                </div>
+                <div class="card metric-card">
+                    <div class="metric-value">{{ (metrics.precision * 100)|round(2) }}%</div>
+                    <div class="metric-label">Précision (Weighted)</div>
+                </div>
+                <div class="card metric-card">
+                    <div class="metric-value">{{ (metrics.recall * 100)|round(2) }}%</div>
+                    <div class="metric-label">Rappel (Recall)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Main Visualization -->
+        <section id="visuals" style="margin-bottom: 3rem;">
+            <div class="card">
+                <div id="afdPlot" style="height: 600px;"></div>
+            </div>
+        </section>
+
+        <!-- 4. Mathematical Results -->
+        <section id="maths" style="margin-bottom: 3rem;">
+            <div class="grid-2">
+                <!-- Matrix W -->
+                <div class="card">
+                    <h3><i class="fas fa-microchip"></i> Matrice W (Within-class)</h3>
+                    <p class="text-secondary" style="font-size: 0.8rem; margin-bottom: 1rem;">Dispersion intra-classes</p>
+                    <div class="table-container math-matrix">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    {% for name in feature_names %}
+                                    <th>{{ name }}</th>
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in S_W %}
+                                <tr>
+                                    <th class="text-secondary">{{ feature_names[loop.index0] }}</th>
+                                    {% for val in row %}
+                                    <td>{{ val|round(4) }}</td>
+                                    {% endfor %}
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Matrix B -->
+                <div class="card">
+                    <h3><i class="fas fa-project-diagram"></i> Matrice B (Between-class)</h3>
+                    <p class="text-secondary" style="font-size: 0.8rem; margin-bottom: 1rem;">Dispersion inter-classes</p>
+                    <div class="table-container math-matrix">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    {% for name in feature_names %}
+                                    <th>{{ name }}</th>
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in S_B %}
+                                <tr>
+                                    <th class="text-secondary">{{ feature_names[loop.index0] }}</th>
+                                    {% for val in row %}
+                                    <td>{{ val|round(4) }}</td>
+                                    {% endfor %}
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-2" style="margin-top: 2rem;">
+                <!-- Eigenvalues -->
+                <div class="card">
+                    <h3><i class="fas fa-list-ol"></i> Valeurs Propres</h3>
+                    <div class="table-container math-matrix">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Axe</th>
+                                    <th>Valeur Propre (λ)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for val in eig_vals %}
+                                <tr>
+                                    <td>Axe {{ loop.index }}</td>
+                                    <td style="color: var(--neon-purple); font-weight: 800;">{{ val|round(6) }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Eigenvectors -->
+                <div class="card">
+                    <h3><i class="fas fa-arrows-up-down-left-right"></i> Vecteurs Propres</h3>
+                    <div class="table-container math-matrix">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Feature</th>
+                                    {% for i in range(eig_vecs[0]|length) %}
+                                    <th>Axe {{ i+1 }}</th>
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in eig_vecs %}
+                                <tr>
+                                    <th class="text-secondary">{{ feature_names[loop.index0] }}</th>
+                                    {% for val in row %}
+                                    <td>{{ val|round(6) }}</td>
+                                    {% endfor %}
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Confusion Matrix -->
+        <section id="confusion" style="margin-bottom: 3rem;">
+            <div class="card">
+                <h2><i class="fas fa-th"></i> Matrice de Confusion</h2>
+                <div id="confusionMatrix" style="height: 500px;"></div>
+            </div>
+        </section>
+
+        <div class="footer">
+            <p>&copy; 2026 Analytics Hub Platform. AFD Mathematical Engine.</p>
+        </div>
+    </div>
+
+    <script>
+        // Render AFD Scatter Plot
+        const afdData = {{ afd_plot|safe }};
+        Plotly.newPlot('afdPlot', afdData.data, afdData.layout, {responsive: true});
+
+        // Render Confusion Matrix Heatmap
+        const cm = {{ metrics.confusion_matrix|safe }};
+        const labels = {{ classes|safe }};
+        
+        const cmData = [{
+            z: cm,
+            x: labels,
+            y: labels,
+            type: 'heatmap',
+            colorscale: [
+                [0, '#0f172a'],
+                [1, '#c084fc']
+            ],
+            showscale: true,
+            text: cm.map((row, i) => row.map((val, j) => `Vrai: ${labels[i]}<br>Prédit: ${labels[j]}<br>Count: ${val}`)),
+            hoverinfo: 'text'
+        }];
+
+        const cmLayout = {
+            title: 'Heatmap de Confusion',
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            font: { color: '#fff' },
+            xaxis: { title: 'Prédit', side: 'bottom' },
+            yaxis: { title: 'Réel', autorange: 'reversed' },
+            margin: { t: 50, b: 50, l: 150, r: 50 }
+        };
+
+        Plotly.newPlot('confusionMatrix', cmData, cmLayout, {responsive: true});
+    </script>
+
+    <style>
+        .metric-card {
+            text-align: center;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(192, 132, 252, 0.1), rgba(139, 92, 246, 0.05));
+            border: 1px solid rgba(192, 132, 252, 0.2);
+        }
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--neon-purple);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(192, 132, 252, 0.3);
+        }
+        .metric-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        .math-matrix {
+            max-height: 300px;
+            overflow: auto;
+            border-radius: 0.5rem;
+            background: rgba(0,0,0,0.2);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+        }
+        .math-matrix table th {
+            background: rgba(255,255,255,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .math-matrix table th:first-child {
+            position: sticky;
+            left: 0;
+            z-index: 20;
+        }
+        .math-matrix table td {
+            border: 1px solid rgba(255,255,255,0.02);
+            padding: 0.5rem;
+            text-align: right;
+        }
+    </style>
+</body>
+
+</html>

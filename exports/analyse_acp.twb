@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<workbook source-build='2025.3.0' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <datasources>
+    <datasource caption='Table Individus' inline='true' name='ds_ind' version='18.1'>
+      <connection class='hyper' dbname='Data/Extracts/data_acp.hyper' server='' table='[Extract].[Individus]' />
+      <column datatype='string' name='[Individu]' role='dimension' type='nominal' />
+      <column datatype='real' name='[C1]' role='measure' type='quantitative' />
+      <column datatype='real' name='[C2]' role='measure' type='quantitative' />
+      <column datatype='integer' name='[Cluster]' role='measure' type='nominal' />
+      <column datatype='string' name='[Image_URL]' role='dimension' type='nominal' />
+    </datasource>
+    <datasource caption='Table Variables' inline='true' name='ds_var' version='18.1'>
+      <connection class='hyper' dbname='Data/Extracts/data_acp.hyper' server='' table='[Extract].[Variables]' />
+      <column datatype='string' name='[Name]' role='dimension' type='nominal' />
+      <column datatype='real' name='[C1]' role='measure' type='quantitative' />
+      <column datatype='real' name='[C2]' role='measure' type='quantitative' />
+      <column datatype='integer' name='[Path]' role='measure' type='quantitative' />
+      <column datatype='string' name='[Type]' role='dimension' type='nominal' />
+    </datasource>
+  </datasources>
+
+  <worksheets>
+    <!-- SHEET 1: INDIVIDUS -->
+    <worksheet name='Nuage Individus'>
+      <table>
+        <view>
+          <datasources>
+            <datasource name='ds_ind' />
+          </datasources>
+          <datasource-dependencies datasource='ds_ind'>
+            <column-instance column='[C1]' derivation='None' name='[none:C1:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[C2]' derivation='None' name='[none:C2:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Cluster]' derivation='None' name='[none:Cluster:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Individu]' derivation='None' name='[none:Individu:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Image_URL]' derivation='None' name='[none:Image_URL:nk]' pivot='key' type='nominal' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view><breakdown value='auto' /></view>
+            <mark class='Circle' />
+            <encodings>
+              <color column='[ds_ind].[none:Cluster:nk]' />
+              <text column='[ds_ind].[none:Individu:nk]' />
+              <tooltip column='[ds_ind].[none:Image_URL:nk]' />
+            </encodings>
+            <style><style-rule element='mark'><format attr='mark-labels-show' value='true' /></style-rule></style>
+          </pane>
+        </panes>
+        <rows>[ds_ind].[none:C2:qk]</rows>
+        <cols>[ds_ind].[none:C1:qk]</cols>
+      </table>
+    </worksheet>
+
+    <!-- SHEET 2: CERCLE VARIABLES -->
+    <worksheet name='Cercle Corrélation'>
+      <table>
+        <view>
+          <datasources><datasource name='ds_var' /></datasources>
+          <datasource-dependencies datasource='ds_var'>
+            <column-instance column='[C1]' derivation='None' name='[none:C1:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[C2]' derivation='None' name='[none:C2:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Name]' derivation='None' name='[none:Name:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Path]' derivation='None' name='[none:Path:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Type]' derivation='None' name='[none:Type:nk]' pivot='key' type='nominal' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view><breakdown value='auto' /></view>
+            <mark class='Line' />
+            <encodings>
+                <color column='[ds_var].[none:Type:nk]' />
+                <path column='[ds_var].[none:Path:qk]' />
+                <lod column='[ds_var].[none:Name:nk]' />
+                <text column='[ds_var].[none:Name:nk]' />
+            </encodings>
+            <style><style-rule element='mark'><format attr='mark-labels-show' value='true' /></style-rule></style>
+          </pane>
+        </panes>
+        <rows>[ds_var].[none:C2:qk]</rows>
+        <cols>[ds_var].[none:C1:qk]</cols>
+      </table>
+    </worksheet>
+  </worksheets>
+
+  <dashboards>
+    <dashboard name='Dashboard Analyse'>
+      <style />
+      <size maxpx='1400' minpx='1000' preset_size_prop='1400x800' />
+      <zones>
+        <zone type='layout-basic' force-tiled-v-ab-order='true'>
+          <zone type='layout-flow' orient='horiz'>
+            <zone name='Nuage Individus' type='worksheet' />
+            <zone name='Cercle Corrélation' type='worksheet' />
+          </zone>
+        </zone>
+      </zones>
+    </dashboard>
+  </dashboards>
+
+  <windows orientation='horizontal'>
+    <window class='worksheet' name='Nuage Individus' />
+    <window class='worksheet' name='Cercle Corrélation' />
+    <window class='dashboard' maximized='true' name='Dashboard Analyse' />
+  </windows>
+</workbook>

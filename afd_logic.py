@@ -40,6 +40,8 @@ def run_afd_calculation(df, target_col, le=None):
     
     # 2. Scatter Matrices
     global_mean = np.mean(X, axis=0)
+    class_counts = {}
+    class_means = []
     S_W = np.zeros((n_features, n_features))
     S_B = np.zeros((n_features, n_features))
     
@@ -48,6 +50,8 @@ def run_afd_calculation(df, target_col, le=None):
         if len(X_k) == 0: continue
         
         mean_k = np.mean(X_k, axis=0)
+        class_counts[str(classes[i])] = int(X_k.shape[0])
+        class_means.append(mean_k)
         
         # Within-class
         diff_w = X_k - mean_k
@@ -68,7 +72,8 @@ def run_afd_calculation(df, target_col, le=None):
     except np.linalg.LinAlgError:
         inv_S_W = np.linalg.pinv(S_W_reg)
         
-    eig_vals, eig_vecs = np.linalg.eig(inv_S_W @ S_B)
+    fisher_matrix = inv_S_W @ S_B
+    eig_vals, eig_vecs = np.linalg.eig(fisher_matrix)
     
     # 4. Sort and select axes
     eig_vals = eig_vals.real
@@ -77,6 +82,7 @@ def run_afd_calculation(df, target_col, le=None):
     idx = eig_vals.argsort()[::-1]
     eig_vals = eig_vals[idx]
     eig_vecs = eig_vecs[:, idx]
+    eig_vals_all = eig_vals.copy()
     
     # Select first q axes (q <= min(K-1, p))
     q = min(n_classes - 1, n_features)
@@ -95,11 +101,20 @@ def run_afd_calculation(df, target_col, le=None):
     return {
         "df_afd": df_afd,
         "eig_vals": eig_vals[:q].tolist(),
+        "eig_vals_all": eig_vals_all.tolist(),
         "eig_vecs": eig_vecs[:, :q].tolist(), # All eigenvectors for the selected axes
         "W_axes": W_axes,
         "S_W": S_W.tolist(),
+        "S_W_reg": S_W_reg.tolist(),
+        "W_inv": inv_S_W.tolist(),
         "S_B": S_B.tolist(),
+        "fisher_matrix": fisher_matrix.tolist(),
         "classes": classes.tolist(),
+        "class_counts": class_counts,
+        "class_means": pd.DataFrame(class_means, index=[str(c) for c in classes if str(c) in class_counts], columns=X_df.columns),
+        "global_mean": pd.Series(global_mean, index=X_df.columns),
+        "X_df": X_df,
+        "y_series": pd.Series(y, index=X_df.index, name=target_col),
         "feature_names": X_df.columns.tolist(),
         "y_encoded": y_encoded,
         "le": le

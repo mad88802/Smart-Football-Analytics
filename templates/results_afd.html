@@ -4,182 +4,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AFD Analytics - Résultats Détaillés</title>
+    <title>Résultats AFD</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>
+
+    <!-- KaTeX for Beautiful Formulas -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 </head>
 
 <body>
     <div class="bg-animation">
         <div class="bg-animation-blobs">
-            <div class="blob blob-1" style="background: var(--neon-purple);"></div>
-            <div class="blob blob-2" style="background: var(--accent-bright);"></div>
-            <div class="blob blob-3" style="background: var(--neon-purple);"></div>
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="blob blob-3"></div>
         </div>
     </div>
     <div class="bg-tech-lines"></div>
+    <div class="floating-labels">
+        <div class="floating-label" style="top: 15%; left: -5%; animation-duration: 40s;">LD1 & LD2</div>
+        <div class="floating-label" style="top: 50%; left: -15%; animation-duration: 55s; animation-delay: -5s;">AFD</div>
+        <div class="floating-label"
+            style="top: 75%; left: 10%; animation-duration: 48s; animation-delay: -20s; font-size: 5rem;">FISHER</div>
+    </div>
 
+    <!-- Floating Navigation -->
     <nav class="navbar">
-        <div class="nav-brand">AFD RESULTS</div>
+        <div class="nav-brand">AFD</div>
         <ul class="nav-links">
-            <li><a href="#data">Données</a></li>
-            <li><a href="#metrics">Métriques</a></li>
-            <li><a href="#visuals">Projection</a></li>
-            <li><a href="#maths">Matrices</a></li>
+            <li><a href="#data">1. Données</a></li>
+            <li><a href="#formulas">2. Formules</a></li>
+            <li><a href="#matrices">3. Matrices</a></li>
+            <li><a href="#analysis">4. Analyse</a></li>
+            <li><a href="#quality">5. Qualité</a></li>
+            <li><a href="#axes">6. Axes</a></li>
+            <li><a href="#visuals">7. Graphiques</a></li>
+            <li><a href="#metrics">8. Métriques</a></li>
         </ul>
-        <a href="/afd" class="nav-back"><i class="fas fa-arrow-left"></i> Nouvelle Analyse</a>
+        <a href="/afd" class="nav-back"><i class="fas fa-arrow-left"></i> Retour</a>
     </nav>
 
     <div class="container">
         <header>
-            <h1>Analyse Factorielle Discriminante</h1>
-            <p>Rapport détaillé de classification par <strong>Position</strong></p>
+            <h1>Rapport d'Analyse</h1>
+            <p>
+                Analyse Factorielle Discriminante (AFD)
+                <br>
+                <span class="badge">{{ target_col }}</span>
+                <span class="badge">{{ afd_steps.n_classes }} groupes</span>
+                <span class="badge">{{ afd_steps.q_axes }} axes retenus</span>
+            </p>
         </header>
 
-        <!-- 1. Données Initiales -->
-        <section id="data" style="margin-bottom: 3rem;">
-            <div class="card">
-                <h2><i class="fas fa-table"></i> 1. Données Initiales (Aperçu)</h2>
-                <div class="table-container" style="max-height: 400px; overflow-y: auto;">
-                    {{ initial_df|safe }}
+        <!-- 1. Donnees initiales -->
+        <section id="data">
+            <div class="card collapsed">
+                <h2 onclick="toggleCard(this)">
+                    <span><i class="fas fa-database"></i> 1. Données Initiales</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <p>
+                        Jeu d'apprentissage utilisÃ© pour construire les axes discriminants :
+                        {{ afd_steps.n_train }} individus, {{ afd_steps.n_features }} variables numÃ©riques,
+                        {{ afd_steps.n_classes }} groupes.
+                    </p>
+                    <div class="formula">$X = [x_{ij}], \quad y \in \{G_1,\ldots,G_K\}$</div>
+                    <div class="grid-2" style="margin-top: 1.5rem;">
+                        <div class="table-container">
+                            {{ afd_steps.X_html|safe }}
+                        </div>
+                        <div class="table-container">
+                            {{ afd_steps.y_html|safe }}
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- 2. Metrics Grid -->
-        <section id="metrics" style="margin-bottom: 3rem;">
-            <div class="grid-4">
-                <div class="card metric-card">
-                    <div class="metric-value">{{ (metrics.accuracy * 100)|round(2) }}%</div>
-                    <div class="metric-label">Précision Globale (Accuracy)</div>
+        <!-- 2. Formules generales -->
+        <section id="formulas">
+            <div class="card collapsed">
+                <h2 onclick="toggleCard(this)">
+                    <span><i class="fas fa-calculator"></i> 2.1 Centres des Groupes</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <div class="formula">
+                        $\bar{x}=\frac{1}{n}\sum_{i=1}^{n}x_i,\quad
+                        \bar{x}_k=\frac{1}{n_k}\sum_{i\in G_k}x_i$
+                    </div>
+                    <p>On calcule le centre global et les centres de chaque classe.</p>
+                    <div class="grid-2" style="margin-top: 1.5rem;">
+                        <div class="table-container">
+                            {{ afd_steps.global_mean_html|safe }}
+                        </div>
+                        <div class="table-container">
+                            {{ afd_steps.class_means_html|safe }}
+                        </div>
+                    </div>
+
                 </div>
-                <div class="card metric-card">
-                    <div class="metric-value">{{ (metrics.f1_score * 100)|round(2) }}%</div>
-                    <div class="metric-label">F1-Score (Weighted)</div>
+            </div>
+
+            <div class="card collapsed">
+                <h2 onclick="toggleCard(this)">
+                    <span><i class="fas fa-balance-scale"></i> 2.2 Critere de Fisher</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <div class="formula">$J(v)=\frac{v^T B v}{v^T W v}$</div>
+                    <p>Le critÃ¨re de Fisher cherche les directions oÃ¹ les groupes sont bien sÃ©parÃ©s et peu dispersÃ©s Ã  l'intÃ©rieur.</p>
+
                 </div>
-                <div class="card metric-card">
-                    <div class="metric-value">{{ (metrics.precision * 100)|round(2) }}%</div>
-                    <div class="metric-label">Précision (Weighted)</div>
-                </div>
-                <div class="card metric-card">
-                    <div class="metric-value">{{ (metrics.recall * 100)|round(2) }}%</div>
-                    <div class="metric-label">Rappel (Recall)</div>
+            </div>
+
+            <div class="card collapsed">
+                <h2 onclick="toggleCard(this)">
+                    <span><i class="fas fa-project-diagram"></i> 2.3 Axes et Projection</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <div class="formula">$q=min(K-1,p), \quad A=[v_1,\ldots,v_q], \quad Z=X A$</div>
+                    <p>Les {{ afd_steps.q_axes }} axes retenus servent Ã  projeter les individus dans l'espace discriminant.</p>
                 </div>
             </div>
         </section>
 
-        <!-- 3. Main Visualization -->
-        <section id="visuals" style="margin-bottom: 3rem;">
-            <div class="card">
-                <div id="afdPlot" style="height: 600px;"></div>
+        <!-- 3. Matrices W et B -->
+        <section id="matrices">
+            <div class="card collapsed">
+                <h2 onclick="toggleCard(this)">
+                    <span><i class="fas fa-border-all"></i> 3.1 Matrice W - Intra-classe</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <div class="formula">
+                        $W = \sum_{k=1}^{K}\sum_{i \in G_k}(x_i-\bar{x}_k)(x_i-\bar{x}_k)^T$
+                    </div>
+                    <p>Cette matrice mesure la dispersion des individus à l'intérieur de chaque groupe.</p>
+                    <div class="table-container">
+                        {{ afd_steps.S_W_html|safe }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="card collapsed">
+                <h2 onclick="toggleCard(this)">
+                    <span><i class="fas fa-project-diagram"></i> 3.2 Matrice B - Inter-classe</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <div class="formula">
+                        $B = \sum_{k=1}^{K} n_k(\bar{x}_k-\bar{x})(\bar{x}_k-\bar{x})^T$
+                    </div>
+                    <p>Cette matrice mesure la séparation entre les centres des groupes et le centre global.</p>
+                    <div class="table-container">
+                        {{ afd_steps.S_B_html|safe }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="card collapsed">
+                <h2 onclick="toggleCard(this)">
+                    <span><i class="fas fa-shield-alt"></i> 3.3 Matrice W régularisée et Fisher</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <div class="formula">$W_{\epsilon}=W+\epsilon I,\quad F=W_{\epsilon}^{-1}B$</div>
+                    <p>La rÃ©gularisation stabilise l'inversion de W lorsque certaines variables sont proches ou redondantes.</p>
+                    <div class="grid-2" style="margin-top: 1.5rem;">
+                        <div class="table-container">
+                            {{ afd_steps.S_W_reg_html|safe }}
+                        </div>
+                        <div class="table-container">
+                            {{ afd_steps.fisher_matrix_html|safe }}
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- 4. Mathematical Results -->
-        <section id="maths" style="margin-bottom: 3rem;">
-            <div class="grid-2">
-                <!-- Matrix W -->
-                <div class="card">
-                    <h3><i class="fas fa-microchip"></i> Matrice W (Within-class)</h3>
-                    <p class="text-secondary" style="font-size: 0.8rem; margin-bottom: 1rem;">Dispersion intra-classes</p>
-                    <div class="table-container math-matrix">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    {% for name in feature_names %}
-                                    <th>{{ name }}</th>
-                                    {% endfor %}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for row in S_W %}
-                                <tr>
-                                    <th class="text-secondary">{{ feature_names[loop.index0] }}</th>
-                                    {% for val in row %}
-                                    <td>{{ val|round(4) }}</td>
-                                    {% endfor %}
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Matrix B -->
-                <div class="card">
-                    <h3><i class="fas fa-project-diagram"></i> Matrice B (Between-class)</h3>
-                    <p class="text-secondary" style="font-size: 0.8rem; margin-bottom: 1rem;">Dispersion inter-classes</p>
-                    <div class="table-container math-matrix">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    {% for name in feature_names %}
-                                    <th>{{ name }}</th>
-                                    {% endfor %}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for row in S_B %}
-                                <tr>
-                                    <th class="text-secondary">{{ feature_names[loop.index0] }}</th>
-                                    {% for val in row %}
-                                    <td>{{ val|round(4) }}</td>
-                                    {% endfor %}
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+        <!-- 4. Valeurs et vecteurs propres -->
+        <section id="analysis">
+            <div class="card collapsed">
+                <h2 onclick="toggleCard(this)">
+                    <span><i class="fas fa-wave-square"></i> 4.1 Valeurs Propres ($\lambda$)</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <div class="formula">$det(F - \lambda I) = 0,\quad F=W_{\epsilon}^{-1}B$</div>
+                    <div class="table-container">
+                        {{ afd_steps.eig_vals_all_html|safe }}
                     </div>
                 </div>
             </div>
 
-            <div class="grid-2" style="margin-top: 2rem;">
-                <!-- Eigenvalues -->
-                <div class="card">
-                    <h3><i class="fas fa-list-ol"></i> Valeurs Propres</h3>
-                    <div class="table-container math-matrix">
+            <div class="card collapsed">
+                <h2 onclick="toggleCard(this)">
+                    <span><i class="fas fa-vector-square"></i> 4.2 Vecteurs Propres ($V$)</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <div class="formula">$F \cdot v = \lambda \cdot v$</div>
+                    <div class="table-container">
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Axe</th>
-                                    <th>Valeur Propre (λ)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for val in eig_vals %}
-                                <tr>
-                                    <td>Axe {{ loop.index }}</td>
-                                    <td style="color: var(--neon-purple); font-weight: 800;">{{ val|round(6) }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Eigenvectors -->
-                <div class="card">
-                    <h3><i class="fas fa-arrows-up-down-left-right"></i> Vecteurs Propres</h3>
-                    <div class="table-container math-matrix">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Feature</th>
+                                    <th>Variable</th>
                                     {% for i in range(eig_vecs[0]|length) %}
-                                    <th>Axe {{ i+1 }}</th>
+                                    <th>Axe {{ i + 1 }}</th>
                                     {% endfor %}
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for row in eig_vecs %}
                                 <tr>
-                                    <th class="text-secondary">{{ feature_names[loop.index0] }}</th>
+                                    <th>{{ feature_names[loop.index0] }}</th>
                                     {% for val in row %}
                                     <td>{{ val|round(6) }}</td>
                                     {% endfor %}
@@ -192,53 +239,188 @@
             </div>
         </section>
 
-        <!-- Confusion Matrix -->
-        <section id="confusion" style="margin-bottom: 3rem;">
-            <div class="card">
-                <h2><i class="fas fa-th"></i> Matrice de Confusion</h2>
-                <div id="confusionMatrix" style="height: 500px;"></div>
+        <!-- 5. Qualite -->
+        <section id="quality">
+            <div class="card quality-box collapsed">
+                <h2 onclick="toggleCard(this)">
+                    <span>5. Qualité Discriminante</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <div class="quality-value">{{ "%.2f"|format(afd_steps.quality_value) }}%</div>
+                    <p>Pouvoir discriminant cumulÃ© sur les {{ afd_steps.q_axes }} axes retenus.</p>
+                    <div class="formula" style="display:inline-block; margin-top:1rem; border:none; background:rgba(0,0,0,0.2);">
+                        $Q_q = \sum_{r=1}^{q}\frac{\lambda_r}{\sum_j \lambda_j}\times 100$
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Axes discriminants -->
+        <section id="axes">
+            <div class="card collapsed">
+                <h2 onclick="toggleCard(this)">
+                    <span><i class="fas fa-project-diagram"></i> 6. Axes Discriminants ($A$)</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <div class="formula">$A = [v_1,\ldots,v_q], \quad q \leq min(K-1,p)$</div>
+                    <p>Les axes discriminants sont les directions qui maximisent la séparation entre les groupes.</p>
+                    <div class="table-container">
+                        {{ afd_steps.axes_html|safe }}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Projection et graphe -->
+        <section id="visuals">
+            <h2><i class="fas fa-images"></i> 7. Projection et Graphe</h2>
+            <div class="grid-2" style="margin-bottom: 2rem;">
+                <div class="card collapsed">
+                    <h2 onclick="toggleCard(this)" style="border:none; margin-bottom: 0;">
+                        <span>Projection des Individus</span>
+                        <i class="fas fa-chevron-down chevron"></i>
+                    </h2>
+                    <div class="card-body">
+                        <div class="formula">$Z = X \cdot A$</div>
+                        <div id="afdPlot" class="plotly-graph"></div>
+                    </div>
+                </div>
+
+                <div class="card collapsed">
+                    <h2 onclick="toggleCard(this)" style="border:none; margin-bottom: 0;">
+                        <span>Coordonnées Projetées</span>
+                        <i class="fas fa-chevron-down chevron"></i>
+                    </h2>
+                    <div class="card-body">
+                        <div class="table-container">
+                            {{ afd_steps.projection_html|safe }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Métriques -->
+        <section id="metrics">
+            <div class="card quality-box collapsed">
+                <h2 onclick="toggleCard(this)">
+                    <span>8. Métriques de Classification</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <div class="grid-4">
+                        <div class="metric-card">
+                            <div class="metric-value">{{ (metrics.accuracy * 100)|round(2) }}%</div>
+                            <div class="metric-label">Accuracy</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">{{ (metrics.f1_score * 100)|round(2) }}%</div>
+                            <div class="metric-label">F1-score</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">{{ (metrics.precision * 100)|round(2) }}%</div>
+                            <div class="metric-label">Précision</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">{{ (metrics.recall * 100)|round(2) }}%</div>
+                            <div class="metric-label">Rappel</div>
+                        </div>
+                    </div>
+
+                    <div class="formula" style="margin-top: 1.5rem;">
+                        $Accuracy=\frac{TP+TN}{TP+TN+FP+FN},\quad
+                        Precision=\frac{TP}{TP+FP},\quad
+                        Recall=\frac{TP}{TP+FN},\quad
+                        F1=2\frac{Precision \cdot Recall}{Precision+Recall}$
+                    </div>
+                </div>
+            </div>
+
+            <div class="card collapsed">
+                <h2 onclick="toggleCard(this)">
+                    <span><i class="fas fa-th"></i> Matrice de Confusion</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <div id="confusionMatrix" class="plotly-graph"></div>
+                </div>
             </div>
         </section>
 
         <div class="footer">
-            <p>&copy; 2026 Analytics Hub Platform. AFD Mathematical Engine.</p>
+            <p>&copy; 2026 Analytics Hub Platform. Moteur de calcul AFD.</p>
         </div>
     </div>
 
     <script>
-        // Render AFD Scatter Plot
-        const afdData = {{ afd_plot|safe }};
-        Plotly.newPlot('afdPlot', afdData.data, afdData.layout, {responsive: true});
+        function toggleCard(header) {
+            const card = header.closest('.card');
+            card.classList.toggle('collapsed');
+            card.querySelectorAll('.plotly-graph').forEach(graph => {
+                Plotly.Plots.resize(graph);
+            });
+        }
 
-        // Render Confusion Matrix Heatmap
-        const cm = {{ metrics.confusion_matrix|safe }};
-        const labels = {{ classes|safe }};
-        
-        const cmData = [{
-            z: cm,
-            x: labels,
-            y: labels,
-            type: 'heatmap',
-            colorscale: [
-                [0, '#0f172a'],
-                [1, '#c084fc']
-            ],
-            showscale: true,
-            text: cm.map((row, i) => row.map((val, j) => `Vrai: ${labels[i]}<br>Prédit: ${labels[j]}<br>Count: ${val}`)),
-            hoverinfo: 'text'
-        }];
+        window.addEventListener('DOMContentLoaded', () => {
+            const afdData = {{ afd_plot|safe }};
+            Plotly.newPlot('afdPlot', afdData.data, afdData.layout, { responsive: true });
+            setTimeout(() => Plotly.Plots.resize(document.getElementById('afdPlot')), 100);
 
-        const cmLayout = {
-            title: 'Heatmap de Confusion',
-            paper_bgcolor: 'rgba(0,0,0,0)',
-            plot_bgcolor: 'rgba(0,0,0,0)',
-            font: { color: '#fff' },
-            xaxis: { title: 'Prédit', side: 'bottom' },
-            yaxis: { title: 'Réel', autorange: 'reversed' },
-            margin: { t: 50, b: 50, l: 150, r: 50 }
-        };
+            const cm = {{ metrics.confusion_matrix|safe }};
+            const labels = {{ classes|safe }};
+            const cmData = [{
+                z: cm,
+                x: labels,
+                y: labels,
+                type: 'heatmap',
+                colorscale: [
+                    [0, '#0f172a'],
+                    [1, '#c084fc']
+                ],
+                showscale: true,
+                text: cm.map((row, i) => row.map((val, j) => `Réel: ${labels[i]}<br>Prédit: ${labels[j]}<br>Nombre: ${val}`)),
+                hoverinfo: 'text'
+            }];
 
-        Plotly.newPlot('confusionMatrix', cmData, cmLayout, {responsive: true});
+            const cmLayout = {
+                title: 'Heatmap de Confusion',
+                paper_bgcolor: 'rgba(0,0,0,0)',
+                plot_bgcolor: 'rgba(0,0,0,0)',
+                font: { color: '#fff' },
+                xaxis: { title: 'Prédit', side: 'bottom' },
+                yaxis: { title: 'Réel', autorange: 'reversed' },
+                margin: { t: 50, b: 50, l: 150, r: 50 }
+            };
+
+            Plotly.newPlot('confusionMatrix', cmData, cmLayout, { responsive: true });
+            setTimeout(() => Plotly.Plots.resize(document.getElementById('confusionMatrix')), 100);
+
+            const formulaObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.formula').forEach(formula => {
+                formulaObserver.observe(formula);
+            });
+
+            setTimeout(() => {
+                if (typeof renderMathInElement === 'function') {
+                    renderMathInElement(document.body, {
+                        delimiters: [
+                            { left: '$$', right: '$$', display: true },
+                            { left: '$', right: '$', display: false }
+                        ],
+                        throwOnError: false
+                    });
+                }
+            }, 100);
+        });
     </script>
 
     <style>
@@ -247,7 +429,9 @@
             padding: 1.5rem;
             background: linear-gradient(135deg, rgba(192, 132, 252, 0.1), rgba(139, 92, 246, 0.05));
             border: 1px solid rgba(192, 132, 252, 0.2);
+            border-radius: 1rem;
         }
+
         .metric-value {
             font-size: 2rem;
             font-weight: 800;
@@ -255,40 +439,18 @@
             margin-bottom: 0.5rem;
             text-shadow: 0 0 10px rgba(192, 132, 252, 0.3);
         }
+
         .metric-label {
             font-size: 0.85rem;
             color: var(--text-secondary);
             text-transform: uppercase;
             letter-spacing: 1px;
         }
+
         .grid-4 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 1.5rem;
-        }
-        .math-matrix {
-            max-height: 300px;
-            overflow: auto;
-            border-radius: 0.5rem;
-            background: rgba(0,0,0,0.2);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-        }
-        .math-matrix table th {
-            background: rgba(255,255,255,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-        .math-matrix table th:first-child {
-            position: sticky;
-            left: 0;
-            z-index: 20;
-        }
-        .math-matrix table td {
-            border: 1px solid rgba(255,255,255,0.02);
-            padding: 0.5rem;
-            text-align: right;
         }
     </style>
 </body>

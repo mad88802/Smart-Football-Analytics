@@ -317,9 +317,13 @@
                 return;
             }
 
-            // Filter rows
-            const dataRows = originalRows.slice(1).filter(row => {
+            // Filter rows, keeping their original CSV index so submit matches the preview.
+            const dataRowsWithIndex = originalRows.slice(1).map((row, idx) => ({
+                row,
+                originalIndex: idx + 1
+            })).filter(item => {
                 return rowRules.every(rule => {
+                    const row = item.row;
                     const cellVal = row[rule.colIdx] || "";
                     const sCell = String(cellVal).trim().toLowerCase();
                     const sFilter = String(rule.value).trim().toLowerCase();
@@ -334,6 +338,8 @@
                     return true;
                 });
             });
+            const dataRows = dataRowsWithIndex.map(item => item.row);
+            const originalRowNumbers = dataRowsWithIndex.map(item => item.originalIndex);
 
             const finalRows = [originalRows[0], ...dataRows];
 
@@ -342,10 +348,10 @@
                 activeColIndices.map(i => row[i] !== undefined ? row[i] : "")
             );
 
-            renderTable(finalData, activeColIndices);
+            renderTable(finalData, activeColIndices, originalRowNumbers);
         }
 
-        function renderTable(rows, originalIndices = null) {
+        function renderTable(rows, originalIndices = null, originalRowNumbers = null) {
             tableHead.innerHTML = '';
             tableBody.innerHTML = '';
             if (!rows || rows.length === 0) return;
@@ -388,8 +394,11 @@
             headerRow.appendChild(document.createElement('th')).textContent = 'Action';
             tableHead.appendChild(headerRow);
 
-            rows.slice(1).forEach(row => {
+            rows.slice(1).forEach((row, rowIdx) => {
                 const tr = document.createElement('tr');
+                if (originalRowNumbers && originalRowNumbers[rowIdx] !== undefined) {
+                    tr.dataset.sourceRow = originalRowNumbers[rowIdx];
+                }
                 row.forEach(cell => {
                     const td = document.createElement('td');
                     td.textContent = cell;
@@ -537,25 +546,23 @@
             });
         };
 
-        // Submit — always send ALL columns (from originalRows with row filters),
-        // so the target column 'Pos' is never missing.
+        // Submit visible preview rows, while preserving all original columns
+        // so the target column is never missing.
         afdForm.onsubmit = (e) => {
-            // Rebuild full data from originalRows, applying row filters only
             const allHeaders = originalRows[0];
-            const dataRows = originalRows.slice(1).filter(row => {
-                return rowRules.every(rule => {
-                    const cellVal = row[rule.colIdx] || "";
-                    const sCell = String(cellVal).trim().toLowerCase();
-                    const sFilter = String(rule.value).trim().toLowerCase();
-                    const nCell = parseFloat(cellVal.replace(',','.'));
-                    const nFilter = parseFloat(rule.value.replace(',','.'));
-                    const isNum = !isNaN(nCell) && !isNaN(nFilter);
-                    if (rule.op === '=') return isNum ? (nCell === nFilter) : (sCell === sFilter);
-                    if (rule.op === '>') return isNum ? (nCell > nFilter) : (sCell > sFilter);
-                    if (rule.op === '<') return isNum ? (nCell < nFilter) : (sCell < sFilter);
-                    if (rule.op === 'contains') return sCell.includes(sFilter);
-                    return true;
+            const activeColIndices = Array.from(document.querySelectorAll('.column-chip.active'))
+                                         .map(c => parseInt(c.dataset.index));
+            const dataRows = Array.from(tableBody.rows).map(tr => {
+                const sourceRow = parseInt(tr.dataset.sourceRow);
+                const fullRow = Number.isInteger(sourceRow) && originalRows[sourceRow]
+                    ? [...originalRows[sourceRow]]
+                    : Array(allHeaders.length).fill("");
+
+                Array.from(tr.cells).slice(0, -1).forEach((cell, i) => {
+                    const originalCol = activeColIndices[i];
+                    if (originalCol !== undefined) fullRow[originalCol] = cell.textContent.trim();
                 });
+                return fullRow;
             });
 
             const fullData = [allHeaders.map(h => h.trim()), ...dataRows];

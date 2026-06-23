@@ -175,10 +175,32 @@ def analyze():
 
 @app.route("/analyze_afd", methods=["POST"])
 def analyze_afd():
-    target_col = request.form.get('target_col')
-    feature_cols = request.form.getlist('feature_cols')
-    test_size = float(request.form.get('test_size', 0.2))
+    target_col = (request.form.get('target_col') or '').strip()
+    feature_cols = [c.strip() for c in request.form.getlist('feature_cols') if c and c.strip()]
+    try:
+        test_size = float(request.form.get('test_size', 0.2))
+    except (TypeError, ValueError):
+        test_size = 0.2
+    test_size = min(max(test_size, 0.1), 0.5)
     api_key = request.form.get('api_key') or os.getenv('GROQ_API_KEY')
+
+    def normalize_key(value):
+        return str(value).strip().lower()
+
+    def resolve_column(name, columns):
+        col_map = {normalize_key(c): c for c in columns}
+        resolved = col_map.get(normalize_key(name))
+        if resolved:
+            return resolved
+        pos_aliases = {'pos': 'position', 'position': 'pos'}
+        return col_map.get(pos_aliases.get(normalize_key(name), ''))
+
+    def coerce_numeric_series(series):
+        cleaned = series.astype(str).str.strip()
+        cleaned = cleaned.str.replace('\u00a0', '', regex=False).str.replace(' ', '', regex=False)
+        cleaned = cleaned.str.replace(r'(\d),(\d{3})(?!\d)', r'\1\2', regex=True)
+        cleaned = cleaned.str.replace(',', '.', regex=False)
+        return pd.to_numeric(cleaned, errors='coerce')
     
     edited_data_json = request.form.get('edited_data')
     if edited_data_json:
@@ -187,17 +209,8 @@ def analyze_afd():
             headers = data[0]
             n_cols = len(headers)
             # Truncate rows to match header count (trailing commas create extra empty columns)
-            rows = [row[:n_cols] for row in data[1:]]
+            rows = [(row + [''] * n_cols)[:n_cols] for row in data[1:]]
             df_raw = pd.DataFrame(rows, columns=headers)
-            # Convert numeric columns where possible
-            for col in df_raw.columns:
-                try:
-                    # Attempt conversion, if it's mostly numeric, coerce errors to NaN
-                    converted = pd.to_numeric(df_raw[col], errors='coerce')
-                    if converted.notna().sum() > 0: # If at least one value is numeric
-                        df_raw[col] = converted
-                except:
-                    pass
         except Exception as e:
             return f"Erreur lors de la lecture des données éditées: {e}"
     else:
@@ -215,50 +228,66 @@ def analyze_afd():
             except: pass
     # Strip whitespace from all column names
     df_raw.columns = df_raw.columns.str.strip()
+    df_raw = df_raw.loc[:, [c for c in df_raw.columns if c]]
+
+    if df_raw.empty:
+        return "Erreur: le fichier AFD est vide ou les colonnes sont illisibles."
+
+    if not target_col:
+        for candidate in ('Position', 'Pos', 'Target', 'Class', 'Classe'):
+            resolved = resolve_column(candidate, df_raw.columns)
+            if resolved:
+                target_col = resolved
+                break
+        if not target_col:
+            return "Erreur: veuillez choisir une variable cible pour l'AFD."
     
     # Case-insensitive lookup for target column
-    if target_col not in df_raw.columns:
-        col_lower_map = {c.lower(): c for c in df_raw.columns}
-        # Alias: treat 'pos' and 'position' as the same thing
-        pos_aliases = {'pos': 'position', 'position': 'pos'}
-        resolved = col_lower_map.get(target_col.lower()) or \
-                   col_lower_map.get(pos_aliases.get(target_col.lower(), ''))
-        if resolved:
-            target_col = resolved
-        else:
-            return f"Erreur: Colonne cible '{target_col}' non trouvée dans les données. Colonnes disponibles: {list(df_raw.columns)}"
+    target_col_actual = resolve_column(target_col, df_raw.columns)
+    if not target_col_actual:
+        return f"Erreur: Colonne cible '{target_col}' non trouvée dans les données. Colonnes disponibles: {list(df_raw.columns)}"
+    target_col = target_col_actual
         
     # Normalize column names to find Player and Pos regardless of case
-    col_map = {c.lower(): c for c in df_raw.columns}
+    col_map = {normalize_key(c): c for c in df_raw.columns}
     
     player_col = col_map.get('player')
-    target_col_actual = col_map.get(target_col.lower()) or target_col
+    image_col = col_map.get('image_url')
+
+    resolved_feature_cols = []
+    for col in feature_cols:
+        resolved = resolve_column(col, df_raw.columns)
+        if resolved and resolved not in resolved_feature_cols:
+            resolved_feature_cols.append(resolved)
+    feature_cols = resolved_feature_cols
     
     # Exclude metadata and target from feature_cols
-    exclude_cols = {target_col_actual.lower()}
+    exclude_cols = {normalize_key(target_col_actual)}
     if player_col:
-        exclude_cols.add(player_col.lower())
-    if 'image_url' in col_map:
-        exclude_cols.add(col_map['image_url'].lower())
+        exclude_cols.add(normalize_key(player_col))
+    if image_col:
+        exclude_cols.add(normalize_key(image_col))
+
+    if not feature_cols:
+        feature_cols = [c for c in df_raw.columns if normalize_key(c) not in exclude_cols]
         
-    cleaned_feature_cols = [c for c in feature_cols if c.lower() not in exclude_cols]
+    cleaned_feature_cols = [c for c in feature_cols if normalize_key(c) not in exclude_cols]
     
     # Filter only numeric feature columns by checking their conversion viability
     valid_feature_cols = []
     for col in cleaned_feature_cols:
         if col in df_raw.columns:
-            # Clean English thousands separator (e.g. 2,372 -> 2372)
-            cleaned = df_raw[col].astype(str).str.replace(r'(\d),(\d{3})(?!\d)', r'\1\2', regex=True)
-            # Clean French decimal comma (e.g. 20,5 -> 20.5)
-            cleaned = cleaned.str.replace(',', '.')
-            converted = pd.to_numeric(cleaned, errors='coerce')
+            converted = coerce_numeric_series(df_raw[col])
             if converted.notna().sum() > 0.5 * len(converted):
                 df_raw[col] = converted
                 valid_feature_cols.append(col)
+
+    if not valid_feature_cols:
+        return "Erreur: aucune variable numérique valide n'a été trouvée pour l'AFD. Sélectionnez au moins une colonne contenant des nombres."
                 
     extra_cols = []
     if player_col: extra_cols.append(player_col)
-    if 'image_url' in col_map: extra_cols.append(col_map['image_url'])
+    if image_col: extra_cols.append(image_col)
         
     cols_to_use = [target_col_actual] + valid_feature_cols + extra_cols
     # Ensure all columns exist in df_raw
@@ -336,13 +365,25 @@ def analyze_afd():
     # Train/Test Split
     class_counts = df[target_col].value_counts()
     can_stratify = class_counts.min() >= 2
+    if can_stratify:
+        n_classes = len(class_counts)
+        n_samples = len(df)
+        min_test_size = n_classes / n_samples
+        max_test_size = 1 - (n_classes / n_samples)
+        if min_test_size <= max_test_size:
+            test_size = min(max(test_size, min_test_size), max_test_size)
+        else:
+            return "Erreur: pas assez de lignes par classe pour créer un jeu train/test fiable."
     
-    train_df, test_df = train_test_split(
-        df, 
-        test_size=test_size, 
-        stratify=df[target_col] if can_stratify else None, 
-        random_state=42
-    )
+    try:
+        train_df, test_df = train_test_split(
+            df,
+            test_size=test_size,
+            stratify=df[target_col] if can_stratify else None,
+            random_state=42
+        )
+    except ValueError as e:
+        return f"Erreur lors du split train/test: {e}"
     
     # Pre-fit LabelEncoder on full dataset to prevent unseen classes issue in test split
     le = LabelEncoder()
@@ -369,60 +410,157 @@ def analyze_afd():
     for i in range(len(afd_train["classes"])):
         centroids_proj.append(np.mean(train_proj[train_y == i], axis=0))
     centroids_proj = np.array(centroids_proj)
-    
     # Predict by nearest centroid
     preds = []
     for i in range(len(X_test_proj)):
         dists = np.linalg.norm(centroids_proj - X_test_proj[i], axis=1)
         preds.append(np.argmin(dists))
-    
+
     # Metrics
-    metrics = calculate_afd_metrics(afd_train["le"].transform(test_df[target_col]), preds, classes=afd_train["classes"])
-    
-    # Visualization (2D if possible)
-    afd_res_df = afd_train["df_afd"]
-    fig_afd = px.scatter(
-        afd_res_df, x="LD1", y="LD2" if "LD2" in afd_res_df.columns else "LD1",
-        color="Target", title="Analyse Factorielle Discriminante - Espace Réduit",
-        template="plotly_dark",
-        hover_name=afd_res_df.index,
-        labels={"LD1": f"Axe 1 ({round(afd_train['eig_vals'][0], 2)}%)", 
-                "LD2": f"Axe 2 ({round(afd_train['eig_vals'][1], 2)}%)" if len(afd_train['eig_vals']) > 1 else ""}
-    )
-    fig_afd.update_layout(paper_bgcolor="#0f172a", plot_bgcolor="#0f172a")
-    
-    # ROC Curve Visualization (Simplified for the top classes)
-    fig_roc = go.Figure()
-    # (Implementation of ROC curves for each class could be added here)
-    
-    return render_template("results_afd.html", 
-                           metrics=metrics, 
-                           afd_plot=fig_afd.to_json(),
-                           classes=afd_train["classes"],
-                           target_col=target_col,
-                           initial_df=df.head(100).to_html(classes='table', border=0),
-                           S_W=afd_train["S_W"],
-                           S_B=afd_train["S_B"],
-                           eig_vals=afd_train["eig_vals"],
-                           eig_vecs=afd_train["eig_vecs"],
-                           feature_names=afd_train["feature_names"])
+    try:
+        metrics = calculate_afd_metrics(afd_train["le"].transform(test_df[target_col]), preds, classes=afd_train["classes"])
+    except Exception as e:
+        import traceback
+        tb = traceback.format_exc()
+        print("AFD METRICS ERROR:", tb)
+        return f"Erreur lors du calcul des métriques AFD: {e}<br><pre>{tb}</pre>"
+
+    def matrix_html(values, index=None, columns=None, decimals=4):
+        try:
+            return pd.DataFrame(values, index=index, columns=columns).round(decimals).to_html(classes='table', border=0)
+        except Exception as e:
+            return f"<p class=\'text-secondary\'>[Erreur affichage matrice: {e}]</p>"
+
+    try:
+        ld_cols = [c for c in afd_train["df_afd"].columns if c.startswith('LD')]
+        eig_vals_all = np.array(afd_train["eig_vals_all"], dtype=float)
+        positive_eig_vals = np.clip(eig_vals_all, 0, None)
+        eig_total = positive_eig_vals.sum()
+        eig_percent = (positive_eig_vals / eig_total * 100).tolist() if eig_total > 0 else [0 for _ in eig_vals_all]
+        selected_eig_percent = eig_percent[:len(ld_cols)]
+        cumulative_quality = float(sum(selected_eig_percent))
+
+        # Build the AFD plot explicitly so points stay visible after template/layout changes.
+        afd_res_df = afd_train["df_afd"].copy()
+        has_ld2 = "LD2" in afd_res_df.columns
+        if has_ld2:
+            y_values = afd_res_df["LD2"].astype(float)
+            y_title = f"Axe 2 ({selected_eig_percent[1]:.2f}%)" if len(selected_eig_percent) > 1 else "Axe 2"
+        else:
+            y_values = pd.Series(np.zeros(len(afd_res_df)), index=afd_res_df.index)
+            y_title = "Projection 1D"
+
+        plot_df = pd.DataFrame({
+            "LD1": afd_res_df["LD1"].astype(float),
+            "LD2": y_values,
+            "Target": afd_res_df["Target"].astype(str),
+            "Individu": afd_res_df.index.astype(str)
+        })
+        palette = px.colors.qualitative.Set2 + px.colors.qualitative.Bold
+        fig_afd = go.Figure()
+        for i, (target, group) in enumerate(plot_df.groupby("Target", sort=True)):
+            fig_afd.add_trace(go.Scatter(
+                x=group["LD1"].astype(float).tolist(),
+                y=group["LD2"].astype(float).tolist(),
+                mode="markers",
+                name=str(target),
+                text=group["Individu"].astype(str).tolist(),
+                hovertemplate=(
+                    "<b>%{text}</b><br>"
+                    f"Classe: {target}<br>"
+                    "LD1: %{x:.4f}<br>"
+                    "LD2: %{y:.4f}<extra></extra>"
+                ),
+                marker={
+                    "size": 12,
+                    "color": palette[i % len(palette)],
+                    "opacity": 0.92,
+                    "line": {"width": 1.5, "color": "#ffffff"}
+                }
+            ))
+
+        if not has_ld2:
+            fig_afd.add_hline(y=0, line_width=1, line_dash="dot", line_color="rgba(255,255,255,0.35)")
+
+        fig_afd.update_layout(
+            title={"text": "Analyse Factorielle Discriminante", "x": 0.02, "xanchor": "left"},
+            template="plotly_dark",
+            paper_bgcolor="#0f172a",
+            plot_bgcolor="#0f172a",
+            font={"color": "#f8fafc"},
+            legend_title_text=target_col,
+            margin={"l": 70, "r": 30, "t": 70, "b": 70},
+            xaxis_title=f"Axe 1 ({selected_eig_percent[0]:.2f}%)" if selected_eig_percent else "Axe 1",
+            yaxis_title=y_title
+        )
+
+        afd_steps = {
+            "n_train": len(train_df),
+            "n_test": len(test_df),
+            "n_features": len(afd_train["feature_names"]),
+            "n_classes": len(afd_train["classes"]),
+            "q_axes": len(ld_cols),
+            "class_counts": afd_train["class_counts"],
+            "X_html": afd_train["X_df"].head(100).round(4).to_html(classes='table', border=0),
+            "y_html": afd_train["y_series"].head(100).to_frame().to_html(classes='table', border=0),
+            "global_mean_html": afd_train["global_mean"].to_frame("Centre global").T.round(4).to_html(classes='table', border=0),
+            "class_means_html": afd_train["class_means"].round(4).to_html(classes='table', border=0),
+            "S_W_html": matrix_html(afd_train["S_W"], afd_train["feature_names"], afd_train["feature_names"]),
+            "S_B_html": matrix_html(afd_train["S_B"], afd_train["feature_names"], afd_train["feature_names"]),
+            "S_W_reg_html": matrix_html(afd_train["S_W_reg"], afd_train["feature_names"], afd_train["feature_names"]),
+            "W_inv_html": matrix_html(afd_train["W_inv"], afd_train["feature_names"], afd_train["feature_names"]),
+            "fisher_matrix_html": matrix_html(afd_train["fisher_matrix"], afd_train["feature_names"], afd_train["feature_names"]),
+            "eig_vals_all_html": pd.DataFrame({
+                "Axe": [f"LD{i+1}" for i in range(len(afd_train["eig_vals_all"]))],
+                "Valeur propre": afd_train["eig_vals_all"],
+                "Pouvoir discriminant (%)": eig_percent
+            }).round(6).to_html(classes='table', border=0, index=False),
+            "axes_html": matrix_html(afd_train["W_axes"], afd_train["feature_names"], ld_cols, decimals=6),
+            "projection_html": afd_train["df_afd"].head(100).round(4).to_html(classes='table', border=0),
+            "eig_percent": eig_percent,
+            "selected_eig_percent": selected_eig_percent,
+            "quality_value": cumulative_quality
+        }
+    except Exception as e:
+        import traceback
+        tb = traceback.format_exc()
+        print("AFD STEPS BUILD ERROR:", tb)
+        return f"Erreur lors de la construction des etapes AFD: {e}"
+
+    try:
+        return render_template("results_afd.html",
+                               metrics=metrics,
+                               afd_plot=fig_afd.to_json(),
+                               classes=afd_train["classes"],
+                               target_col=target_col,
+                               initial_df=df.head(100).to_html(classes='table', border=0),
+                               S_W=afd_train["S_W"],
+                               S_B=afd_train["S_B"],
+                               eig_vals=afd_train["eig_vals"],
+                               eig_vecs=afd_train["eig_vecs"],
+                               feature_names=afd_train["feature_names"],
+                               afd_steps=afd_steps)
+    except Exception as e:
+        import traceback
+        tb = traceback.format_exc()
+        print("AFD RENDER ERROR:", tb)
+        return f"Erreur lors du rendu du template AFD: {e}"
 
 
 @app.route("/get_interpretation", methods=["POST"])
 def get_interpretation():
     data = request.json
     try:
-        # Reconstruct components for the interpretation function
         eig_percent = np.array(data['eig_percent'])
         coord_var = pd.DataFrame(data['coord_var'])
         C_vals = pd.DataFrame(data['C'])
         clusters = data.get('clusters', [])
         api_key = os.getenv('GROQ_API_KEY')
-        
         interpretation = generate_llm_interpretation(eig_percent, coord_var, C_vals, clusters, api_key)
         return jsonify({"interpretation": interpretation})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
 
 @app.route("/chat", methods=["POST"])
 def chat():
@@ -431,39 +569,34 @@ def chat():
     interpretation_data = data.get('interpretationData', {})
     user_message = data.get('message', '')
     api_key = os.getenv('GROQ_API_KEY')
-    
+
     if not api_key:
-        return jsonify({"error": "Clé API Groq manquante."}), 400
-        
+        return jsonify({"error": "Cle API Groq manquante."}), 400
+
     try:
         from groq import Groq
         client = Groq(api_key=api_key)
-        
-        # Build the system prompt with context
+
         context_str = json.dumps({
             "eig_percent": interpretation_data.get("eig_percent"),
             "coord_var": interpretation_data.get("coord_var")
         }, ensure_ascii=False)
-        
+
         system_prompt = f"""
 Tu es un data scientist expert en Analyse en Composantes Principales (ACP) et un assistant de ce projet.
-Réponds aux questions de l'utilisateur de manière concise, professionnelle, et en français.
-Voici le contexte partiel des résultats actuels (valeurs propres en pourcentages, et coordonnées des variables sur les axes):
+Reponds aux questions de l'utilisateur de maniere concise, professionnelle, et en francais.
+Voici le contexte partiel des resultats actuels (valeurs propres en pourcentages, et coordonnees des variables sur les axes):
 {context_str}
-Ne donne ces informations brutes que si elles sont utiles pour répondre à la question de l'utilisateur. 
-Formate toujours ta réponse en markdown (utilisation de **gras**, de listes, etc. si nécessaire).
+Ne donne ces informations brutes que si elles sont utiles pour repondre a la question de l'utilisateur.
+Formate toujours ta reponse en markdown (utilisation de **gras**, de listes, etc. si necessaire).
 """
         messages = [{"role": "system", "content": system_prompt}]
-        
-        # Keep only the last 10 messages from history to prevent exceeding tokens
         for msg in chat_history[-10:]:
             messages.append({"role": msg["role"], "content": msg["content"]})
-            
         messages.append({"role": "user", "content": user_message})
 
         model_names = ["llama-3.3-70b-versatile", "llama-3.1-70b-versatile", "mixtral-8x7b-32768"]
         last_error = ""
-
         for model_name in model_names:
             try:
                 chat_completion = client.chat.completions.create(
@@ -477,13 +610,14 @@ Formate toujours ta réponse en markdown (utilisation de **gras**, de listes, et
                 last_error = str(e)
                 if "400" in last_error or "model_decommissioned" in last_error or "404" in last_error:
                     continue
-                else: break
-                    
-        return jsonify({"error": f"Erreur avec les modèles Groq: {last_error}"}), 500
+                else:
+                    break
+        return jsonify({"error": f"Erreur avec les modeles Groq: {last_error}"}), 500
 
     except Exception as e:
         print(f"DEBUG ERROR GROQ CHAT: {str(e)}")
         return jsonify({"error": str(e)}), 500
+
 
 @app.route("/launch_tableau", methods=["POST"])
 def launch_tableau():

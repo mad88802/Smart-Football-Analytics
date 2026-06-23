@@ -524,6 +524,8 @@ h3 {
 /* Tables - Premium Dark Mode Style */
 .table-container {
     overflow-x: auto;
+    overflow-y: auto;
+    max-height: 24rem;
     background: rgba(15, 23, 42, 0.4);
     border-radius: 1rem;
     border: 1px solid var(--card-border);
@@ -546,6 +548,9 @@ td {
 }
 
 th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
     color: var(--neon-cyan);
     font-weight: 700;
     text-transform: uppercase;

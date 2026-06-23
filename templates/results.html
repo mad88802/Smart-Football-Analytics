@@ -42,12 +42,14 @@
             {% if acp_type == 'norme' %}ACP NORMÉE{% else %}ACP NON NORMÉE{% endif %}
         </div>
         <ul class="nav-links">
-            <li><a href="#data">Données</a></li>
-            <li><a href="#matrices">Matrices</a></li>
-            <li><a href="#analysis">Analyse</a></li>
-            <li><a href="#var-coords">Variables</a></li>
-            {% if acp_type == 'non_norme' %}<li><a href="#contributions">Contributions</a></li>{% endif %}
-            <li><a href="#visuals">Graphiques</a></li>
+            <li><a href="#data">1. Données</a></li>
+            <li><a href="#matrices">2. Matrices</a></li>
+            <li><a href="#analysis">3. Analyse</a></li>
+            <li><a href="#quality">4. Qualité</a></li>
+            <li><a href="#components">5. Composantes</a></li>
+            <li><a href="#var-coords">6. Variables</a></li>
+            {% if acp_type == 'non_norme' %}<li><a href="#contributions">7. Contributions</a></li>{% endif %}
+            <li><a href="#visuals">{% if acp_type == 'non_norme' %}8{% else %}7{% endif %}. Graphiques</a></li>
         </ul>
         <a href="/" class="nav-back"><i class="fas fa-home"></i> Retour au Hub</a>
     </nav>
@@ -72,7 +74,7 @@
         <section id="data">
             <div class="card collapsed">
                 <h2 onclick="toggleCard(this)">
-                    <span><i class="fas fa-database"></i> Données Initiales</span>
+                    <span><i class="fas fa-database"></i> 1. Données Initiales</span>
                     <i class="fas fa-chevron-down chevron"></i>
                 </h2>
                 <div class="card-body">
@@ -87,7 +89,7 @@
         <section id="matrices">
             <div class="card collapsed">
                 <h2 onclick="toggleCard(this)">
-                    <span><i class="fas fa-calculator"></i> {{ standardization_label }}</span>
+                    <span><i class="fas fa-calculator"></i> 2.1 {{ standardization_label }}</span>
                     <i class="fas fa-chevron-down chevron"></i>
                 </h2>
                 <div class="card-body">
@@ -100,7 +102,7 @@
 
             <div class="card collapsed">
                 <h2 onclick="toggleCard(this)">
-                    <span><i class="fas fa-border-all"></i> {{ matrix_label }}</span>
+                    <span><i class="fas fa-border-all"></i> 2.2 {{ matrix_label }}</span>
                     <i class="fas fa-chevron-down chevron"></i>
                 </h2>
                 <div class="card-body">
@@ -116,7 +118,7 @@
         <section id="analysis">
             <div class="card collapsed">
                 <h2 onclick="toggleCard(this)">
-                    <span><i class="fas fa-wave-square"></i> Valeurs Propres ($\lambda$)</span>
+                    <span><i class="fas fa-wave-square"></i> 3.1 Valeurs Propres ($\lambda$)</span>
                     <i class="fas fa-chevron-down chevron"></i>
                 </h2>
                 <div class="card-body">
@@ -130,7 +132,7 @@
 
             <div class="card collapsed">
                 <h2 onclick="toggleCard(this)">
-                    <span><i class="fas fa-vector-square"></i> Vecteurs Propres ($V$)</span>
+                    <span><i class="fas fa-vector-square"></i> 3.2 Vecteurs Propres ($V$)</span>
                     <i class="fas fa-chevron-down chevron"></i>
                 </h2>
                 <div class="card-body">
@@ -146,7 +148,7 @@
         <section id="quality">
             <div class="card quality-box collapsed">
                 <h2 onclick="toggleCard(this)">
-                    <span>Qualité de Représentation</span>
+                    <span>4. Qualité de Représentation</span>
                     <i class="fas fa-chevron-down chevron"></i>
                 </h2>
                 <div class="card-body">
@@ -164,7 +166,7 @@
         <section id="components">
             <div class="card collapsed">
                 <h2 onclick="toggleCard(this)">
-                    <span><i class="fas fa-project-diagram"></i> Composantes Principales ($C$)</span>
+                    <span><i class="fas fa-project-diagram"></i> 5. Composantes Principales ($C$)</span>
                     <i class="fas fa-chevron-down chevron"></i>
                 </h2>
                 <div class="card-body">
@@ -180,7 +182,7 @@
         <section id="var-coords">
             <div class="card collapsed">
                 <h2 onclick="toggleCard(this)">
-                    <span><i class="fas fa-superscript"></i> Coordonnées des Variables</span>
+                    <span><i class="fas fa-superscript"></i> 6. Coordonnées des Variables</span>
                     <i class="fas fa-chevron-down chevron"></i>
                 </h2>
                 <div class="card-body">
@@ -204,7 +206,7 @@
         <section id="contributions">
             <div class="card collapsed" style="margin-bottom: 2rem;">
                 <h2 onclick="toggleCard(this)">
-                    <span><i class="fas fa-chart-pie"></i> Contributions des Individus ($\rho_{ik}$)</span>
+                    <span><i class="fas fa-chart-pie"></i> 7.1 Contributions des Individus ($\rho_{ik}$)</span>
                     <i class="fas fa-chevron-down chevron"></i>
                 </h2>
                 <div class="card-body">
@@ -220,7 +222,7 @@
 
             <div class="card collapsed" style="margin-bottom: 3.5rem;">
                 <h2 onclick="toggleCard(this)">
-                    <span><i class="fas fa-bullseye"></i> Qualité de Représentation ($cos^2$)</span>
+                    <span><i class="fas fa-bullseye"></i> 7.2 Qualité de Représentation ($cos^2$)</span>
                     <i class="fas fa-chevron-down chevron"></i>
                 </h2>
                 <div class="card-body">
@@ -239,7 +241,7 @@
 
         <!-- 6. Visualisations -->
         <section id="visuals">
-            <h2><i class="fas fa-images"></i> Plans Factoriels</h2>
+            <h2><i class="fas fa-images"></i> {% if acp_type == 'non_norme' %}8{% else %}7{% endif %}. Plans Factoriels</h2>
             {% for plot in plots %}
             <div class="grid-2" style="margin-bottom: 2rem;">
                 <div class="card collapsed">

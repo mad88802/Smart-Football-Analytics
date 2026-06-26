@@ -102,7 +102,7 @@
     </style>
 </head>
 
-<body>
+<body class="theme-scraping">
     <div class="bg-animation">
         <div class="bg-animation-blobs">
             <div class="blob blob-1"></div>
@@ -281,5 +281,15 @@
             }, 2000);
         }
     </script>
+    <script>
+        window.ANALYSIS_CONTEXT = {
+            analysisType: 'scraping',
+            pageContext: {
+                page: 'scraping FBref',
+                help: 'Aide au choix des ligues, au scraping des joueurs, photos et fichiers CSV exportes.'
+            }
+        };
+    </script>
+    {% include 'chat_widget.html' %}
 </body>
 </html>

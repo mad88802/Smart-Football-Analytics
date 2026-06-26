@@ -1180,6 +1180,11 @@ img {
     --card-glow: rgba(192, 132, 252, 0.3);
 }
 
+.card-afc {
+    --card-accent: #2dd4bf;
+    --card-glow: rgba(45, 212, 191, 0.3);
+}
+
 .module-card .icon-box {
     background: rgba(255, 255, 255, 0.05);
     color: var(--card-accent);
@@ -1211,6 +1216,78 @@ img {
 .module-card:hover .arrow-icon {
     opacity: 1;
     transform: translateX(0);
+}
+
+.theme-scraping .bg-animation {
+    background:
+        radial-gradient(circle at 20% 45%, rgba(34, 211, 238, 0.14), transparent 38%),
+        radial-gradient(circle at 80% 20%, rgba(8, 145, 178, 0.12), transparent 36%),
+        linear-gradient(135deg, #050b14 0%, #071f31 54%, #083344 100%);
+}
+
+.theme-scraping .blob-1,
+.theme-scraping .blob-3 {
+    background: var(--neon-cyan);
+    opacity: 0.22;
+}
+
+.theme-scraping .blob-2 {
+    background: #38bdf8;
+    opacity: 0.12;
+}
+
+.theme-acp .bg-animation {
+    background:
+        radial-gradient(circle at 45% 30%, rgba(99, 102, 241, 0.15), transparent 38%),
+        radial-gradient(circle at 80% 70%, rgba(129, 140, 248, 0.12), transparent 36%),
+        linear-gradient(135deg, #070d19 0%, #15143a 56%, #1f1b54 100%);
+}
+
+.theme-acp .blob-1,
+.theme-acp .blob-3 {
+    background: var(--accent-color);
+    opacity: 0.22;
+}
+
+.theme-acp .blob-2 {
+    background: #818cf8;
+    opacity: 0.13;
+}
+
+.theme-afd .bg-animation {
+    background:
+        radial-gradient(circle at 70% 35%, rgba(192, 132, 252, 0.15), transparent 38%),
+        radial-gradient(circle at 20% 70%, rgba(168, 85, 247, 0.11), transparent 36%),
+        linear-gradient(135deg, #0a0f1b 0%, #22043d 56%, #37145f 100%);
+}
+
+.theme-afd .blob-1,
+.theme-afd .blob-3 {
+    background: var(--neon-purple);
+    opacity: 0.21;
+}
+
+.theme-afd .blob-2 {
+    background: #a855f7;
+    opacity: 0.13;
+}
+
+.theme-afc .bg-animation {
+    background:
+        radial-gradient(circle at 72% 38%, rgba(45, 212, 191, 0.13), transparent 38%),
+        radial-gradient(circle at 26% 74%, rgba(244, 114, 182, 0.09), transparent 36%),
+        linear-gradient(135deg, #031615 0%, #092f2d 54%, #0b3f3c 100%);
+}
+
+.theme-afc .blob-1,
+.theme-afc .blob-3 {
+    background: #2dd4bf;
+    opacity: 0.21;
+}
+
+.theme-afc .blob-2 {
+    background: #f472b6;
+    opacity: 0.11;
 }
 
 /* Back button in navbar */

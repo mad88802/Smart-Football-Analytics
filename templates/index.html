@@ -169,6 +169,16 @@
             });
         });
     </script>
+    <script>
+        window.ANALYSIS_CONTEXT = {
+            analysisType: 'general',
+            pageContext: {
+                page: 'accueil',
+                modules: ['ACP', 'AFD', 'AFC', 'Scraping']
+            }
+        };
+    </script>
+    {% include 'chat_widget.html' %}
 </body>
 
 </html>

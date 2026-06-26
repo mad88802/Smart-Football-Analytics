@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFC Analytics - Configuration</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="theme-afc">
+    <div class="bg-animation">
+        <div class="bg-animation-blobs">
+            <div class="blob blob-1" style="background: var(--neon-cyan);"></div>
+            <div class="blob blob-2" style="background: #f472b6;"></div>
+            <div class="blob blob-3" style="background: var(--neon-cyan);"></div>
+        </div>
+    </div>
+    <div class="bg-tech-lines"></div>
+
+    <nav class="navbar">
+        <div class="nav-brand">AFC ANALYTICS</div>
+        <ul class="nav-links"></ul>
+        <a href="/" class="nav-back"><i class="fas fa-arrow-left"></i> Hub Principal</a>
+    </nav>
+
+    <div class="container upload-container">
+        <header>
+            <h1 style="background: linear-gradient(to right, #22d3ee, #f472b6); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent;">
+                Analyse Factorielle des Correspondances
+            </h1>
+            <p>Chargez votre tableau de contingence pour explorer les associations</p>
+        </header>
+
+        <div class="card upload-card">
+            <form action="/analyze_afc" method="POST" enctype="multipart/form-data" id="afcForm">
+
+                <!-- File Upload Zone -->
+                <div class="upload-zone-wrapper">
+                    <h2><span><i class="fas fa-table"></i> 1. Tableau de Contingence</span></h2>
+
+                    <!-- Format hint -->
+                    <div class="afc-hint">
+                        <i class="fas fa-info-circle"></i>
+                        <div>
+                            <strong>Format CSV attendu :</strong> Première colonne = labels des lignes,
+                            colonnes suivantes = effectifs numériques par catégorie.
+                            <br>
+                            <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan); opacity: 0.8;">
+                                Yeux\Cheveux, Blonds, Marrons, Noirs<br>
+                                Vert, 50, 10, 3<br>
+                                Bleu, 43, 8, 0
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="upload-zone" id="uploadZone">
+                        <i class="fas fa-cloud-upload-alt upload-icon" style="color: var(--neon-cyan);"></i>
+                        <div class="form-group" style="pointer-events: none;">
+                            <label for="csvfile"><i class="fas fa-file-csv"></i> Sélectionner le fichier CSV</label>
+                            <input type="file" name="csvfile" id="csvfile" accept=".csv" required class="form-input">
+                            <p id="fileNameDisplay" class="upload-text">Glissez-déposez votre fichier ici<br>ou cliquez pour parcourir</p>
+                        </div>
+                        <span class="file-name" id="fileName" style="display:none; color: var(--neon-cyan); font-weight:600; margin-top:1rem;"></span>
+                    </div>
+                </div>
+
+                <!-- Preview & Options (hidden until file loaded) -->
+                <div id="afcConfig" style="display: none; margin-top: 2rem; animation: fadeIn 0.5s ease-out;">
+
+                    <!-- Table Preview -->
+                    <div class="card" style="padding: 1.5rem; background: rgba(34,211,238,0.04); border: 1px solid rgba(34,211,238,0.2); margin-bottom: 2rem;">
+                        <h3 style="color: var(--neon-cyan);"><i class="fas fa-eye"></i> Aperçu du tableau</h3>
+                        <div id="tablePreview" class="table-container" style="max-height: 260px; overflow-y: auto; margin-top: 1rem;"></div>
+                        <div style="margin-top: 1rem;" id="tableStats"></div>
+                    </div>
+
+                    <!-- Submit -->
+                    <button type="submit" class="btn btn-primary" id="launchBtn" style="width:100%; padding:1.2rem; font-size:1.1rem; background: linear-gradient(135deg, #0891b2, #22d3ee); border: none; border-radius: 1rem; cursor: pointer; font-weight: 700; color: #fff; transition: all 0.3s ease;">
+                        <i class="fas fa-play"></i> Lancer l'Analyse AFC
+                    </button>
+                </div>
+
+                <!-- Hidden field for edited data -->
+                <input type="hidden" name="edited_data" id="editedData">
+            </form>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2026 Analytics Hub Platform. Analyse Factorielle des Correspondances.</p>
+        </div>
+    </div>
+
+    <style>
+        .upload-card {
+            padding: 2.5rem;
+        }
+
+        .upload-zone-wrapper h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 1rem;
+        }
+
+        .upload-zone {
+            border: 2px dashed rgba(34, 211, 238, 0.3);
+            border-radius: 1.5rem;
+            padding: 3rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(34, 211, 238, 0.03);
+            position: relative;
+        }
+
+        .upload-zone:hover,
+        .upload-zone.drag-over {
+            border-color: var(--neon-cyan);
+            background: rgba(34, 211, 238, 0.07);
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.15);
+        }
+
+        .upload-zone input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+            pointer-events: all;
+            width: 100%;
+            height: 100%;
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .upload-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+        }
+
+        .form-group label {
+            display: none;
+        }
+
+        .afc-hint {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            background: rgba(34, 211, 238, 0.06);
+            border: 1px solid rgba(34, 211, 238, 0.2);
+            border-radius: 1rem;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .afc-hint i {
+            color: var(--neon-cyan);
+            font-size: 1.2rem;
+            margin-top: 0.15rem;
+            flex-shrink: 0;
+        }
+
+        #launchBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(34, 211, 238, 0.3);
+        }
+
+        .stat-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(34, 211, 238, 0.1);
+            border: 1px solid rgba(34, 211, 238, 0.25);
+            border-radius: 2rem;
+            padding: 0.3rem 0.9rem;
+            font-size: 0.85rem;
+            color: var(--neon-cyan);
+            margin-right: 0.5rem;
+        }
+    </style>
+
+    <script>
+        const uploadZone = document.getElementById('uploadZone');
+        const csvInput   = document.getElementById('csvfile');
+        const fileName   = document.getElementById('fileName');
+        const afcConfig  = document.getElementById('afcConfig');
+        const tablePreview = document.getElementById('tablePreview');
+        const tableStats = document.getElementById('tableStats');
+
+        // Click anywhere on the zone triggers file dialog
+        uploadZone.addEventListener('click', () => csvInput.click());
+
+        // Drag & drop
+        uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over'); });
+        uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
+        uploadZone.addEventListener('drop', e => {
+            e.preventDefault();
+            uploadZone.classList.remove('drag-over');
+            if (e.dataTransfer.files.length) {
+                csvInput.files = e.dataTransfer.files;
+                handleFile(e.dataTransfer.files[0]);
+            }
+        });
+
+        csvInput.addEventListener('change', e => {
+            if (e.target.files.length) handleFile(e.target.files[0]);
+        });
+
+        function handleFile(file) {
+            fileName.textContent = file.name;
+            fileName.style.display = 'block';
+            document.getElementById('fileNameDisplay').style.display = 'none';
+
+            const reader = new FileReader();
+            reader.onload = ev => {
+                const text = ev.target.result;
+                const lines = text.split('\n').filter(l => l.trim());
+
+                // Try comma then semicolon separator
+                let sep = ',';
+                const firstLine = lines[0] || '';
+                if ((firstLine.split(';').length) > (firstLine.split(',').length)) sep = ';';
+
+                const rows = lines.map(l => l.split(sep).map(c => c.trim().replace(/^["']|["']$/g, '')));
+                const nRows = rows.length;
+                const nCols = rows[0] ? rows[0].length : 0;
+
+                // Build preview table
+                let html = '<table class="table"><thead><tr>';
+                (rows[0] || []).forEach(h => { html += `<th>${h}</th>`; });
+                html += '</tr></thead><tbody>';
+                rows.slice(1, 8).forEach(row => {
+                    html += '<tr>' + row.map(c => `<td>${c}</td>`).join('') + '</tr>';
+                });
+                if (nRows > 9) html += `<tr><td colspan="${nCols}" style="text-align:center; color:var(--text-secondary); font-style:italic;">... ${nRows - 8} lignes supplémentaires</td></tr>`;
+                html += '</tbody></table>';
+                tablePreview.innerHTML = html;
+
+                tableStats.innerHTML = `
+                    <span class="stat-pill"><i class="fas fa-grip-lines-vertical"></i> ${nRows - 1} lignes</span>
+                    <span class="stat-pill"><i class="fas fa-grip-lines"></i> ${nCols - 1} colonnes</span>
+                    <span class="stat-pill"><i class="fas fa-file"></i> ${file.name}</span>
+                `;
+
+                afcConfig.style.display = 'block';
+            };
+            reader.readAsText(file);
+        }
+
+        // Prevent form submit if no file
+        document.getElementById('afcForm').addEventListener('submit', function(e) {
+            if (!csvInput.files.length) {
+                e.preventDefault();
+                uploadZone.style.borderColor = '#f87171';
+                setTimeout(() => uploadZone.style.borderColor = '', 2000);
+            }
+        });
+    </script>
+    <script>
+        window.ANALYSIS_CONTEXT = {
+            analysisType: 'AFC',
+            pageContext: {
+                page: 'configuration AFC',
+                help: 'Preparation du tableau de contingence, lignes, colonnes et effectifs numeriques.'
+            }
+        };
+    </script>
+    {% include 'chat_widget.html' %}
+</body>
+
+</html>

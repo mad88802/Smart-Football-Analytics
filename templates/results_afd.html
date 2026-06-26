@@ -18,7 +18,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 </head>
 
-<body>
+<body class="theme-afd">
     <div class="bg-animation">
         <div class="bg-animation-blobs">
             <div class="blob blob-1"></div>
@@ -310,30 +310,48 @@
                     <i class="fas fa-chevron-down chevron"></i>
                 </h2>
                 <div class="card-body">
-                    <div class="grid-4">
-                        <div class="metric-card">
+                    <div class="metrics-grid">
+                        <div class="metric-card" style="--delay: 0ms;">
+                            <div class="metric-icon"><i class="fas fa-bullseye"></i></div>
                             <div class="metric-value">{{ (metrics.accuracy * 100)|round(2) }}%</div>
                             <div class="metric-label">Accuracy</div>
                         </div>
-                        <div class="metric-card">
+                        <div class="metric-card" style="--delay: 90ms;">
+                            <div class="metric-icon"><i class="fas fa-scale-balanced"></i></div>
                             <div class="metric-value">{{ (metrics.f1_score * 100)|round(2) }}%</div>
                             <div class="metric-label">F1-score</div>
                         </div>
-                        <div class="metric-card">
+                        <div class="metric-card" style="--delay: 180ms;">
+                            <div class="metric-icon"><i class="fas fa-crosshairs"></i></div>
                             <div class="metric-value">{{ (metrics.precision * 100)|round(2) }}%</div>
                             <div class="metric-label">Précision</div>
                         </div>
-                        <div class="metric-card">
+                        <div class="metric-card" style="--delay: 270ms;">
+                            <div class="metric-icon"><i class="fas fa-rotate-left"></i></div>
                             <div class="metric-value">{{ (metrics.recall * 100)|round(2) }}%</div>
                             <div class="metric-label">Rappel</div>
                         </div>
                     </div>
 
-                    <div class="formula" style="margin-top: 1.5rem;">
-                        $Accuracy=\frac{TP+TN}{TP+TN+FP+FN},\quad
-                        Precision=\frac{TP}{TP+FP},\quad
-                        Recall=\frac{TP}{TP+FN},\quad
-                        F1=2\frac{Precision \cdot Recall}{Precision+Recall}$
+                    <div class="formula metrics-formula" style="margin-top: 1.5rem;">
+                        <div class="formulas-grid">
+                            <div class="formula-item">
+                                <span class="formula-label">Accuracy</span>
+                                <div class="formula-eq">$$\mathrm{Accuracy}=\frac{TP+TN}{TP+TN+FP+FN}$$</div>
+                            </div>
+                            <div class="formula-item">
+                                <span class="formula-label">F1-score</span>
+                                <div class="formula-eq">$$F_1=2\frac{P\cdot R}{P+R}$$</div>
+                            </div>
+                            <div class="formula-item">
+                                <span class="formula-label">Précision</span>
+                                <div class="formula-eq">$$P=\frac{TP}{TP+FP}$$</div>
+                            </div>
+                            <div class="formula-item">
+                                <span class="formula-label">Rappel</span>
+                                <div class="formula-eq">$$R=\frac{TP}{TP+FN}$$</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -452,7 +470,170 @@
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 1.5rem;
         }
+
+        .formulas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 1.25rem;
+            width: 100%;
+        }
+
+        .formula-item {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 0.75rem;
+            padding: 1rem 0.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .formula-item:hover {
+            border-color: rgba(192, 132, 252, 0.35);
+            background: rgba(15, 23, 42, 0.85);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(192, 132, 252, 0.08);
+        }
+
+        .formula-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .formula-eq {
+            font-size: 0.95rem;
+            width: 100%;
+        }
+        
+        .formula-eq .katex-display {
+            margin: 0.25rem 0;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .metric-card {
+            min-height: 150px;
+            padding: 1.35rem 1rem;
+            border-radius: 0.9rem;
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.86), rgba(15, 23, 42, 0.74));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            position: relative;
+            overflow: hidden;
+            animation: metricRise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+            animation-delay: var(--delay);
+        }
+
+        .metric-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top, rgba(192, 132, 252, 0.24), transparent 54%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .metric-card:hover::before {
+            opacity: 1;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(192, 132, 252, 0.45);
+            box-shadow: 0 16px 35px rgba(15, 23, 42, 0.45), 0 0 22px rgba(192, 132, 252, 0.12);
+        }
+
+        .metric-icon {
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            background: rgba(192, 132, 252, 0.16);
+            border: 1px solid rgba(192, 132, 252, 0.28);
+            z-index: 1;
+        }
+
+        .metric-value,
+        .metric-label {
+            z-index: 1;
+        }
+
+        .metric-value {
+            font-size: clamp(1.75rem, 4vw, 2.45rem);
+            line-height: 1.05;
+            margin-bottom: 0;
+        }
+
+        .metrics-formula {
+            padding: 1.25rem;
+            overflow: visible;
+        }
+
+        .formulas-grid {
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        }
+
+        .formula-item {
+            min-height: 115px;
+            border-radius: 0.8rem;
+            padding: 1rem 0.75rem;
+        }
+
+        .formula-eq {
+            font-size: clamp(0.78rem, 1.6vw, 0.95rem);
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+
+        @keyframes metricRise {
+            from {
+                opacity: 0;
+                transform: translateY(18px) scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
     </style>
+    <script>
+        window.ANALYSIS_CONTEXT = {
+            analysisType: 'AFD',
+            pageContext: {
+                page: 'resultats AFD',
+                target: {{ target_col|tojson }},
+                classes: {{ classes|tojson }},
+                metrics: {
+                    accuracy: {{ metrics.accuracy|tojson }},
+                    f1_score: {{ metrics.f1_score|tojson }},
+                    precision: {{ metrics.precision|tojson }},
+                    recall: {{ metrics.recall|tojson }},
+                    confusion_matrix: {{ metrics.confusion_matrix|safe }}
+                },
+                n_train: {{ afd_steps.n_train|tojson }},
+                n_features: {{ afd_steps.n_features|tojson }},
+                n_classes: {{ afd_steps.n_classes|tojson }},
+                q_axes: {{ afd_steps.q_axes|tojson }}
+            }
+        };
+    </script>
+    {% include 'chat_widget.html' %}
 </body>
 
 </html>

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultats AFC</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body class="theme-afc">
+    <div class="bg-animation"><div class="bg-animation-blobs"><div class="blob blob-1" style="background:#2dd4bf;"></div><div class="blob blob-2" style="background:#f472b6;"></div><div class="blob blob-3" style="background:#2dd4bf;"></div></div></div>
+    <div class="bg-tech-lines"></div>
+    <div class="floating-labels">
+        <div class="floating-label" style="top:15%;left:-5%;animation-duration:40s;">F1 &amp; F2</div>
+        <div class="floating-label" style="top:50%;left:-15%;animation-duration:55s;animation-delay:-5s;">AFC</div>
+        <div class="floating-label" style="top:75%;left:10%;animation-duration:48s;animation-delay:-20s;font-size:5rem;">SVD</div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-brand" style="color:#2dd4bf;">AFC</div>
+        <ul class="nav-links">
+            <li><a href="#data">1. Donnees</a></li>
+            <li><a href="#frequencies">2. Frequences</a></li>
+            <li><a href="#residuals">3. Residus</a></li>
+            <li><a href="#svd">4. SVD</a></li>
+            <li><a href="#inertia">5. Inertie</a></li>
+            <li><a href="#coords">6. Coordonnees</a></li>
+            <li><a href="#afc-quality">7. Qualite</a></li>
+            <li><a href="#visuals">8. Graphiques</a></li>
+        </ul>
+        <a href="/afc" class="nav-back"><i class="fas fa-arrow-left"></i> Retour</a>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1 style="background:linear-gradient(to right,#2dd4bf,#f472b6,#2dd4bf);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;">Rapport d'Analyse</h1>
+            <p>
+                Analyse Factorielle des Correspondances (AFC)<br>
+                <span class="badge" style="background:rgba(45,212,191,.15);border-color:rgba(45,212,191,.4);color:#2dd4bf;">{{ result.row_labels|length }} lignes</span>
+                <span class="badge" style="background:rgba(244,114,182,.15);border-color:rgba(244,114,182,.4);color:#f472b6;">{{ result.col_labels|length }} colonnes</span>
+                <span class="badge">{{ result.n_axes }} axes factoriels</span>
+                <span class="badge">n = {{ result.n|int }}</span>
+            </p>
+        </header>
+
+        <section class="afc-overview" aria-label="Resume AFC">
+            <div class="afc-summary-card" style="--delay: 0ms;">
+                <span class="summary-icon"><i class="fas fa-table"></i></span>
+                <span class="summary-value">{{ result.row_labels|length }} x {{ result.col_labels|length }}</span>
+                <span class="summary-label">Tableau analyse</span>
+            </div>
+            <div class="afc-summary-card" style="--delay: 90ms;">
+                <span class="summary-icon teal"><i class="fas fa-layer-group"></i></span>
+                <span class="summary-value">{{ result.n|int }}</span>
+                <span class="summary-label">Effectif total</span>
+            </div>
+            <div class="afc-summary-card" style="--delay: 180ms;">
+                <span class="summary-icon pink"><i class="fas fa-chart-line"></i></span>
+                <span class="summary-value">
+                    {% if result.explained_inertia|length > 1 %}
+                        {{ "%.2f"|format(result.explained_inertia[0] + result.explained_inertia[1]) }}%
+                    {% else %}
+                        {{ "%.2f"|format(result.explained_inertia[0]) }}%
+                    {% endif %}
+                </span>
+                <span class="summary-label">Inertie F1 + F2</span>
+            </div>
+            <div class="afc-summary-card" style="--delay: 270ms;">
+                <span class="summary-icon"><i class="fas fa-compass-drafting"></i></span>
+                <span class="summary-value">{{ result.n_axes }}</span>
+                <span class="summary-label">Axes factoriels</span>
+            </div>
+        </section>
+
+        <!-- 1. Tableau de contingence -->
+        <section id="data">
+            <div class="card collapsed">
+                <h2 onclick="toggleCard(this)">
+                    <span><i class="fas fa-table"></i> 1. Tableau de Contingence</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <p>Tableau brut des effectifs observes. Chaque cellule $n_{ij}$ represente le nombre d'observations appartenant simultanement a la ligne $i$ et a la colonne $j$.</p>
+                    <div class="formula">$$X = [n_{ij}],\quad n = \sum_i\sum_j n_{ij} = {{ result.n|int }}$$</div>
+                    <div class="table-container">{{ tables.contingency_html|safe }}</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Frequences et masses -->
+        <section id="frequencies">
+            <div class="card collapsed">
+                <h2 onclick="toggleCard(this)">
+                    <span><i class="fas fa-percentage"></i> 2.1 Frequences Relatives (P)</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <div class="formula">$$P = \frac{X}{n},\quad p_{ij} = \frac{n_{ij}}{n}$$</div>
+                    <p>La matrice P contient les frequences relatives. La somme de tous les elements est egale a 1.</p>
+                    <div class="table-container">{{ tables.freq_html|safe }}</div>
+                </div>
+            </div>
+            <div class="card collapsed">
+                <h2 onclick="toggleCard(this)">
+                    <span><i class="fas fa-weight-hanging"></i> 2.2 Masses (Profils Marginaux)</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <div class="formula">$$r_i = \sum_j p_{ij},\quad c_j = \sum_i p_{ij}$$</div>
+                    <p>Les masses correspondent aux sommes marginales de P. Elles ponderent chaque ligne et colonne dans l'analyse.</p>
+                    <div class="grid-2" style="margin-top:1.5rem;">
+                        <div class="table-container">{{ tables.masses_row_html|safe }}</div>
+                        <div class="table-container">{{ tables.masses_col_html|safe }}</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Residus standardises -->
+        <section id="residuals">
+            <div class="card collapsed">
+                <h2 onclick="toggleCard(this)">
+                    <span><i class="fas fa-wave-square"></i> 3. Matrice des Residus Standardises (S)</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <div class="formula">$$S = D_r^{-1/2}\,(P - r\,c^\top)\,D_c^{-1/2}$$</div>
+                    <p>La matrice S encode les ecarts a l'independance, normalises par les masses. C'est sur cette matrice qu'est appliquee la SVD.</p>
+                    <div class="table-container">{{ tables.S_html|safe }}</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. SVD -->
+        <section id="svd">
+            <div class="card collapsed">
+                <h2 onclick="toggleCard(this)">
+                    <span><i class="fas fa-cubes"></i> 4.1 Valeurs Singulieres et Valeurs Propres</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <div class="formula">$$S = U\,\Sigma\,V^\top,\quad \lambda_k = \sigma_k^2$$</div>
+                    <p>La SVD decompose S en valeurs singulieres. Les valeurs propres $\lambda_k = \sigma_k^2$ representent l'inertie capturee par chaque axe factoriel.</p>
+                    <div class="table-container">{{ tables.sigma_html|safe }}</div>
+                </div>
+            </div>
+            <div class="card collapsed">
+                <h2 onclick="toggleCard(this)">
+                    <span><i class="fas fa-border-all"></i> 4.2 Vecteurs Propres U (Lignes) et V (Colonnes)</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <div class="formula">$$S\,v_k = \sigma_k\,u_k,\quad S^\top\,u_k = \sigma_k\,v_k$$</div>
+                    <p>Les vecteurs propres U et V definissent les directions factorielles dans l'espace des lignes et des colonnes respectivement.</p>
+                    <div class="grid-2" style="margin-top:1.5rem;">
+                        <div class="table-container">{{ tables.U_html|safe }}</div>
+                        <div class="table-container">{{ tables.VT_html|safe }}</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Inertie -->
+        <section id="inertia">
+            <div class="card quality-box collapsed">
+                <h2 onclick="toggleCard(this)">
+                    <span>5. Inertie Totale et Taux Expliques</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <div class="quality-value" style="color:#2dd4bf;text-shadow:0 0 20px rgba(45,212,191,.4);">
+                        {% if result.explained_inertia|length > 1 %}
+                            {{ "%.2f"|format(result.explained_inertia[0] + result.explained_inertia[1]) }}%
+                        {% else %}
+                            {{ "%.2f"|format(result.explained_inertia[0]) }}%
+                        {% endif %}
+                    </div>
+                    <p>Inertie cumulee sur les 2 premiers axes factoriels.</p>
+                    <div class="formula" style="display:inline-block;margin-top:1rem;border:none;background:rgba(0,0,0,.2);">
+                        $$\tau_k = \frac{\lambda_k}{\sum_r \lambda_r} \times 100$$
+                    </div>
+                    <div style="margin-top:1.5rem;display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;">
+                        {% for pct in result.explained_inertia %}
+                        <div class="inertia-pill">
+                            <span class="inertia-axis">F{{ loop.index }}</span>
+                            <span class="inertia-pct">{{ "%.2f"|format(pct) }}%</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div id="inertiaPlot" class="plotly-graph" style="margin-top:2rem;"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Coordonnees -->
+        <section id="coords">
+            <div class="card collapsed">
+                <h2 onclick="toggleCard(this)">
+                    <span><i class="fas fa-map-marker-alt"></i> 6.1 Coordonnees des Lignes (F)</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <div class="formula">$$F = D_r^{-1/2}\,U\,\Sigma$$</div>
+                    <p>Coordonnees des modalites-lignes dans l'espace factoriel.</p>
+                    <div class="table-container">{{ tables.coord_row_html|safe }}</div>
+                </div>
+            </div>
+            <div class="card collapsed">
+                <h2 onclick="toggleCard(this)">
+                    <span><i class="fas fa-map-pin"></i> 6.2 Coordonnees des Colonnes (G)</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <div class="formula">$$G = D_c^{-1/2}\,V\,\Sigma$$</div>
+                    <p>Coordonnees des modalites-colonnes dans l'espace factoriel.</p>
+                    <div class="table-container">{{ tables.coord_col_html|safe }}</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Contributions et Cos2 -->
+        <section id="afc-quality">
+            <div class="card collapsed">
+                <h2 onclick="toggleCard(this)">
+                    <span><i class="fas fa-star"></i> 7.1 Contributions &amp; Cos2 des Lignes</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <div class="formula">$$CTR_{ik} = \frac{r_i \cdot F_{ik}^2}{\lambda_k}\times 100,\quad \cos^2_{ik} = \frac{F_{ik}^2}{\sum_k F_{ik}^2}$$</div>
+                    <p>La contribution mesure la part de chaque ligne dans la construction de l'axe. Le cos2 mesure la qualite de representation.</p>
+                    <div class="grid-2" style="margin-top:1.5rem;">
+                        <div class="table-container">{{ tables.contrib_row_html|safe }}</div>
+                        <div class="table-container">{{ tables.cos2_row_html|safe }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="card collapsed">
+                <h2 onclick="toggleCard(this)">
+                    <span><i class="fas fa-star-half-alt"></i> 7.2 Contributions &amp; Cos2 des Colonnes</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <div class="formula">$$CTR_{jk} = \frac{c_j \cdot G_{jk}^2}{\lambda_k}\times 100,\quad \cos^2_{jk} = \frac{G_{jk}^2}{\sum_k G_{jk}^2}$$</div>
+                    <div class="grid-2" style="margin-top:1.5rem;">
+                        <div class="table-container">{{ tables.contrib_col_html|safe }}</div>
+                        <div class="table-container">{{ tables.cos2_col_html|safe }}</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Biplot -->
+        <section id="visuals">
+            <h2><i class="fas fa-images"></i> 8. Carte Factorielle &amp; Biplot</h2>
+            <div class="card collapsed">
+                <h2 onclick="toggleCard(this)" style="border:none;margin-bottom:0;">
+                    <span>Biplot AFC (Lignes &amp; Colonnes)</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </h2>
+                <div class="card-body">
+                    <p>Les points <span style="color:#2dd4bf;font-weight:700;">Lignes</span> (teal) et <span style="color:#f472b6;font-weight:700;">Colonnes</span> (rose) sont superposes. La proximite entre un point-ligne et un point-colonne indique une association forte.</p>
+                    <div id="afcPlot" class="plotly-graph"></div>
+                </div>
+            </div>
+        </section>
+
+        <div class="footer">
+            <p>&copy; 2026 Analytics Hub Platform. Analyse Factorielle des Correspondances.</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleCard(header) {
+            const card = header.closest('.card');
+            card.classList.toggle('collapsed');
+            card.querySelectorAll('.plotly-graph').forEach(g => Plotly.Plots.resize(g));
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const afcData = {{ afc_plot|safe }};
+            Plotly.newPlot('afcPlot', afcData.data, afcData.layout, {responsive: true});
+            setTimeout(() => Plotly.Plots.resize(document.getElementById('afcPlot')), 100);
+
+            const inertiaData = {{ inertia_plot|safe }};
+            Plotly.newPlot('inertiaPlot', inertiaData.data, inertiaData.layout, {responsive: true});
+            setTimeout(() => Plotly.Plots.resize(document.getElementById('inertiaPlot')), 100);
+
+            const obs = new IntersectionObserver(entries => {
+                entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
+            }, {threshold: 0.1});
+            document.querySelectorAll('.formula').forEach(f => obs.observe(f));
+
+            setTimeout(() => {
+                if (typeof renderMathInElement === 'function') {
+                    renderMathInElement(document.body, {
+                        delimiters: [
+                            {left: '$$', right: '$$', display: true},
+                            {left: '$', right: '$', display: false}
+                        ],
+                        throwOnError: false
+                    });
+                }
+            }, 100);
+        });
+    </script>
+
+    <style>
+        .afc-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.25rem;
+            margin: -2rem 0 3rem;
+        }
+
+        .afc-summary-card {
+            min-height: 132px;
+            padding: 1.25rem;
+            border-radius: 0.9rem;
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.78), rgba(30, 41, 59, 0.62));
+            border: 1px solid rgba(45, 212, 191, 0.18);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            text-align: center;
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.22);
+            animation: afcCardRise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+            animation-delay: var(--delay);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .afc-summary-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(45, 212, 191, 0.45);
+            box-shadow: 0 18px 38px rgba(0, 0, 0, 0.32), 0 0 24px rgba(45, 212, 191, 0.12);
+        }
+
+        .summary-icon {
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            background: rgba(45, 212, 191, 0.13);
+            border: 1px solid rgba(45, 212, 191, 0.25);
+        }
+
+        .summary-icon.pink {
+            background: rgba(244, 114, 182, 0.13);
+            border-color: rgba(244, 114, 182, 0.28);
+        }
+
+        .summary-icon.teal {
+            background: rgba(34, 211, 238, 0.13);
+            border-color: rgba(34, 211, 238, 0.28);
+        }
+
+        .summary-value {
+            font-size: clamp(1.55rem, 3vw, 2.2rem);
+            line-height: 1;
+            font-weight: 800;
+            color: #f8fafc;
+        }
+
+        .summary-label {
+            color: var(--text-secondary);
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 700;
+        }
+
+        @keyframes afcCardRise {
+            from {
+                opacity: 0;
+                transform: translateY(18px) scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .quality-box { border-color: rgba(45,212,191,.3); }
+        .inertia-pill {
+            display:inline-flex; flex-direction:column; align-items:center; gap:.2rem;
+            background:rgba(45,212,191,.08); border:1px solid rgba(45,212,191,.25);
+            border-radius:.75rem; padding:.6rem 1.2rem; min-width:80px;
+        }
+        .inertia-axis { font-size:.75rem; color:var(--text-secondary); text-transform:uppercase; letter-spacing:1px; font-weight:600; }
+        .inertia-pct  { font-size:1.4rem; font-weight:800; color:#2dd4bf; text-shadow:0 0 10px rgba(45,212,191,.3); }
+        .grid-2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.5rem; }
+    </style>
+    <script>
+        window.ANALYSIS_CONTEXT = {
+            analysisType: 'AFC',
+            pageContext: {
+                page: 'resultats AFC',
+                rows: {{ result.row_labels|tojson }},
+                columns: {{ result.col_labels|tojson }},
+                n: {{ result.n|tojson }},
+                n_axes: {{ result.n_axes|tojson }},
+                explained_inertia: {{ result.explained_inertia|tojson }}
+            },
+            interpretationData: {
+                analysis_type: 'AFC',
+                row_labels: {{ result.row_labels|tojson }},
+                col_labels: {{ result.col_labels|tojson }},
+                explained_inertia: {{ result.explained_inertia|tojson }},
+                C_row: {{ result.C_row|tojson }},
+                C_col: {{ result.C_col|tojson }}
+            }
+        };
+    </script>
+    {% include 'chat_widget.html' %}
+</body>
+</html>
+

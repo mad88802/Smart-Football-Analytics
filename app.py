@@ -57,6 +57,11 @@ def afd_home():
     return render_template("upload_afd.html")
 
 
+@app.route("/afc")
+def afc_home():
+    return render_template("upload_afc.html")
+
+
 
 @app.route("/analyze", methods=["POST"])
 def analyze():
@@ -567,6 +572,8 @@ def chat():
     data = request.json
     chat_history = data.get('history', [])
     interpretation_data = data.get('interpretationData', {})
+    analysis_type = data.get('analysisType', interpretation_data.get('analysis_type', 'general'))
+    page_context = data.get('pageContext', {})
     user_message = data.get('message', '')
     api_key = os.getenv('GROQ_API_KEY')
 
@@ -578,16 +585,22 @@ def chat():
         client = Groq(api_key=api_key)
 
         context_str = json.dumps({
-            "eig_percent": interpretation_data.get("eig_percent"),
-            "coord_var": interpretation_data.get("coord_var")
+            "analysis_type": analysis_type,
+            "interpretation_data": interpretation_data,
+            "page_context": page_context
         }, ensure_ascii=False)
 
         system_prompt = f"""
-Tu es un data scientist expert en Analyse en Composantes Principales (ACP) et un assistant de ce projet.
+Tu es l'assistant IA d'Analytics Hub, un projet Flask qui propose des analyses ACP, AFD et AFC.
+Tu peux aider sur:
+- ACP: composantes principales, inertie, cercle de correlation, qualite de representation.
+- AFD: classification supervisée, axes discriminants, matrice de confusion, accuracy, precision, rappel, F1-score.
+- AFC: tableau de contingence, profils, masses, inertie, contributions, cos2 et biplot.
 Reponds aux questions de l'utilisateur de maniere concise, professionnelle, et en francais.
-Voici le contexte partiel des resultats actuels (valeurs propres en pourcentages, et coordonnees des variables sur les axes):
+Voici le contexte disponible pour la page actuelle:
 {context_str}
-Ne donne ces informations brutes que si elles sont utiles pour repondre a la question de l'utilisateur.
+Si le contexte est vide, aide l'utilisateur a comprendre quelle analyse choisir, comment preparer ses donnees, ou comment lire les resultats.
+Ne donne les donnees brutes que si elles sont utiles pour repondre a la question.
 Formate toujours ta reponse en markdown (utilisation de **gras**, de listes, etc. si necessaire).
 """
         messages = [{"role": "system", "content": system_prompt}]
@@ -1451,6 +1464,231 @@ def run_pca(df, acp_type, data_type, criterion, image_urls=None, api_key=None):
         print(f"Error creating TWBX: {e}")
 
     return result_dict
+
+# ============================================================
+# AFC ROUTES
+# ============================================================
+
+@app.route("/analyze_afc", methods=["POST"])
+def analyze_afc():
+    from afc_logic import run_afc_calculation, build_afc_tables
+
+    edited_data_json = request.form.get('edited_data')
+    if edited_data_json:
+        try:
+            data = json.loads(edited_data_json)
+            headers = data[0]
+            n_cols = len(headers)
+            rows = [(row + [''] * n_cols)[:n_cols] for row in data[1:]]
+            df_raw = pd.DataFrame(rows, columns=headers)
+        except Exception as e:
+            return f"Erreur lors de la lecture des données éditées: {e}"
+    else:
+        uploaded_file = request.files.get('csvfile')
+        if not uploaded_file or uploaded_file.filename == '':
+            return redirect(url_for('afc_home'))
+
+        filepath = os.path.join(app.config['UPLOAD_FOLDER'], uploaded_file.filename)
+        uploaded_file.save(filepath)
+        content = open(filepath, 'rb').read()
+        for enc in ('utf-8-sig', 'utf-8', 'latin-1', 'cp1252'):
+            try:
+                text = content.decode(enc)
+                break
+            except UnicodeDecodeError:
+                continue
+        else:
+            return "Erreur: encodage du fichier non supporté."
+
+        import io
+        df_raw = pd.read_csv(io.StringIO(text))
+        if df_raw.shape[1] < 2:
+            try:
+                df_sep = pd.read_csv(io.StringIO(text), sep=';')
+                if df_sep.shape[1] > df_raw.shape[1]:
+                    df_raw = df_sep
+            except:
+                pass
+
+    # Strip whitespace from column names
+    df_raw.columns = df_raw.columns.str.strip()
+    df_raw = df_raw.loc[:, [c for c in df_raw.columns if c]]
+
+    if df_raw.empty or df_raw.shape[1] < 2:
+        return "Erreur: le fichier AFC doit avoir au moins 2 colonnes (labels + données)."
+
+    # Convert all numeric columns
+    for col in df_raw.columns[1:]:
+        df_raw[col] = pd.to_numeric(
+            df_raw[col].astype(str).str.strip().str.replace(',', '.', regex=False),
+            errors='coerce'
+        ).fillna(0)
+
+    api_key = request.form.get('api_key') or os.getenv('GROQ_API_KEY')
+
+    try:
+        result = run_afc_calculation(df_raw)
+        tables = build_afc_tables(result)
+    except Exception as e:
+        import traceback
+        tb = traceback.format_exc()
+        print("AFC CALC ERROR:", tb)
+        return f"Erreur lors du calcul AFC: {e}<br><pre>{tb}</pre>"
+
+    # ---- Build Plotly biplot ----
+    try:
+        C_row = np.array(result["C_row"])
+        C_col = np.array(result["C_col"])
+        row_labels = result["row_labels"]
+        col_labels = result["col_labels"]
+        expl = result["explained_inertia"]
+        ax1_pct = f"{expl[0]:.1f}%" if len(expl) > 0 else ""
+        ax2_pct = f"{expl[1]:.1f}%" if len(expl) > 1 else ""
+
+        fig_afc = go.Figure()
+
+        # Row points (circles)
+        fig_afc.add_trace(go.Scatter(
+            x=C_row[:, 0].tolist(),
+            y=(C_row[:, 1].tolist() if C_row.shape[1] > 1 else [0.0] * len(row_labels)),
+            mode="markers+text",
+            name="Lignes",
+            text=row_labels,
+            textposition="top center",
+            hovertemplate="<b>%{text}</b><br>F1: %{x:.4f}<br>F2: %{y:.4f}<extra></extra>",
+            marker=dict(size=14, color="#22d3ee", symbol="circle",
+                        line=dict(width=2, color="#fff")),
+            textfont=dict(color="#22d3ee", size=11)
+        ))
+
+        # Column points (squares)
+        fig_afc.add_trace(go.Scatter(
+            x=C_col[:, 0].tolist(),
+            y=(C_col[:, 1].tolist() if C_col.shape[1] > 1 else [0.0] * len(col_labels)),
+            mode="markers+text",
+            name="Colonnes",
+            text=col_labels,
+            textposition="top center",
+            hovertemplate="<b>%{text}</b><br>F1: %{x:.4f}<br>F2: %{y:.4f}<extra></extra>",
+            marker=dict(size=14, color="#f472b6", symbol="square",
+                        line=dict(width=2, color="#fff")),
+            textfont=dict(color="#f472b6", size=11)
+        ))
+
+        # Axis lines
+        fig_afc.add_hline(y=0, line_width=1, line_dash="dot", line_color="rgba(255,255,255,0.25)")
+        fig_afc.add_vline(x=0, line_width=1, line_dash="dot", line_color="rgba(255,255,255,0.25)")
+
+        fig_afc.update_layout(
+            title={"text": "Carte Factorielle AFC (Biplot)", "x": 0.02, "xanchor": "left"},
+            template="plotly_dark",
+            paper_bgcolor="#0f172a",
+            plot_bgcolor="#0f172a",
+            font={"color": "#f8fafc"},
+            xaxis_title=f"Axe F1 ({ax1_pct})",
+            yaxis_title=f"Axe F2 ({ax2_pct})",
+            margin={"l": 70, "r": 30, "t": 70, "b": 70},
+            legend=dict(bgcolor="rgba(15,23,42,0.6)", borderwidth=1)
+        )
+
+        # Inertia bar chart
+        fig_inertia = go.Figure(go.Bar(
+            x=[f"F{i+1}" for i in range(len(expl))],
+            y=expl,
+            text=[f"{v:.1f}%" for v in expl],
+            textposition="outside",
+            marker_color=["#22d3ee" if i < 2 else "#334155" for i in range(len(expl))]
+        ))
+        fig_inertia.update_layout(
+            title={"text": "Inertie expliquée par axe", "x": 0.02},
+            template="plotly_dark",
+            paper_bgcolor="#0f172a",
+            plot_bgcolor="#0f172a",
+            font={"color": "#f8fafc"},
+            yaxis_title="Inertie (%)",
+            margin={"l": 50, "r": 20, "t": 60, "b": 40}
+        )
+
+    except Exception as e:
+        import traceback
+        tb = traceback.format_exc()
+        print("AFC PLOT ERROR:", tb)
+        return f"Erreur lors de la création du graphique AFC: {e}<br><pre>{tb}</pre>"
+
+    try:
+        return render_template(
+            "results_afc.html",
+            result=result,
+            tables=tables,
+            afc_plot=fig_afc.to_json(),
+            inertia_plot=fig_inertia.to_json(),
+            api_key=api_key or ""
+        )
+    except Exception as e:
+        import traceback
+        tb = traceback.format_exc()
+        print("AFC RENDER ERROR:", tb)
+        return f"Erreur lors du rendu du template AFC: {e}<br><pre>{tb}</pre>"
+
+
+@app.route("/get_interpretation_afc", methods=["POST"])
+def get_interpretation_afc():
+    data = request.json
+    api_key = data.get('api_key') or os.getenv('GROQ_API_KEY')
+
+    if not api_key:
+        return jsonify({"error": "Clé API Groq manquante."}), 400
+
+    try:
+        from groq import Groq
+        client = Groq(api_key=api_key)
+
+        row_labels = data.get('row_labels', [])
+        col_labels = data.get('col_labels', [])
+        expl = data.get('explained_inertia', [])
+        C_row = data.get('C_row', [])
+        C_col = data.get('C_col', [])
+
+        context = json.dumps({
+            "row_labels": row_labels,
+            "col_labels": col_labels,
+            "explained_inertia": expl,
+            "row_coordinates_F1_F2": [r[:2] for r in C_row],
+            "col_coordinates_F1_F2": [c[:2] for c in C_col]
+        }, ensure_ascii=False)
+
+        system_prompt = (
+            "Tu es un expert en Analyse Factorielle des Correspondances (AFC).\n"
+            "Voici les résultats d'une AFC :\n" + context + "\n\n"
+            "Réponds en français, de façon structurée (markdown) :\n"
+            "1. Inertie retenue par les deux premiers axes.\n"
+            "2. Profils des lignes et colonnes les plus contributeurs.\n"
+            "3. Associations fortes entre lignes et colonnes (proximité sur le biplot).\n"
+            "4. Conclusion générale sur la structure du tableau de contingence."
+        )
+
+        model_names = ["llama-3.3-70b-versatile", "llama-3.1-70b-versatile", "mixtral-8x7b-32768"]
+        last_error = ""
+        for model_name in model_names:
+            try:
+                resp = client.chat.completions.create(
+                    model=model_name,
+                    messages=[{"role": "system", "content": system_prompt},
+                               {"role": "user", "content": "Génère l'interprétation complète."}],
+                    temperature=0.3,
+                    max_tokens=1200
+                )
+                return jsonify({"interpretation": resp.choices[0].message.content})
+            except Exception as e:
+                last_error = str(e)
+                if any(code in last_error for code in ["400", "model_decommissioned", "404"]):
+                    continue
+                else:
+                    break
+        return jsonify({"error": f"Erreur Groq: {last_error}"}), 500
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=5018)

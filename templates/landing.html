@@ -51,12 +51,22 @@
 
             <!-- 3. AFD -->
             <a href="/afd" class="module-card card-afd">
-                <span class="badge-new">Nouveau</span>
                 <div class="icon-box">
                     <i class="fas fa-project-diagram"></i>
                 </div>
                 <h2>Analyse AFD</h2>
                 <p>Classification supervisée par position (GK, DF, MF, FW) et analyse discriminante.</p>
+                <div class="arrow-icon"><i class="fas fa-arrow-right"></i></div>
+            </a>
+
+            <!-- 4. AFC -->
+            <a href="/afc" class="module-card card-afc">
+                <span class="badge-new">Nouveau</span>
+                <div class="icon-box">
+                    <i class="fas fa-table"></i>
+                </div>
+                <h2>Analyse AFC</h2>
+                <p>Explorez les associations entre variables catégorielles grâce à l'Analyse Factorielle des Correspondances.</p>
                 <div class="arrow-icon"><i class="fas fa-arrow-right"></i></div>
             </a>
         </div>
@@ -75,6 +85,16 @@
             margin-bottom: 4rem;
         }
     </style>
+    <script>
+        window.ANALYSIS_CONTEXT = {
+            analysisType: 'general',
+            pageContext: {
+                page: 'hub',
+                modules: ['ACP', 'AFD', 'AFC']
+            }
+        };
+    </script>
+    {% include 'chat_widget.html' %}
 </body>
 
 </html>

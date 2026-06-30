@@ -96,9 +96,70 @@ Then open [http://localhost:5000](http://localhost:5000) in your browser.
 
 ---
 
-## 📸 Screenshots
+# 📸 Demo
 
-> *Add screenshots of the dashboard, PCA results, and AFD plots here*
+Experience the main features of **Smart Football Analytics** through the demonstrations below.
 
 ---
+
+## 🏠 Main Interface
+
+<p align="center">
+  <img src="images/main.gif" alt="Main Interface" width="95%">
+</p>
+
+<p align="center">
+  <em>Main dashboard of Smart Football Analytics.</em>
+</p>
+
+---
+
+## 📐 Principal Component Analysis (PCA)
+
+<p align="center">
+  <img src="images/acp.gif" alt="PCA Analysis" width="95%">
+</p>
+
+<p align="center">
+  <em>Upload a dataset, configure PCA parameters, visualize eigenvalues, correlation circle, individuals projection and clustering.</em>
+</p>
+
+---
+
+## 📊 Linear Discriminant Analysis (LDA)
+
+<p align="center">
+  <img src="images/afd.gif" alt="LDA Analysis" width="95%">
+</p>
+
+<p align="center">
+  <em>Run Linear Discriminant Analysis, visualize discriminant axes and evaluate the classifier using performance metrics.</em>
+</p>
+
+---
+
+## 📈 Correspondence Analysis (CA)
+
+<p align="center">
+  <img src="images/afc.gif" alt="Correspondence Analysis" width="95%">
+</p>
+
+<p align="center">
+  <em>Perform Correspondence Analysis on contingency tables and explore the relationships between rows and columns.</em>
+</p>
+
+---
+
+
+## 🕷️ Live FBref Scraping
+
+<p align="center">
+  <img src="images/scraping.gif" alt="FBref Scraper" width="95%">
+</p>
+
+<p align="center">
+  <em>Scrape real-time football statistics, download player photos and monitor progress directly from the web interface.</em>
+</p>
+
+
 

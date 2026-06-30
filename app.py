@@ -665,11 +665,11 @@ def launch_tableau():
 # ============================================================
 
 LEAGUES_CONFIG = {
-    "premier_league": {"name": "Premier League", "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
-    "ligue1":         {"name": "Ligue 1",        "flag": "🇫🇷"},
-    "laliga":         {"name": "La Liga",        "flag": "🇪🇸"},
-    "bundesliga":     {"name": "Bundesliga",     "flag": "🇩🇪"},
-    "seriea":         {"name": "Serie A",        "flag": "🇮🇹"},
+    "premier_league": {"name": "Premier League", "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "code": "gb"},
+    "ligue1":         {"name": "Ligue 1",        "flag": "🇫🇷", "code": "fr"},
+    "laliga":         {"name": "La Liga",        "flag": "🇪🇸", "code": "es"},
+    "bundesliga":     {"name": "Bundesliga",     "flag": "🇩🇪", "code": "de"},
+    "seriea":         {"name": "Serie A",        "flag": "🇮🇹", "code": "it"},
 }
 
 _scrape_state = {"running": False, "log": [], "output_file": None, "error": None}

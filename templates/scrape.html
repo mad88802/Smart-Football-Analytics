@@ -34,7 +34,7 @@
             background: rgba(99,102,241,0.22);
             box-shadow: 0 0 20px rgba(99,102,241,0.35);
         }
-        .league-flag { font-size: 2.5rem; display: block; margin-bottom: 0.5rem; }
+        .league-flag { width: 48px; height: 32px; object-fit: cover; display: block; margin: 0 auto 0.75rem auto; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.15); }
         .league-name { font-weight: 600; font-size: 0.95rem; }
 
         .step-grid {
@@ -130,7 +130,7 @@
             <div class="league-grid">
                 {% for key, league in leagues.items() %}
                 <div class="league-card" data-key="{{ key }}" onclick="selectLeague(this)">
-                    <span class="league-flag">{{ league.flag }}</span>
+                    <img class="league-flag" src="https://flagcdn.com/{{ league.code }}.svg" alt="{{ league.name }}">
                     <span class="league-name">{{ league.name }}</span>
                 </div>
                 {% endfor %}
@@ -149,22 +149,7 @@
                 </select>
             </div>
 
-            <!-- Step 3: What to scrape -->
-            <h2 style="margin-bottom: 1rem; margin-top: 2rem;"><i class="fas fa-cogs"></i> 3. Étapes à Exécuter</h2>
-            <div class="step-grid">
-                <button class="step-btn selected" data-step="all" onclick="selectStep(this)">
-                    <i class="fas fa-play-circle"></i> Tout Faire
-                </button>
-                <button class="step-btn" data-step="stats" onclick="selectStep(this)">
-                    <i class="fas fa-table"></i> Stats Seules
-                </button>
-                <button class="step-btn" data-step="photos" onclick="selectStep(this)">
-                    <i class="fas fa-camera"></i> Photos Seules
-                </button>
-                <button class="step-btn" data-step="clean" onclick="selectStep(this)">
-                    <i class="fas fa-broom"></i> Nettoyage Seul
-                </button>
-            </div>
+
 
             <!-- Launch button -->
             <button id="launchBtn" class="submit-btn" onclick="launchScrape()" style="margin-top: 2rem;">
@@ -199,11 +184,7 @@
             selectedLeague = el.dataset.key;
         }
 
-        function selectStep(el) {
-            document.querySelectorAll('.step-btn').forEach(b => b.classList.remove('selected'));
-            el.classList.add('selected');
-            selectedStep = el.dataset.step;
-        }
+
 
         function log(msg, color = '#94a3b8') {
             const box = document.getElementById('log-box');
